@@ -6,6 +6,7 @@ import { Doc } from 'src/app/models/doc.model';
 import { Enregistrement } from 'src/app/models/enregistrement.model';
 import { DynamicGrid } from 'src/app/models/grid.model';
 import { Remise } from 'src/app/models/remise.model';
+import { Reponse } from 'src/app/models/reponse';
 import { Reunion } from 'src/app/models/reunion.model';
 import { Travail } from 'src/app/models/travail.model';
 
@@ -36,6 +37,8 @@ export class ConsulterFormationComponent implements OnInit {
   newEnregistrement:any={};
   reunions:Array<Reunion>=[];
   newReunion:any={};
+  reponses:Array<Reponse>=[];
+  newReponse:any={};
   items=['compétence 1','compétence 2','compétence 3','compétence 4'];
   itemId:any;
   levels=['Niveau 1','Niveau 2','Niveau 3','Niveau 4'];
@@ -76,19 +79,14 @@ export class ConsulterFormationComponent implements OnInit {
   ngOnInit(): void {
     var rowIdx = 0;
     this.newDynamic = {competence: "", niveau: "",resultat:""};  
-    this.dynamicArray.push(this.newDynamic);  
-    this.newTravail = {titre: "", date_debut: "",date_echeance:"",test:"",ponderation:"",resultat:""};  
-    this.traveaux.push(this.newTravail);  
-    this.newConsigne={titre:"",piece_jointe:""};
-    this.consignes.push(this.newConsigne);
-    this.newRemise={titre:"",piece_jointe:""};
-    this.remises.push(this.newRemise);
-    this.newDocument={titre:"",piece_jointe:""};
-    this.documents.push(this.newDocument);
-    this.newEnregistrement={lien_zoom:"",date:""};
+     this.newTravail = {titre: "", date_debut: "",date_echeance:"",test:"",ponderation:"",resultat:""};  
+     this.newConsigne={titre:"",piece_jointe:""};
+     this.newRemise={titre:"",piece_jointe:""};
+     this.newDocument={titre:"",piece_jointe:""};
+     this.newEnregistrement={lien_zoom:"",date:""};
     this.newReunion={titre:"",date:"",lien:""};
  
- 
+    this.newReponse={id:"",text:""};
     this.inscriptions=[
       {'id':1, 'formateur':'Personne 1','Date_debut':'20/4/2021','Date_fin':'20/5/2020','statut':'réfuse'},
       {'id':2, 'formateur':'Personne 2','Date_debut':'20/4/2020','Date_fin':'20/5/2021','statut':'En attente'},
@@ -160,6 +158,13 @@ addReunion() {
     return true;  
 }   
 
+addReponse() {    
+  this.newReponse = {id: "", text:"" };  
+    this.reponses.push(this.newReponse);  
+    this.toastr.success('New row added successfully', 'New Row');  
+    //console.log(this.dynamicArray);  
+    return true;  
+}   
 
 deleteRow(index:any) {  
     if(this.dynamicArray.length ==1) {  
@@ -228,6 +233,16 @@ deleteTravail(index:any) {
       return false;  
   } else {  
       this.traveaux.splice(index, 1);  
+      this.toastr.warning('Row deleted successfully', 'Delete row');  
+      return true;  
+  }  
+}
+deleteReponse(index:any) {  
+  if(this.reponses.length ==1) {  
+    this.toastr.error("Can't delete the row when there is only one row", 'Warning');  
+      return false;  
+  } else {  
+      this.reponses.splice(index, 1);  
       this.toastr.warning('Row deleted successfully', 'Delete row');  
       return true;  
   }  

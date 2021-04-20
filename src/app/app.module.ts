@@ -20,6 +20,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { from } from 'rxjs';
 import { InscriptionsComponent } from './programmes/inscriptions/inscriptions.component';
 import { InscriptionsEmployesComponent } from './programmes/inscriptions-employes/inscriptions-employes.component';
+import { AccordionModule } from '@syncfusion/ej2-angular-navigations';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +34,7 @@ import { InscriptionsEmployesComponent } from './programmes/inscriptions-employe
    ConsulterFormationComponent,
    InscriptionsComponent,
    InscriptionsEmployesComponent
-    
+    //AccordionModule
   ],
   imports: [
     MatTabsModule,
@@ -41,7 +43,8 @@ import { InscriptionsEmployesComponent } from './programmes/inscriptions-employe
      NgxSelectModule,
     // NgxMatSelectSearchModule,
     HttpClientModule,
-   
+    AccordionModule,
+    
     BrowserModule,
      
    // BsDatepickerModule.forRoot(),

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Programme } from 'src/app/models/programme';
+import { ProgrammeService } from 'src/app/services/programme.service';
 
 @Component({
   selector: 'app-programme',
@@ -7,9 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProgrammeComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+ constructor(){}
+ ngOnInit(){}
 
 }

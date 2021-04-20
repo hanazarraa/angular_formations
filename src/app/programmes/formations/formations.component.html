@@ -36,7 +36,7 @@
                         
                        
  
-                                    <ul id="treeview" style="color: black;">
+                                    <!--<ul id="treeview" style="color: black;">
                                         <li  data-expanded="true" *ngFor="let formation of formations" style="color: black;">{{formation.titre}}
                                             <ul>
                                                 <li  data-expanded="true" *ngFor="let sousformation of formation.sousProg" > <td> <b> <a [routerLink]="['/programmes',sousformation.id]" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"  > {{ sousformation.titre}}</a></b> </td>
@@ -69,10 +69,103 @@
                                         </li>
                                      
                                          
-                                    </ul> 
+                                    </ul> -->
                                  
                              
-                      
+                                     <ejs-accordion>
+                                        <e-accordionitems>
+                                          <e-accordionitem expanded="true" *ngFor="let programme of programmes">
+                                            <ng-template #header>
+                                              <div >{{programme.titre_Fils}}</div>
+                                            </ng-template>
+                                            <ng-template #content>
+                                              <ejs-accordion>
+                                                <e-accordionitems>
+                                                  <e-accordionitem>
+                                                    <ng-template #header>
+                                                      <div><a class="btn btn-primary" style="margin-bottom: 2px;"> Liste des inscriptions </a></div>
+                                                    </ng-template>
+                                                  </e-accordionitem>
+                                                  <e-accordionitem>
+                                                    <ng-template #header>
+                                                      <div><a class="btn btn-primary" style="margin-bottom: 2px;"> Sous Programme</a></div>
+                                                    </ng-template>
+                                                  </e-accordionitem>
+                                                  <e-accordionitem>
+                                                    <ng-template #header>
+                                                      <div><a class="btn btn-primary" style="margin-bottom: 2px;"> Cours</a></div>
+                                                    </ng-template>
+                                                  </e-accordionitem>
+                                                  
+                                                </e-accordionitems>
+                                              </ejs-accordion>
+                                            </ng-template>
+                                          </e-accordionitem>
+                                          <!--<e-accordionitem>
+                                            <ng-template #header>
+                                              <div>Music</div>
+                                            </ng-template>
+                                            <ng-template #content>
+                                              <ejs-accordion>
+                                                <e-accordionitems>
+                                                  <e-accordionitem>
+                                                    <ng-template #header>
+                                                      <div>Music Track 1</div>
+                                                    </ng-template>
+                                                  </e-accordionitem>
+                                                  <e-accordionitem>
+                                                    <ng-template #header>
+                                                      <div>Music Track 2</div>
+                                                    </ng-template>
+                                                  </e-accordionitem>
+                                                  <e-accordionitem>
+                                                    <ng-template #header>
+                                                      <div>Music New</div>
+                                                    </ng-template>
+                                                    <ng-template #content>
+                                                      <ejs-accordion>
+                                                        <e-accordionitems>
+                                                          <e-accordionitem>
+                                                            <ng-template #header>
+                                                              <div>New Track 1</div>
+                                                            </ng-template>
+                                                          </e-accordionitem>
+                                                          <e-accordionitem>
+                                                            <ng-template #header>
+                                                              <div>New Track 2</div>
+                                                            </ng-template>
+                                                          </e-accordionitem>
+                                                        </e-accordionitems>
+                                                      </ejs-accordion>
+                                                    </ng-template>
+                                                  </e-accordionitem>
+                                                </e-accordionitems>
+                                              </ejs-accordion>
+                                            </ng-template>
+                                          </e-accordionitem>-->
+                                          <!--<e-accordionitem>
+                                            <ng-template #header>
+                                              <div>Images</div>
+                                            </ng-template>
+                                            <ng-template #content>
+                                              <ejs-accordion>
+                                                <e-accordionitems>
+                                                  <e-accordionitem>
+                                                    <ng-template #header>
+                                                      <div>Track 1</div>
+                                                    </ng-template>
+                                                  </e-accordionitem>
+                                                  <e-accordionitem>
+                                                    <ng-template #header>
+                                                      <div>Track 2</div>
+                                                    </ng-template>
+                                                  </e-accordionitem>
+                                                </e-accordionitems>
+                                              </ejs-accordion>
+                                            </ng-template>
+                                          </e-accordionitem>-->
+                                        </e-accordionitems>
+                                      </ejs-accordion>
                      </div>
                                
                  </div>
