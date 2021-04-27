@@ -1,20 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
  import { AccordionComponent } from '@syncfusion/ej2-angular-navigations';
 import { ExpandEventArgs, Accordion, AccordionClickArgs} from '@syncfusion/ej2-navigations';
 import { Programme } from 'src/app/models/programme';
 import { ProgrammeService } from 'src/app/services/programme.service';
-
-@Component({
+  @Component({
   selector: 'app-formations',
   templateUrl: './formations.component.html',
-  styleUrls: ['./formations.component.scss']
+  styleUrls: ['./formations.component.scss'],
+ 
 })
 export class FormationsComponent implements OnInit {
+   
+  private itemCount: number = 1;
+  
   programmes : Programme[]=new Array<Programme>();
   formations:any;
-  constructor(  private router:Router,private programmeService:ProgrammeService) {
-     
+  
+
+   constructor(  private router:Router,private programmeService:ProgrammeService) {
+   
+   
+
   }
   ngOnInit(){
   
@@ -64,4 +71,5 @@ export class FormationsComponent implements OnInit {
   Ajouter(){
      this.router.navigate(['programmes/add']);
  }
+  
 }

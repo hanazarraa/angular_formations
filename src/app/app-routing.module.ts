@@ -8,7 +8,18 @@ import { FormationsComponent } from './programmes/formations/formations.componen
 import { InscriptionsEmployesComponent } from './programmes/inscriptions-employes/inscriptions-employes.component';
 import { InscriptionsComponent } from './programmes/inscriptions/inscriptions.component';
 import { ProgrammeComponent } from './programmes/programme/programme.component';
-
+//import {ProgrammeFormateurComponent} from  './formateur/programme-formateur/programme-formateur.component';
+ import { from } from 'rxjs';
+import { ProgrammeFormateurComponent } from './formateur/programme-formateur/programme-formateur.component';
+import { InscriptionsFormateurComponent } from './formateur/inscriptions-formateur/inscriptions-formateur.component';
+ import { PlanifierCourseFormateurComponent } from './formateur/planifier-course-formateur/planifier-course-formateur.component';
+import { PlanifierProgramFormateurComponent } from './formateur/planifier-program-formateur/planifier-program-formateur.component';
+import { PlanifierCourseHebdomodaireComponent } from './formateur/planifier-course-hebdomodaire/planifier-course-hebdomodaire.component';
+import { FormationFormateurComponent } from './formateur/formation-formateur/formation-formateur.component';
+import { CoursesFormateurComponent } from './formateur/courses-formateur/courses-formateur.component';
+import { HoraireCoursesComponent } from './formateur/horaire-courses/horaire-courses.component';
+import { ConsulterCoursFormateurComponent } from './formateur/consulter-cours-formateur/consulter-cours-formateur.component';
+import { CreerCoursFormateurComponent } from './formateur/creer-cours-formateur/creer-cours-formateur.component';
 const routes: Routes = [
   
   {path:'login',component:LoginComponent},
@@ -22,6 +33,24 @@ const routes: Routes = [
        {path:':programmeID/inscriptions',component:InscriptionsComponent},
        {path:':programmeID/inscriptions/:inscriptionID',component:InscriptionsEmployesComponent}
     ]
+ },
+  {path:'formateur/programmes',component:ProgrammeFormateurComponent,
+   children:[
+     {path:'',component:FormationFormateurComponent},
+     {path:':programmeID/demande_inscription',component:PlanifierProgramFormateurComponent},
+     {path:':programmeID/inscriptions',component:InscriptionsFormateurComponent},
+     {path:':programmeID/cours',component:CoursesFormateurComponent},
+     {path:':programmeID/cours/ajouter',component:CreerCoursFormateurComponent},
+
+     {path:':programmeID/cours/horaire',component:HoraireCoursesComponent},
+     {path:':programmeID/cours/:coursID',component:ConsulterCoursFormateurComponent},
+
+     {path:':programmeID/cours/:coursID/planifier',component:PlanifierCourseFormateurComponent},
+     {path:':programmeID/cours/:coursID/planifier_hebdo',component:PlanifierCourseHebdomodaireComponent}
+
+
+   ]
+
  }
 ];
 

@@ -9,6 +9,7 @@ import { Remise } from 'src/app/models/remise.model';
 import { Reponse } from 'src/app/models/reponse';
 import { Reunion } from 'src/app/models/reunion.model';
 import { Travail } from 'src/app/models/travail.model';
+import { MatFormField }from      '@angular/material/form-field';
 
 @Component({
   selector: 'app-consulter-formation',
@@ -17,7 +18,7 @@ import { Travail } from 'src/app/models/travail.model';
 })
 export class ConsulterFormationComponent implements OnInit {
   @ViewChild('closebtn') closebtn:any;
-
+   
   inscriptions:any;
   addForm: FormGroup;
 
@@ -66,11 +67,43 @@ export class ConsulterFormationComponent implements OnInit {
     { optionId: 19, optionTitle: 'option 19' },
     { optionId: 20, optionTitle: 'option 20' },
   ];
-
-  model:any;
-  constructor(private toastr: ToastrService) { }  
    
+  current = 0;
+  prev = -1;
 
+  onPrev() {
+    this.prev = this.current--;
+  }
+
+  onNext() {
+    this.prev = this.current++ ;
+  }
+
+  isLeftTransition(idx: number): boolean {
+    return this.current === idx ? this.prev > this.current : this.prev < this.current;
+  }
+
+   
+  model:any;
+  date_debut:any;
+  date_fin:any;
+  public month: number = new Date().getMonth();
+ 
+  public fullYear: number = new Date().getFullYear();
+ 
+  public date: number = new Date().getDate();
+ 
+  public heure_debut: Date = new Date(this.fullYear, this.month , this.date, 10, 0, 0);
+ 
+  public minValue: Date = new Date(this.fullYear, this.month , this.date, 7, 0, 0);
+  public heure_fin: Date = new Date(this.fullYear, this.month , this.date, 10, 0, 0);
+
+  public maxValue: Date = new Date(this.fullYear, this.month, this.date, 20, 0 ,0);
+ 
+  constructor(private toastr: ToastrService) { }  
+  hide(){
+    $("#addquestion").hide();
+    }
   onRemoveRow(rowIndex:number){
     this.rows.removeAt(rowIndex);
   }
@@ -86,7 +119,7 @@ export class ConsulterFormationComponent implements OnInit {
      this.newEnregistrement={lien_zoom:"",date:""};
     this.newReunion={titre:"",date:"",lien:""};
  
-    this.newReponse={id:"",text:""};
+    this.newReponse={id:"",option:"",result:false};
     this.inscriptions=[
       {'id':1, 'formateur':'Personne 1','Date_debut':'20/4/2021','Date_fin':'20/5/2020','statut':'réfuse'},
       {'id':2, 'formateur':'Personne 2','Date_debut':'20/4/2020','Date_fin':'20/5/2021','statut':'En attente'},
@@ -159,7 +192,7 @@ addReunion() {
 }   
 
 addReponse() {    
-  this.newReponse = {id: "", text:"" };  
+  this.newReponse = {id: "", option:"" ,result:false};  
     this.reponses.push(this.newReponse);  
     this.toastr.success('New row added successfully', 'New Row');  
     //console.log(this.dynamicArray);  
@@ -251,5 +284,32 @@ valider(){
   this.closebtn.nativeElement.click();
 
 }
+presentation(){
+  $("#presentation-tab").removeClass("text-dark").addClass("text-light") ;
+  $("#cmpv-tab").removeClass("text-light").addClass("text-dark") ;
+  $("#evaluation-tab").removeClass("text-light").addClass("text-dark");
+}
+cmpv(){
+  $("#presentation-tab").removeClass("text-light").addClass("text-dark");
+  $("#cmpv-tab").removeClass("text-dark").addClass("text-light");
+  $("#evaluation-tab").removeClass("text-light").addClass("text-dark");
 
+}
+evaluation(){
+  $("#presentation-tab").removeClass("text-light").addClass("text-dark");
+  $("#cmpv-tab").removeClass("text-light").addClass("text-dark");
+  $("#evaluation-tab").removeClass("text-dark").addClass("text-light");
+
+}
+travaux(){
+  $("#travaux-tab").removeClass("text-dark").addClass("text-light");
+  $("#qcm-tab").removeClass("text-light").addClass("text-dark");
+ 
+}
+qcm(){
+  $("#travaux-tab").removeClass("text-light").addClass("text-dark");
+  $("#qcm-tab").removeClass("text-dark").addClass("text-light");
+ 
+}
+ 
 }

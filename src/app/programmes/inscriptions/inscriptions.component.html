@@ -34,13 +34,11 @@
                                             <th>Date Fin</th>
                                             
                                             <th>Status</th>¨
-                                            <th>Actions</th>
-                                        </tr>
+                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr *ngFor ="let inscription of inscriptions"> 
-                                            {{inscription.id}}
-                                            <td>  <a [routerLink]="['/programmes', formationId,'inscriptions',inscription.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> 
+                                             <td>  <a [routerLink]="['/programmes', formationId,'inscriptions',inscription.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> 
                                                 {{inscription.formateur}} </a>
                                             </td>
                                             <td> 
@@ -55,12 +53,10 @@
                                              </td>
                                             <td>
                                                 <a [routerLink]="['/formations', formationId,'inscriptions',inscription.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> 
-                                                <span class="badge badge-declined" style="background-color: blue;">{{inscription.Statut}}</span>
+                                                <span class="badge badge-declined" style="background-color: blue;">{{inscription.statut}}</span>
                                                 </a>
                                             </td>
-                                            <td><!--<button class="btn btn-success" style="height: 10px;">Accepter</button>
-                                                <button class="btn btn-danger"> Réfuser</button>-->
-                                            </td>
+
                                        
                                         </tr>
                                        

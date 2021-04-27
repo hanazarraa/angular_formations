@@ -1,0 +1,58 @@
+<div class="content">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <a routerLink=".."><i class="fa fa-arrow-left" style="color: black;"></i> </a>  &nbsp;&nbsp;<strong class="card-title">Demande d'inscription</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-sm-12">
+                            <div class="col col-md-6" style="float: left;">
+                                <h4>  Titre du Programme :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Programme Hancho </h4>
+                            </div>
+                            <div class="col col-md-6" style="float: right;">
+                                <h4>  Titre du groupe :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Programme IC Canada </h4>
+                            </div>
+                            <br>
+                            <br>
+                            <br><br>
+                            <form   class="form-horizontal">
+                                <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label   class=" form-control-label">Date début</label>
+                                    </div>
+                                   
+                                  <div class="input-group col col-md-4">
+                                    <input class="form-control" placeholder="yyyy-mm-dd"
+                                           name="dd" [(ngModel)]="date_debut" ngbDatepicker #dd="ngbDatepicker">
+                                    <div class="input-group-append">
+                                      <button class="btn btn-outline-secondary calendar" (click)="dd.toggle()" type="button"></button>
+                                    </div>
+                                  </div>
+                                  <div class="col col-md-2">
+                                    <label   class=" form-control-label">Date Fin</label>
+                                </div>
+                                <div class="input-group col col-md-3">
+                                  <input class="form-control" placeholder="yyyy-mm-dd"
+                                         name="df" [(ngModel)]="date_fin" ngbDatepicker #df="ngbDatepicker">
+                                  <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary calendar" (click)="df.toggle()" type="button"></button>
+                                  </div>
+                                </div>
+                                </div>
+                                <br>
+                                <br>
+                                <br>
+                                <div class="col col-md-6" style="margin-left: 350px;">
+                                <button type="button" class="btn btn-success" style="margin-right: 5px;"(click)="valider()">Valider</button>
+                                <button type="button" class="btn btn-danger">Annuler</button>
+
+                                </div>
+
+                            </form>
+                           
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="content">
+
+    <div class="animated fadeIn">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Programme Hancho</strong>&nbsp;&nbsp;<a class="btn btn-light"  ></a> &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
+                    </div>
+                     
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                     <button class="btn btn-primary" style="margin-left: 900px;width: 100px;" (click)="Horaire()"> Horaire</button>
+                    <div class="card-body"> 
+
+                        <button class="btn  btn-outline-primary shadow rounded-pill" (click)="Creer()"> Créer un cours</button> 
+                                    <br><br><br>
+                                     <ejs-accordion>
+                                        <e-accordionitems>
+                                          <e-accordionitem expanded="true" *ngFor="let course of courses">
+                                            <ng-template #header>
+                                              <div >{{course.titre}}</div>
+                                            </ng-template>
+                                            <ng-template #content>
+                                              <ejs-accordion>
+                                                <e-accordionitems>
+                                                  <e-accordionitem  >
+                                                    <ng-template #header>
+                                                      <div> &nbsp;&nbsp;&nbsp;&nbsp;  <a [routerLink]="['/formateur/programmes',programmeID,'cours',course.id]" class="btn btn-sm btn-primary" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"  >Présentation </a>&nbsp;&nbsp; <a [routerLink]="['/formateur/programmes',programmeID,'cours',course.id]" class="btn btn-sm btn-primary" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"  > Matériel Pedagogique </a>&nbsp;&nbsp;<a [routerLink]="['/formateur/programmes',programmeID,'cours',course.id]" class="btn btn-sm btn-primary" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"  > Réunions  </a></div>
+                                                    </ng-template>
+                                                  </e-accordionitem>
+                                                 
+                                                  
+                                                </e-accordionitems>
+                                              </ejs-accordion>
+                                            </ng-template>
+                                          </e-accordionitem>
+                                          
+                                        </e-accordionitems>
+                                      </ejs-accordion>
+                                    </div>
+                               
+                                </div>
+                           </div>
+               
+               
+                       </div>
+                   </div>
+               </div>    

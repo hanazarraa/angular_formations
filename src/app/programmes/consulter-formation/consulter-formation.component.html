@@ -10,7 +10,7 @@
                         <div class="col-sm-12">
                             <!-- Nav tabs -->
                              
-                            <ul class="nav nav-pills ">
+                            <!--<ul class="nav nav-pills ">
                              
                               <li>
                                 <a class="active" id="presentation-tab" data-toggle="tab" href="#presentation" >Présentation</a>
@@ -28,14 +28,28 @@
                                 <a  id="reunion-tab" data-toggle="tab" href="#reunions">Reunions</a>
                               </li>
                              
-                              </ul>
+                              </ul>-->
+                                 <ul class="nav d-flex justify-content-center">
+                                    <li class="nav-item mx-lg-4">
+                                        <a class="filter-btn nav-link btn-outline-primary active shadow rounded-pill text-light px-4 light-300" id="presentation-tab" data-toggle="tab" href="#presentation" role="tab" aria-controls="presentation" aria-selected="true" (click)="presentation()" >Présentation</a>
+                                    </li>
+                                    <li class="nav-item mx-lg-4">
+                                        <a class="filter-btn nav-link btn-outline-primary shadow rounded-pill text-dark px-4 light-300"  id="cmpv-tab" data-toggle="tab" href="#cmpv" role="tab" aria-controls="cmpv" aria-selected="true"  (click)="cmpv()" >CMPV</a>
+                                    </li>
+                                    <li class="nav-item mx-lg-4">
+                                        <a class="filter-btn nav-link btn-outline-primary shadow rounded-pill text-dark px-4 light-300"  id="evaluation-tab" data-toggle="tab" href="#evaluation" role="tab" aria-controls="evaluation" aria-selected="true"  (click)="evaluation()"  >Evaluation</a>
+                                    </li>
+                                </ul>
+                                 
                               
                               <!-- Tab panes -->
-                              <div class="tab-content clearfix">
-                              
-                              <div class="tab-pane active" id="presentation" style="background-color: white;">
-                                <div class="row">
+                              <div class="tab-content" id="nav-tabContent">
+
+                                <div class="tab-pane fade show active" id="presentation" role="tabpanel" aria-labelledby="presentation-tab">
+
+                                 <div class="row">
                                   <div class="col-sm-12">
+                                    <br><br><br>
                                     <div class="jumbotron" style="background-color: white;">
                                        <form   class="form-horizontal">
                                         <div class="row form-group">
@@ -47,47 +61,54 @@
                                           </div>
                                             <div class="row form-group">
                                                 <div class="col col-md-3">
-                                                    <label   class=" form-control-label">Date début</label>
+                                                    <label   class=" form-control-label" style="margin-top: 15px;">Date début</label>
                                                 </div>
                                                
-                                              <div class="input-group col col-md-4">
-                                                <input class="form-control" placeholder="yyyy-mm-dd"
-                                                       name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
-                                                <div class="input-group-append">
-                                                  <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
-                                                </div>
-                                              </div>
+                                                <mat-form-field appearance="fill">
+                                                  <mat-label>Choose a date</mat-label>
+                                                  <input matInput [matDatepicker]="date_debut">
+                                                  <mat-datepicker-toggle matSuffix [for]="date_debut"></mat-datepicker-toggle>
+                                                  <mat-datepicker #date_debut></mat-datepicker>
+                                                </mat-form-field>
                                               <div class="col col-md-2">
-                                                <label   class=" form-control-label">Date Fin</label>
+                                                <label   class=" form-control-label" style="margin-top: 15px;">Date Fin</label>
                                             </div>
                                             <div class="input-group col col-md-3">
-                                              <input class="form-control" placeholder="yyyy-mm-dd"
-                                                     name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
-                                              <div class="input-group-append">
-                                                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
-                                              </div>
+                                             
+                                              <mat-form-field appearance="fill">
+                                                <mat-label>Choose a date</mat-label>
+                                                <input matInput [matDatepicker]="date_fin">
+                                                <mat-datepicker-toggle matSuffix [for]="date_fin"></mat-datepicker-toggle>
+                                                <mat-datepicker #date_fin></mat-datepicker>
+                                              </mat-form-field>
+
                                             </div>
                                             </div>
                                             
+                                            
                                             <div class="row form-group">
-                                                <div class="col col-md-2" style="margin-top: 30px;margin-right: 40px;">
-                                                    <label   class=" form-control-label">Heure début</label>
-                                                </div>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                 
-                                                    <div class="input-group timepicker col-md-4">
-                                                        <timepicker [(ngModel)]="time"></timepicker>
-                                                         
-                                                     </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                                                     <div class="col col-md-1" style="margin-top: 30px;">
-                                                      <label   class=" form-control-label">Heure Fin</label>
-                                                  </div>
+                                              <div class="col col-md-2" style="margin-right: 40px;margin-top: 10px;">
+                                                  <label   class=" form-control-label">Heure début</label>
+                                              </div>&nbsp;&nbsp;&nbsp;&nbsp;
+                                              <div class="col col-md-3" style="margin-top: 10px;" > 
+                                              <ejs-timepicker [value]='heure_debut' [min]='minValue' [max]='maxValue'></ejs-timepicker>
+                                              </div>
+              
+              
+              
+                                              <div class="col col-md-2" style="margin-right: 40px;margin-top: 10px;">
+                                                  <label   class=" form-control-label">Heure Fin</label>
+                                              </div>&nbsp;&nbsp;&nbsp;&nbsp;
+                                              <div class="col col-md-3" style="margin-top: 10px;" > 
+                                              <ejs-timepicker [value]='heure_fin' [min]='minValue' [max]='maxValue'></ejs-timepicker>
+                                              </div>
+                                               
+                                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              
                                                    
-                                                      <div class="input-group timepicker col-md-3">
-                                                          <timepicker [(ngModel)]="time"></timepicker>
-                                                           
-                                                       </div>
-                                            </div>
+                                                 
+                                                     
+                                          </div>
                                             <div class="row form-group">
                                               <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Description</label></div>
                                               <div class="col-12 col-md-4"><textarea name="textarea-input" id="textarea-input"  class="form-control"></textarea></div>
@@ -101,6 +122,7 @@
                               <div class="tab-pane" id="cmpv" >
                                 <div class="row">
                                   <div class="col-sm-12">
+                                    <br><br><br>
                                     <div class="jumbotron" style="background-color: white;">
                                        <form   class="form-horizontal">
                                         <div class="row form-group">
@@ -156,20 +178,22 @@
                               <div class="tab-pane" id="evaluation">
                                 <div class="row">
                                   <div class="col-sm-12">
+                                    <br><br><br>
                                     <div class="jumbotron" style="background-color: white;">
                                         <ul class="nav d-flex justify-content-center">
                                             <li class="nav-item mx-lg-4">
-                                                <a class="filter-btn nav-link btn-outline-primary active shadow rounded-pill text-dark px-4 light-300" id="traveaux-tab" data-toggle="tab" href="#traveaux" role="tab" aria-controls="traveaux" aria-selected="true"  >Traveaux</a>
+                                                <a class="filter-btn nav-link btn-outline-primary active shadow rounded-pill text-light px-4 light-300" id="travaux-tab" data-toggle="tab" href="#travaux" role="tab" aria-controls="travaux" aria-selected="true" (click)="travaux()" >Travaux</a>
                                             </li>
                                             <li class="nav-item mx-lg-4">
-                                                <a class="filter-btn nav-link btn-outline-primary rounded-pill text-dark px-4 light-300"  id="qcm-tab" data-toggle="tab" href="#qcm" role="tab" aria-controls="qcm" aria-selected="true"   >QCM</a>
+                                                <a class="filter-btn nav-link btn-outline-primary shadow rounded-pill text-dark px-4 light-300"  id="qcm-tab" data-toggle="tab" href="#qcm" role="tab" aria-controls="qcm" aria-selected="true"  (click)="qcm()" >QCM</a>
                                             </li>
                                           
                                         </ul>
                                         <div class="tab-content" id="nav-tabContent">
-                                            <div class="tab-pane fade show active" id="traveaux" role="tabpanel" aria-labelledby="traveaux-tab">
+                                            <div class="tab-pane fade show active" id="travaux" role="tabpanel" aria-labelledby="travaux-tab">
+                                              
                                                 <form   class="form-horizontal">
-                                                    <h2>Liste des traveaux</h2>
+                                                    <h2>Liste des travaux</h2>
                                                     <div class="row form-group">
                                                     
                                                      
@@ -198,20 +222,22 @@
                                                             </td>
                                                             <td style="width:   200px;">
                                                               <div class="input-group col">
-                                                                <input class="form-control" placeholder="yyyy-mm-dd"
-                                                                       name="dp" [(ngModel)]="traveaux[i].date_debut" ngbDatepicker #d="ngbDatepicker">
-                                                                
-                                                                  <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
-                                                                
+                                                                <mat-form-field appearance="fill">
+                                                                  <mat-label>Choose a date</mat-label>
+                                                                  <input matInput [matDatepicker]="date_debut">
+                                                                  <mat-datepicker-toggle matSuffix [for]="date_debut"></mat-datepicker-toggle>
+                                                                  <mat-datepicker #date_debut></mat-datepicker>
+                                                                </mat-form-field>
                                                               </div>
                                                             </td>
-                                                            <td style="width:   200px;">
+                                                            <td style="width:   50px;">
                                                               <div class="input-group col">
-                                                                <input class="form-control" placeholder="yyyy-mm-dd"
-                                                                       name="dp" [(ngModel)]="traveaux[i].date_echeance" ngbDatepicker #d="ngbDatepicker">
-                                                                
-                                                                  <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
-                                                                
+                                                                <mat-form-field appearance="fill">
+                                                                  <mat-label>Choose a date</mat-label>
+                                                                  <input matInput [matDatepicker]="date_fin" [(ngModel)]="traveaux[i].date_echeance">
+                                                                  <mat-datepicker-toggle matSuffix [for]="date_fin"></mat-datepicker-toggle>
+                                                                  <mat-datepicker #date_fin></mat-datepicker>
+                                                                </mat-form-field>
                                                               </div>
                                                             </td>
                                                              
@@ -329,56 +355,87 @@
                                                    </form>
                                             </div>
                                             <div class="tab-pane fade show" id="qcm" role="tabpanel" aria-labelledby="qcm-tab">
-                                              <h3><strong>QCM</strong></h3>
-                                               <form   class="form-horizontal">
-                                                
-                                                      <input type="question" id="question" name="question"  class="form-control" placeholder="Question 1" style="align-right:center"> 
-                                                    
-                                                    <div class="row form-group">
-                                                        <div class="input-group col col-md-10">
-                                                            <textarea name="Consigne" id="textarea-input consigne"  class="form-control" placeholder="Consigne"></textarea>                                                        </div>
-                                                    </div>
-                                                    <div class="row form-group">
-                                                         <div class="col col-md-12">
+                                              <br>
+                                              <br>
+                                               
+                                              <h3><strong style="margin-left: 400px;margin-top: 200px;">QCM</strong></h3>
+                                              <div class="container">
+                                                <div class="slide-wrapper">
+                                                  <app-slider  *ngIf="current === 0" [left]="isLeftTransition(0)">
+                                                    <button class="btn  btn-outline-primary shadow rounded-pill" (click)="onNext()"> Ajouter une Question</button> 
+                                                    <br><br>
+                                                    <table id="example" class="table table-striped" style="width:40%">
+                                                      <thead>
+                                                        <th >ID</th>
+                                                        <th>Titre </th>
+                                                      
+                                                      </thead>
+                                                      <tr>
+                                                          <td>1</td> 
+                                                       <a (click)="onNext()" > <td>Quizz 1</td></a>
+                                                         
+                                                      </tr>
+                                                      <tr>
+                                                          <td>2</td> 
+                                                          <a (click)="onNext()"  > <td>Quizz 2</td></a>
+                                                           
+                                                      </tr>
+
+                                                    </table>
+                                                  </app-slider>
+                                                  <app-slider *ngIf="current >= 1" [left]="isLeftTransition(1)">
+                                                    <div class="container" style="margin-left: 300px;">
+                                                      <div class="row"> 
+                                                         <a *ngIf="current!==1" (click)="onPrev()" class="button" style="width: 20px;height: 20px;margin-right: 50px;"><i class="fa fa-arrow-left" style="margin-right: 50px;"></i>  </a> 
+                                                         <a *ngIf="current===1" (click)="onPrev()" class="button disabled" style="width: 20px;height: 20px;margin-right: 50px;"><i class="fa fa-arrow-left" style="margin-right: 50px;"></i>  </a> 
+
+                                                      <h5> Question {{current}}</h5> 
+                                                      <div class="fa-hover col-lg-3 col-md-3" style="margin-left: 50px;"><a (click)="onNext()" class="button" style="width: 80px;height: 20px;"> Nouveau  </a></div>
+
+                                                      </div>
+                                                      <div class="form-horizontal">
+                                                        <div class="row form-group">
+                                                           <div class="col-md-6"><textarea name="textarea-input" id="textarea-input" rows="9" placeholder="Consigne" class="form-control"></textarea></div>
+                                                      </div> 
+                                                      <div class="row form-group">
+                                                        <table id="example" class="table table-striped" style="width:40%">
+                                                           
+                                                            
+                                                            <tr *ngFor="let reponse of reponses; let i = index;">  
+                                                                <td (click)="deleteReponse(i)">    
+                                                                  <i class="fa fa-trash fa-2x"></i>    
+                                                                </td>  
+                                                                <td> 
+                                                                  <input type="text" id="option"  [(ngModel)]="reponses[i].option"  class="form-control" placeholder="option {{i+1}}"> 
+              
+                                                              </td>
+                                                              
+                                                            
+                                                            
+                                                               
+                                                              </tr>
+                                                               <tr>    
+                                                              <td (click)="addReponse()">    
+                                                                <i class="fa fa-plus"></i>  
+                                                              </td>     
+                                                            </tr>
                                                              
-                                                            <div class="form-check">
-                                                                <table id="example" class="table table-striped" style="width:100%">
-                                                                    <tr *ngFor="let reponse of reponses; let i = index;">  
-                                                                    
-                                                                <div class="radio">
-                                                                    <label for="radio1" class="form-check-label ">
-                                                                      <td>  <input type="radio" id="radio1" name="radios" value="option1" class="form-check-input"> </td>
-                                                                        <td> <input type="text" id="solution1" name="solution1"  class="form-control" placeholder="solution 1"></td>
-                                                                    </label>&nbsp;&nbsp;&nbsp;
-                                                                       <td>  <i class="fa fa-trash fa-2x" ></i></td>
+                                                              </table>  
+                                                    
+                                                      </div>     
+                                                      <div class="row form-group">
+                                                         <button type="button" class="btn btn-danger" (click)="onPrev()">Supprimer la question</button>
+                                                      </div> 
 
-                                                                     
-                                                                </div>
-                                                                </tr>
-                                                                <br>
-                                                                <br>
-                                                                <div class="radio">
-                                                                    <label for="radio2" class="form-check-label ">
-                                                                        <input type="radio" id="radio2" name="radios" value="option2" class="form-check-input">
-                                                                        <input type="text" id="solution1" name="solution1"  class="form-control" placeholder="solution 2"  > 
-
-                                                                    </label>&nbsp;&nbsp;&nbsp;
-                                                                </div>
-                                                                <br>
-                                                                <br>
-                                                                <div class="radio">
-                                                                    <label for="radio3" class="form-check-label ">
-                                                                        <input type="radio" id="radio3" name="radios" value="option3" class="form-check-input">
-                                                                        <input type="text" id="solution1" name="solution1"  class="form-control" placeholder="solution 3"  > 
-                                                                       
-                                                                    </label>&nbsp;&nbsp;&nbsp;
-                                                                   
-                                                                </div>
-                                                                </table>
-                                                            </div>
-                                                        </div>
                                                     </div>
-                                               </form>
+
+
+
+                                                    </div> 
+                                                  </app-slider>
+                                                 </div>
+                                              
+                                              </div>
                                                
 
                                             </div>
@@ -536,6 +593,7 @@
                               <div class="tab-pane" id="reunions" >
                                 <div class="row">
                                   <div class="col-sm-12">
+
                                     <div class="jumbotron" style="background-color: white;">
                                        <form   class="form-horizontal">
                                         <div class="row form-group">

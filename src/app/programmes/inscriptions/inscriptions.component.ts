@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./inscriptions.component.scss']
 })
 export class InscriptionsComponent implements OnInit {
-
+  @ViewChild('closebutton') closebutton:any;
   formationId:any;
   inscriptions:any;
  constructor(private route: ActivatedRoute) { 
