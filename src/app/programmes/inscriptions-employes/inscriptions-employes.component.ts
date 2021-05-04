@@ -47,6 +47,24 @@ export class InscriptionsEmployesComponent implements OnInit {
     }
 
   }
+  accept(){
+    $("#acceptes-tab").removeClass("text-dark").addClass("text-light") 
+    $("#enattente-tab").removeClass("text-light").addClass("text-dark") ;
+    $("#refuses-tab").removeClass("text-light").addClass("text-dark");
+  }
+  en_attente(){
+    $("#acceptes-tab").removeClass("text-light").addClass("text-dark");
+    $("#enattente-tab").removeClass("text-dark").addClass("text-light");
+    $("#refuses-tab").removeClass("text-light").addClass("text-dark");
+  
+  }
+  refuses(){
+    $("#acceptes-tab").removeClass("text-light").addClass("text-dark");
+    $("#enattente-tab").removeClass("text-light").addClass("text-dark");
+    $("#refuses-tab").removeClass("text-dark").addClass("text-light");
+  
+  }
+  
 
 
 }

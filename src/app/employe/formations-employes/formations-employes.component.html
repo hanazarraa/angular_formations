@@ -1,0 +1,73 @@
+
+ 
+ 
+ <div class="content">
+
+    <div class="animated fadeIn">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Programmes</strong>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
+                       
+                               <ul class="nav nav-tabs card-header-tabs pull-right"  id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active btn-light" id="list-tab" data-toggle="tab" href="#list" role="tab" aria-controls="list" aria-selected="true">Liste</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link btn-light" id="agenda-tab" data-toggle="tab" href="#agenda" role="tab" aria-controls="agenda" aria-selected="false">Agenda</a>
+                                </li>
+                                
+                            </ul>
+                       
+                      </div>
+                     
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                
+                     <div class="card-body"> 
+                        <table class="table" style="border-radius: 0ch;">
+                            <thead>
+                                <tr style="border-radius: 0ch;">
+                                     <th scope="col">Titre</th>
+                                     <th scope="col">Formateur</th>
+                                    <th scope="col">Date Limite</th>
+                                     <th scope="col">Statut</th>
+                                    <th scope="col">Actions</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let programme of programmes">
+                                     <td>   <a    [routerLink]="['/employé/programmes', programme.id ]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><b>  {{programme.titre_Fils}} </b></a></td>
+                                     <td>Formateur 1</td>
+
+                                    <td>06/03/2021</td>
+                                    <td ><strong *ngIf="programme.id === 1"> Non inscrit</strong> 
+                                         <strong *ngIf="programme.id === 2">A payé </strong>
+                                         <strong *ngIf="programme.id === 3">En Attente </strong>
+                                         <strong *ngIf="programme.id === 4">Réfusé </strong>
+
+                                    </td>
+
+                                    <td>
+                                        <a  *ngIf="programme.id === 1 " [routerLink]="['/employé/programmes', programme.id,'inscriptions']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-pencil-square-o"></i> S'inscrire</a>
+                                        <a *ngIf="programme.id!==1 && programme.id === 2" [routerLink]="['/employé/programmes', programme.id,'inscriptions']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-pencil-square-o"></i> Payer</a>
+                                        <a  *ngIf="programme.id === 3 " [routerLink]="['/employé/programmes', programme.id,'inscriptions']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-pencil-square-o"></i>Désinscrire</a>
+                                        <a  *ngIf="programme.id === 4 " [routerLink]="['/employé/programmes', programme.id,'inscriptions']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> </a>
+                                    </td>
+                                 </tr>
+                                 
+                            </tbody>
+                        </table>
+                         
+                               
+                 </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+  

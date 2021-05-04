@@ -41,17 +41,15 @@
                             <tbody>
                                 <tr *ngFor="let programme of programmes">
                                     <td scope="row">{{programme.id}}</td>
-                                    <td>{{programme.titre_Fils}}</td>
+                                    <td><a  [routerLink]="[programme.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" ><b> {{programme.titre_Fils}}</b></a></td>
                                     <td>{{programme.description}}</td>
                                     <td>20 H</td>
-                                    <td><div class="dropdown-container" tabindex="-1">
-                                        <div class="three-dots"></div>
-                                        <div class="dropdown">
-                                          <a [routerLink]="['/formateur/programmes', programme.id,'inscriptions']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><div>Inscriptions</div></a>
-                                          <a href="#"><div>Consulter Programme</div></a>
-                                          <a href="#"><div>Consulter cours</div></a>
-                                        </div>
-                                      </div>
+                                    <td>
+                                        
+                                          <a class="btn-primary btn-sm rounded-pill text-light" [routerLink]="[programme.id,'inscriptions']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> Inscriptions</a>
+
+                                       
+                                      
                                     </td>
                                  </tr>
                                  

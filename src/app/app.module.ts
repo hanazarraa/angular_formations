@@ -33,7 +33,9 @@ import { PlanifierCourseHebdomodaireComponent } from './formateur/planifier-cour
 import { FormationFormateurComponent } from './formateur/formation-formateur/formation-formateur.component';
 import { CoursesFormateurComponent } from './formateur/courses-formateur/courses-formateur.component';
 import {InscriptionsFormateurComponent} from './formateur/inscriptions-formateur/inscriptions-formateur.component';
- 
+import { MatExpansionModule } from '@angular/material/expansion';
+ import {DragDropModule} from '@angular/cdk/drag-drop';
+
 import {MatTreeModule} from '@angular/material/tree';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
@@ -42,6 +44,17 @@ import { AngularImgComponent } from './angular-img/angular-img.component';
 import { HoraireCoursesComponent } from './formateur/horaire-courses/horaire-courses.component';
 import { ConsulterCoursFormateurComponent } from './formateur/consulter-cours-formateur/consulter-cours-formateur.component';
 import { CreerCoursFormateurComponent } from './formateur/creer-cours-formateur/creer-cours-formateur.component';
+import { ProgrammeEmployesComponent } from './employe/programme-employes/programme-employes.component';
+import { FormationsEmployesComponent } from './employe/formations-employes/formations-employes.component';
+import { InscrireEmployesComponent } from './employe/inscrire-employes/inscrire-employes.component';
+import { CoursesProgramResponsableComponent } from './programmes/courses-program-responsable/courses-program-responsable.component';
+import { CreerCoursResponsableComponent } from './programmes/creer-cours-responsable/creer-cours-responsable.component';
+import { ConsulterCoursResponsableComponent } from './programmes/consulter-cours-responsable/consulter-cours-responsable.component';
+import { CoursesProgramFormateurComponent } from './formateur/courses-program-formateur/courses-program-formateur.component';
+import { ConsulterFormationFormateurComponent } from './formateur/consulter-formation-formateur/consulter-formation-formateur.component';
+import { CoursesProgramEmployeComponent } from './employe/courses-program-employe/courses-program-employe.component';
+import { ConsulterFormationEmployeComponent } from './employe/consulter-formation-employe/consulter-formation-employe.component';
+import { ConsulterCoursEmployeComponent } from './employe/consulter-cours-employe/consulter-cours-employe.component';
  @NgModule({
   declarations: [
     AppComponent,
@@ -66,10 +79,23 @@ import { CreerCoursFormateurComponent } from './formateur/creer-cours-formateur/
    HoraireCoursesComponent,
    ConsulterCoursFormateurComponent,
    CreerCoursFormateurComponent,
+   ProgrammeEmployesComponent,
+   FormationsEmployesComponent,
+   InscrireEmployesComponent,
+   CoursesProgramResponsableComponent,
+   CreerCoursResponsableComponent,
+   ConsulterCoursResponsableComponent,
+   CoursesProgramFormateurComponent,
+   ConsulterFormationFormateurComponent,
+   CoursesProgramEmployeComponent,
+   ConsulterFormationEmployeComponent,
+   ConsulterCoursEmployeComponent,
 
     //AccordionModule
   ],
   imports: [
+    MatExpansionModule,
+    DragDropModule,
     MatInputModule,
      MatNativeDateModule,
     MatFormFieldModule,

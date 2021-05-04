@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
  import { AccordionComponent } from '@syncfusion/ej2-angular-navigations';
 import { ExpandEventArgs, Accordion, AccordionClickArgs} from '@syncfusion/ej2-navigations';
 import { Programme } from 'src/app/models/programme';
@@ -16,13 +16,15 @@ export class FormationsComponent implements OnInit {
   
   programmes : Programme[]=new Array<Programme>();
   formations:any;
+  programmeID:any;
+
+   constructor(  private router:Router,private programmeService:ProgrammeService,private route:ActivatedRoute) {
+    this.programmeID= this.route.snapshot.paramMap.get('programmeID');
+    console.log(this.programmeID);
+ }
+   
+
   
-
-   constructor(  private router:Router,private programmeService:ProgrammeService) {
-   
-   
-
-  }
   ngOnInit(){
   
 

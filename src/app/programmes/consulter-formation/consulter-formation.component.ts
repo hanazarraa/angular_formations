@@ -10,6 +10,7 @@ import { Reponse } from 'src/app/models/reponse';
 import { Reunion } from 'src/app/models/reunion.model';
 import { Travail } from 'src/app/models/travail.model';
 import { MatFormField }from      '@angular/material/form-field';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-consulter-formation',
@@ -99,8 +100,11 @@ export class ConsulterFormationComponent implements OnInit {
   public heure_fin: Date = new Date(this.fullYear, this.month , this.date, 10, 0, 0);
 
   public maxValue: Date = new Date(this.fullYear, this.month, this.date, 20, 0 ,0);
- 
-  constructor(private toastr: ToastrService) { }  
+  programmeID:any;
+  constructor(private toastr: ToastrService,private route:ActivatedRoute) {
+    this.programmeID= this.route.snapshot.paramMap.get('programmeID');
+    // console.log(this.programmeID);
+   }  
   hide(){
     $("#addquestion").hide();
     }

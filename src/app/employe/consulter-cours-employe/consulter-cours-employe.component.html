@@ -1,0 +1,246 @@
+<app-courses-program-employe></app-courses-program-employe>
+<div id="right-panel" class="right-panel">
+  <app-navbar></app-navbar> 
+
+<div class="content">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Cours Introduction</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-sm-12">
+
+                            <ul class="nav d-flex justify-content-center">
+                                <li class="nav-item mx-lg-4">
+                                    <a class="filter-btn nav-link btn-outline-primary active shadow rounded-pill text-light px-4 light-300" id="presentation-tab" data-toggle="tab" href="#presentation" role="tab" aria-controls="presentation" aria-selected="true"  (click)="presentation()" >Présentation</a>
+                                </li>
+                                <li class="nav-item mx-lg-4">
+                                    <a class="filter-btn nav-link btn-outline-primary shadow rounded-pill text-dark px-4 light-300"  id="materiel-tab" data-toggle="tab" href="#materiel" role="tab" aria-controls="materiel" aria-selected="true" (click)="materiel()"  >Matériel Pédagogique</a>
+                                </li>
+                                <li class="nav-item mx-lg-4">
+                                    <a class="filter-btn nav-link btn-outline-primary shadow rounded-pill text-dark px-4 light-300"  id="reunions-tab" data-toggle="tab" href="#reunions" role="tab" aria-controls="reunions" aria-selected="true"    (click)="reunion()" >Réunions</a>
+                                </li>
+                            </ul>
+                             
+                          
+                          <!-- Tab panes -->
+                          <div class="tab-content" id="nav-tabContent">
+
+                            <div class="tab-pane fade show active" id="presentation" role="tabpanel" aria-labelledby="presentation-tab">
+
+                             <div class="row">
+                              <div class="col-sm-12">
+                                <br><br><br>
+                                <div class="jumbotron" style="background-color: white;">
+                                   <form   class="form-horizontal">
+                                    <div class="row form-group">
+                                        <div class="col col-md-2">
+                                            <label   class=" form-control-label">Titre</label>
+                                        </div>
+                                            <div class="input-group col col-md-3">
+                                              <input type="titre" id="titre" name="titre"  class="form-control"> 
+                                            </div>
+                                            <div class="col col-md-2">
+                                                <label   class=" form-control-label">Programme</label>
+                                            </div>
+                                                <div class="input-group col col-md-3">
+                                                  <input type="titre" id="titre" name="titre"  class="form-control"> 
+                                                </div>
+                                        </div>
+
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                            </div>
+                            <div class="tab-pane fade show " id="materiel" role="tabpanel" aria-labelledby="materiel-tab">
+                                <div class="row">
+                                  <div class="col-sm-6">
+                                      <br><br><br>
+                                     <div class="card"> 
+                                       <div class="card-body"> <h4 class="box-title"> Liste des Documents</h4></div>
+                                       <div class="card-body"> 
+                                       <!--<div class="jumbotron" style="background-color: white;">-->
+                                       <form   class="form-horizontal">
+                                        <div class="row form-group">
+                                        
+                                       
+                                       
+                                        
+                                            <table id="example" class="table table-striped" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                  <th>Action</th>    
+                                                    <th>Titre Document</th>
+                                                    <th>Pièce Jointe</th>
+                                                  
+                                                      
+                                                </tr>
+                                            </thead>
+                                            <tbody > 
+                                              <tr *ngFor="let document of documents; let i = index;">  
+                                                  <td (click)="deleteDocument(i)">    
+                                                    <i class="fa fa-trash fa-2x"></i>    
+                                                  </td>  
+                                                  <td> 
+                                                    <input type="text" id="titre"  [(ngModel)]="documents[i].titre"  class="form-control"> 
+
+                                                </td>
+                                                <td>
+                                                  <input type="file" class="form-control-file" id="piece_jointe" [(ngModel)]="documents[i].piece_jointe" >
+
+                                                </td>
+                                              
+                                              
+                                                 
+                                                </tr>
+                                                 <tr>    
+                                                <td (click)="addDocument()">    
+                                                  <i class="fa fa-plus"></i>  
+                                                </td>     
+                                              </tr>
+                                              </tbody>
+                                                </table>  
+                                      
+                                  
+                                       </div>
+                                       </form>
+                                      <!---- </div>-->
+                                       </div>
+                                       </div>
+                                       </div>
+
+
+                                       <div class="col-sm-6">
+                                        <br><br><br>
+                                        <div class="card"> 
+                                          <div class="card-body"> <h4 class="box-title"> Liste des enregistrements</h4></div>
+                                          <div class="card-body">
+                                        <!--<div class="jumbotron" style="background-color: white;">-->
+                                           <form   class="form-horizontal">
+                                            <div class="row form-group">
+                                            
+                                             
+                                           
+                                            
+                                                <table id="example" class="table table-striped" style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                      <th>Action</th>    
+                                                        <th>Lien Enregistrement</th>
+                                                        <th>Date</th>
+                                                      
+                                                          
+                                                    </tr>
+                                                </thead>
+                                                <tbody > 
+                                                  <tr *ngFor="let Enregistrement of enregistrements let i = index;">  
+                                                      <td (click)="deleteEnregistrement(i)">    
+                                                        <i class="fa fa-trash fa-2x"></i>    
+                                                      </td>  
+                                                      <td> 
+                                                        <input type="text" id="lien"  [(ngModel)]="enregistrements[i].lien_zoom"  class="form-control"> 
+    
+                                                    </td>
+                                                    <td style="width: 200px;">
+                                                      <div class="input-group col">
+                                                        <input class="form-control" placeholder="yyyy-mm-dd"
+                                                               name="dp" [(ngModel)]="enregistrements[i].date" ngbDatepicker #d="ngbDatepicker">
+                                                        
+                                                          <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                                                        
+                                                      </div>    
+                                                    </td>
+                                                  
+                                                  
+                                                     
+                                                    </tr>
+                                                     <tr>    
+                                                    <td (click)="addEnregistrement()">    
+                                                      <i class="fa fa-plus"></i>  
+                                                    </td>     
+                                                  </tr>
+                                                  </tbody>
+                                                    </table>  
+                                          
+                                      
+                                           </div>
+                                           </form>
+                                          </div>
+                                        </div>
+                                           <!--</div>-->
+                                           </div>
+                                       </div>
+                              </div>
+                              <div class="tab-pane fade show" id="reunions" role="tabpanel" aria-labelledby="reunions-tab">
+                                 <div class="row">
+                                  <div class="col-sm-12">
+                                    <br><br><br>
+                                    <div class="jumbotron" style="background-color: white;">
+                                       <form   class="form-horizontal">
+                                        <div class="row form-group">
+                                        
+                                         
+                                       
+                                        
+                                            <table id="example" class="table table-striped" style="width:80%">
+                                            <thead>
+                                                <tr>
+                                                  <th>Action</th>    
+                                                    <th>Titre</th>
+                                                    <th>Date</th>
+                                                  
+                                                     <th>Lien </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody > 
+                                              <tr *ngFor="let reunion of reunions; let i = index;">  
+                                                  <td (click)="deleteReunion(i)">    
+                                                    <i class="fa fa-trash fa-2x"></i>    
+                                                  </td>  
+                                                  <td> 
+                                                    <input type="text" id="titre"  [(ngModel)]="reunions[i].titre"  class="form-control"> 
+
+                                                </td>
+                                                <td>
+                                                  <input type="text" id="date"  [(ngModel)]="reunions[i].date"  class="form-control"> 
+
+                                                </td>
+                                              
+                                                <td>
+                                                  <input type="text" id="lien"  [(ngModel)]="reunions[i].lien"  class="form-control"> 
+
+                                                </td>
+                                                 
+                                                </tr>
+                                                 <tr>    
+                                                <td (click)="addReunion()">    
+                                                  <i class="fa fa-plus"></i>  
+                                                </td>     
+                                              </tr>
+                                              </tbody>
+                                                </table>  
+                                      
+                                  
+                                       </div>
+                                       </form>
+                                        </div>
+                                       </div>
+                                       </div>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+                         

@@ -60,5 +60,7 @@ refuses(){
   $("#refuses-tab").removeClass("text-dark").addClass("text-light");
 
 }
-
+ConsulterProg(){
+  this.router.navigate(["/formateur/programmes/"+this.formationId]);
+}
 }

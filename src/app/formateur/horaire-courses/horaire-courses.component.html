@@ -16,9 +16,10 @@
                 
                      <div class="card-body"> 
                         <div class="table-stats order-table ov-h" style="float: center;">
+                             
                             <table class="table">
                                 <thead>
-                                    <th>Cours</th>
+                                    <th> </th>
                                     <th><select name="select" id="select" class="form-control">
                                         <option value="0">Please select</option>
                                         <option value="1">Semaine</option>
@@ -29,6 +30,26 @@
                                         <option value="3">Vendredi</option>
                                         <option value="3">Samedi</option>
                                     </select></th>
+                                    <th></th>
+                                    <th><ejs-timepicker [value]='heure_debut' [min]='minValue' [max]='maxValue'></ejs-timepicker></th>
+                                    <th> <ejs-timepicker [value]='heure_fin' [min]='minValue' [max]='maxValue'></ejs-timepicker></th>
+                                    <th></th>
+                                </thead>
+                                <thead>
+                                    <th>Cours</th>
+                                    <th>
+                                        Jour
+                                        <!--<select name="select" id="select" class="form-control">
+                                        <option value="0">Please select</option>
+                                        <option value="1">Semaine</option>
+                                        <option value="2">Lundi</option>
+                                        <option value="3">Mardi</option>
+                                        <option value="3">Mercredi</option>
+                                        <option value="3">Jeudi</option>
+                                        <option value="3">Vendredi</option>
+                                        <option value="3">Samedi</option>
+                                    </select>-->
+                                </th>
                                     <th>Date</th>
                                     <th>Heure début</th>
                                     <th>Heure fin</th>

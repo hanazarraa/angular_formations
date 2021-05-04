@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-inscriptions',
@@ -10,7 +10,7 @@ export class InscriptionsComponent implements OnInit {
   @ViewChild('closebutton') closebutton:any;
   formationId:any;
   inscriptions:any;
- constructor(private route: ActivatedRoute) { 
+ constructor(private route: ActivatedRoute,private router:Router) { 
    this.formationId= this.route.snapshot.paramMap.get('programmeID');
    console.log(this.formationId);
  }
@@ -25,4 +25,24 @@ export class InscriptionsComponent implements OnInit {
        ]
 console.log(this.inscriptions);
  }
+ accept(){
+  $("#acceptes-tab").removeClass("text-dark").addClass("text-light") 
+  $("#enattente-tab").removeClass("text-light").addClass("text-dark") ;
+  $("#refuses-tab").removeClass("text-light").addClass("text-dark");
+}
+enattente(){
+  $("#acceptes-tab").removeClass("text-light").addClass("text-dark");
+  $("#enattente-tab").removeClass("text-dark").addClass("text-light");
+  $("#refuses-tab").removeClass("text-light").addClass("text-dark");
+
+}
+refuses(){
+  $("#acceptes-tab").removeClass("text-light").addClass("text-dark");
+  $("#enattente-tab").removeClass("text-light").addClass("text-dark");
+  $("#refuses-tab").removeClass("text-dark").addClass("text-light");
+
+}
+ConsulterProg(){
+  this.router.navigate(["/programmes/"+this.formationId]);
+}
 }

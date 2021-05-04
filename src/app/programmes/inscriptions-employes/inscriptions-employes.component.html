@@ -1,4 +1,4 @@
-<div class="content">
+<!--<div class="content">
     <div class="animated fadeIn">
         <div class="row">
             <div class="col-md-12">
@@ -9,30 +9,180 @@
                     <div class="card-body">
                         <div class="col-sm-12">
                             <div class="col col-md-8">
-                                <h6 class="page-header">  Titre du groupe :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Programme IC Canada </h6>
+                                <h3>  Titre du groupe :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Programme IC Canada </h3>
                             </div>
                             <div class="row">
                             <div class="col col-md-8" style="float: left;">
-                                <h6 class="page-header">&nbsp;&nbsp;Durée :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     30H </h6>
+                                <h3>&nbsp;&nbsp;Durée :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     30H </h3>
                             </div>
                             <div class="col col-md-4" style="float:right">
-                                <h6 class="page-header">Capacité    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Min :   10   &nbsp;&nbsp; Max: 20  </h6>
+                                <h3>Capacité    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Min :   10   &nbsp;&nbsp; Max: 20  </h3>
                             </div>
                             </div>
                             <div class="row"> 
                             <div class="col col-md-8" style="float: left;">
-                                <h6 class="page-header"> Formateur :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Personne 1  </h6>
+                                <h3> Formateur :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Personne 1  </h3>
                             </div>
                             <div class="col col-md-4" style="float: right;">
-                                <h6 class="page-header"> Statut :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     {{statutParent}}  </h6>
+                                <h3> Statut :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     {{statutParent}}  </h3>
 
                             </div>
                             </div>
                             <br>
                             <div class="col col-md-8" style="float: left;">
-                                <h6 class="page-header">&nbsp;&nbsp;<b> Liste des demandes des employés  </b>   </h6>
+                                <h3>&nbsp;&nbsp;<b> Liste des demandes des employés  </b>   </h3>
                             </div>
+                            <div class="col col-md-8" style="float: left;">
+                                <ul class="nav d-flex justify-content-center">
+                                    <li class="nav-item mx-lg-4">
+                                        <a class="filter-btn nav-link btn-outline-primary active shadow rounded-pill text-light px-4 light-300" id="acceptes-tab" data-toggle="tab" href="#acceptes" role="tab" aria-controls="acceptes" aria-selected="true"  (click)="accept()">Acceptés</a>
+                                    </li>
+                                    <li class="nav-item mx-lg-4">
+                                        <a class="filter-btn nav-link btn-outline-primary shadow rounded-pill text-dark px-4 light-300"  id="enattente-tab" data-toggle="tab" href="#enattente" role="tab" aria-controls="enattente" aria-selected="true"  (click)="en_attente()" >En Attente</a>
+                                    </li>
+                                    <li class="nav-item mx-lg-4">
+                                        <a class="filter-btn nav-link btn-outline-primary shadow rounded-pill text-dark px-4 light-300"  id="refuses-tab" data-toggle="tab" href="#refuses" role="tab" aria-controls="refuses" aria-selected="true" (click)="refuses()"  >Réfusés</a>
+                                    </li>
+                                </ul>
+                                </div>
 
+                                <div class="tab-content" id="nav-tabContent">
+                                    <div class="tab-pane fade show active" id="acceptes" role="tabpanel" aria-labelledby="acceptes-tab">
+                                        <br><br><br>
+                                <div class="table-stats order-table ov-h " style="float: left; ">
+                                     
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                 
+                                                <th>Employé</th>
+                                            <th>Date Demande</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor ="let inscription of inscriptions"> 
+                                                 <td  *ngIf="inscription.Statut === 'Accepté' ">  
+                                                    {{inscription.Employe}} 
+                                                </td>
+                                                <td  *ngIf="inscription.Statut === 'Accepté' "> 
+                                                         {{inscription.Date_demande}}
+                                                   
+                                                </td>
+                                                
+                                                
+    
+                                           
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                                </div>
+                                <div class="tab-pane fade " id="enattente" role="tabpanel" aria-labelledby="enattente-tab">
+                                    <br><br><br>
+                                    <div class="table-stats order-table ov-h" style="float: left;">
+                                         
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                     
+                                                    <th>Employé</th>
+                                                    <th>Date Demande</th>
+                                                    <th>Actions</th>
+                                                 </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor ="let inscription of inscriptions"> 
+                                                     <td  *ngIf="inscription.Statut === 'En attente' ">   
+                                                        {{inscription.Employe}} 
+                                                    </td>
+                                                    <td *ngIf="inscription.Statut === 'En attente' "> 
+                                                               {{inscription.Date_demande}} 
+                                                        
+                                                    </td>
+                                                    <td > 
+                                                        
+                                                     </td>
+                                                    
+        
+                                               
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    </div>
+                                    <div class="tab-pane fade show" id="refuses" role="tabpanel" aria-labelledby="refuses-tab">
+                                        <br><br><br>
+                                        <div class="table-stats order-table ov-h" style="float: left;">
+                                             
+                                            <table class="table ">
+                                                <thead>
+                                                    <tr>
+                                                         
+                                                        <th>Employé</th>
+                                                        <th>Date Demande</th>
+                                                     
+                                                       
+                                                     </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor ="let inscription of inscriptions"> 
+                                                         <td *ngIf="inscription.statut === 'réfuse' ">   
+                                                            {{inscription.Employe}}  
+                                                        </td>
+                                                        <td *ngIf="inscription.statut === 'réfuse' "> 
+                                                                 {{inscription.Employe}}
+                                                           
+                                                        </td>
+                                                         
+            
+                                                   
+                                                    </tr>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        </div>
+                                </div>-->
+                                <!--<div class="tab-content" id="nav-tabContent">
+                                    <div class="tab-pane fade show active" id="acceptes" role="tabpanel" aria-labelledby="acceptes-tab">
+                                        <br><br><br>
+                                <div class="table-stats order-table ov-h " style="float: left; ">
+                                     
+                                    <table class="table ">
+                                        <thead>
+                                            <tr>
+                                                 
+                                                <th>Formateur</th>
+                                                <th>Date début</th>
+                                                <th>Date Fin</th>
+                                                ¨
+                                             </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor ="let inscription of inscriptions"> 
+                                                 <td  >  
+                                                    d
+                                                </td>
+                                                <td   > 
+                                                 d         <span class="name"> </span>
+                                                 </td>
+                                                <td  > 
+                                                    d <span class="product"> </span>
+                                                  </td>
+                                                
+    
+                                           
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                                </div>
+                                    <div class="tab-pane fade " id="enattente" role="tabpanel" aria-labelledby="enattente-tab">
+                                       
+                                   <br><br><br>
                             <div class="table-stats order-table ov-h" style="float: left;">
                                 <table class="table ">
                                     <thead>
@@ -119,10 +269,268 @@
                                     </tbody>
                                 </table>
                             </div> 
+                            </div>
+                            <div class="tab-pane fade " id="enattente" role="tabpanel" aria-labelledby="refuses-tab">
+                                       
+                                <br><br><br>
+                         <div class="table-stats order-table ov-h" style="float: left;">
+                             <table class="table ">
+                                 <thead>
+                                     <tr>
+                                          
+                                         <th>Employé</th>
+                                         <th>Date Demande</th>
+                                         <th>Statut Demande</th>
+                                         
+                                         <th>Actions</th>¨
+                                         
+                                     </tr>
+                                 </thead>
+                                 <tbody>
+                                     <tr *ngFor ="let inscription of inscriptions"> 
+                                         <td>   
+                                             {{inscription.Employe}} 
+                                         </td>
+                                         <td> 
+                                                   <span class="name">{{inscription.Date_demande}}</span>
+                                              
+                                         </td>
+                                         <td> 
+                                              <span class="product">{{inscription.Statut}}</span>
+                                              
+                                          </td>
+                                          
+                                         <td *ngIf="enattente(inscription.Statut)" >
+                                             <button type="button" class="btn btn-success btn-sm"  data-toggle="modal" data-target="#acceptModal">Accepter</button>
+                                            <br><br> <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#declineModal">Réfuser</button>
+
+                                         </td>
+                                         <td *ngIf="!enattente(inscription.Statut)" >
+                                             <button type="button" class="btn btn-success btn-sm" disabled="disabled">Accepter</button>
+                                            <br><br> <button type="button" class="btn btn-danger btn-sm" disabled="disabled" >Réfuser</button>
+
+                                         </td>
+                                         
+                                      
+                                     </tr>
+                                    
+                                   
+                                 </tbody>
+                             </table>
+                         </div> 
+                         </div>
+                            </div>-->
+
+                            
+                        <!----</div>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->
+<div class="content">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <a routerLink=".."><i class="fa fa-arrow-left" style="color: black;"></i> </a>  &nbsp;&nbsp;<strong class="card-title">Programme Hancho</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-sm-12">
+                            <div class="col col-md-8">
+                                <h3>  Titre du groupe :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Programme IC Canada </h3>
+                            </div>
+                            <div class="row">
+                            <div class="col col-md-8" style="float: left;">
+                                <h3>&nbsp;&nbsp;Durée :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     30H </h3>
+                            </div>
+                            <div class="col col-md-4" style="float:right">
+                                <h3>Capacité    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Min :   10   &nbsp;&nbsp; Max: 20  </h3>
+                            </div>
+                            </div>
+                            <div class="row"> 
+                            <div class="col col-md-8" style="float: left;">
+                                <h3> Formateur :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Personne 1  </h3>
+                            </div>
+                            <div class="col col-md-4" style="float: right;">
+                                <h3> Statut :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     {{statutParent}}  </h3>
+
+                            </div>
+                            </div>
+                            <br>
+                            <div class="col col-md-8" style="float: left;">
+                                <h3>&nbsp;&nbsp;<b> Liste des demandes formateurs  </b>   </h3>
+                            </div>
+                            <div class="col col-md-8" style="float: left;">
+                                <ul class="nav d-flex justify-content-center">
+                                    <li class="nav-item mx-lg-4">
+                                        <a class="filter-btn nav-link btn-outline-primary active shadow rounded-pill text-light px-4 light-300" id="acceptes-tab" data-toggle="tab" href="#acceptes" role="tab" aria-controls="acceptes" aria-selected="true"  (click)="accept()">Acceptés</a>
+                                    </li>
+                                    <li class="nav-item mx-lg-4">
+                                        <a class="filter-btn nav-link btn-outline-primary shadow rounded-pill text-dark px-4 light-300"  id="enattente-tab" data-toggle="tab" href="#enattente" role="tab" aria-controls="enattente" aria-selected="true"  (click)="en_attente()" >En Attente</a>
+                                    </li>
+                                    <li class="nav-item mx-lg-4">
+                                        <a class="filter-btn nav-link btn-outline-primary shadow rounded-pill text-dark px-4 light-300"  id="refuses-tab" data-toggle="tab" href="#refuses" role="tab" aria-controls="refuses" aria-selected="true" (click)="refuses()"  >Réfusés</a>
+                                    </li>
+                                </ul>
+                                </div>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="acceptes" role="tabpanel" aria-labelledby="acceptes-tab">
+                                    <br><br><br>
+                            <div class="table-stats order-table ov-h " style="float: left; ">
+                                 
+                                <table class="table ">
+                                    <thead>
+                                        <tr>
+                                             
+                                            <th>Employé</th>
+                                            <th>Date demande</th>
+                                           
+                                         </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor ="let inscription of inscriptions"> 
+                                             <td  *ngIf="inscription.Statut === 'Accepté' ">  
+                                               {{inscription.Employe}}
+                                            </td>
+                                            <td  *ngIf="inscription.Statut === 'Accepté' "> 
+                                                      <span class="name">{{inscription.Date_demande}}</span>
+                                                
+                                            </td>
+                                             
+
+                                       
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                            </div>
+                            <div class="tab-pane fade " id="enattente" role="tabpanel" aria-labelledby="enattente-tab">
+                                <br><br><br>
+                                <div class="table-stats order-table ov-h" style="float: left;">
+                                     
+                                    <table class="table ">
+                                        <thead>
+                                            <tr>
+                                                 
+                                                <th>Employé</th>
+                                                <th>Date demande</th>
+                                                <th>Actions</th>
+                                                 
+                                                 ¨
+                                             </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor ="let inscription of inscriptions"> 
+                                                 <td  *ngIf="inscription.Statut === 'En Attente' ">  
+                                                    {{inscription.Employe}}
+
+                                                </td>
+                                                <td *ngIf="inscription.Statut === 'En Attente' "> 
+                                                          <span class="name">{{inscription.Date_demande}}</span>
+                                                 </td>
+                                                <td *ngIf="inscription.Statut === 'En Attente' "> 
+                                                    <button type="button" class="btn btn-success btn-sm"  data-toggle="modal" data-target="#acceptModal">Accepter</button>
+                                                    <br><br> <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#declineModal">Réfuser</button>
+     
+                                               
+                                                 </td>
+                                                 <div class="modal fade" id="acceptModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-sm" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="staticModalLabel">Confirmer</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closebutton>
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>
+                                                                 Etes Vous sur d'accepter cette Demande 
+                                                               </p>
+                                                           </div>
+                                                           <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"  >Annuler</button>
+                                                            <button type="button" class="btn btn-success" (click)="Accepter(inscription)" >Confirmer</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal fade" id="declineModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-sm" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="staticModalLabel">Confirmer</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closebtn>
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>
+                                                             Etes Vous sur de Réfuser cette Demande 
+                                                           </p>
+                                                          
+                                                       </div>
+                                                       <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"  >Annuler</button>
+                                                        <button type="button" class="btn btn-danger" (click)="Refuser(inscription)" >Confirmer</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                                
+    
+                                           
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                                </div>
+                                <div class="tab-pane fade show" id="refuses" role="tabpanel" aria-labelledby="refuses-tab">
+                                    <br><br><br>
+                                    <div class="table-stats order-table ov-h" style="float: left;">
+                                         
+                                        <table class="table ">
+                                            <thead>
+                                                <tr>
+                                                     
+                                                    <th>Employé</th>
+                                                    <th>Date demande</th>
+                                                    
+                                                   
+                                                 </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor ="let inscription of inscriptions"> 
+                                                     <td *ngIf="inscription.Statut === 'Réfusé' ">   
+                                                        {{inscription.Employe}}
+                                                    </td>
+                                                    <td *ngIf="inscription.Statut === 'Réfusé' "> 
+                                                              <span class="name">{{inscription.Date_demande}}</span>
+                                                        
+                                                    </td>
+                                                    
+        
+                                               
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    </div>
+                            </div>
 
                             
                          </div>
-                     </div>
+                      </div>
                 </div>
             </div>
         </div>

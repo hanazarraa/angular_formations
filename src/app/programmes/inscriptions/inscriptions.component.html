@@ -9,22 +9,42 @@
                     <div class="card-body"> 
                         <div class="col-sm-12">
                             <div class="col col-md-8">
-                                <h6 class="page-header">  Titre du groupe :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Programme IC Canada </h6>
+                                <h3>  Titre du groupe :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Programme IC Canada </h3>
                             </div>
                             <div class="row">
                             <div class="col col-md-8" style="float: left;">
-                                <h6 class="page-header">&nbsp;&nbsp;Durée :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     30H </h6>
+                                <h3>&nbsp;&nbsp;Durée :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     30H </h3>
                             </div>
                             <div class="col col-md-4" style="float:right">
-                                <h6 class="page-header">Capacité    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Min :   10   &nbsp;&nbsp; Max: 20  </h6>
+                                <h3 class="page-header">Capacité    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Min :   10   &nbsp;&nbsp; Max: 20  </h3>
                             </div>
                             </div>
                             <br>
                             <div class="col col-md-8" style="float: left;">
-                                <h6 class="page-header">&nbsp;&nbsp;<b> Liste des demandes formateurs  </b>   </h6>
+                                <h3>&nbsp;&nbsp;<b> Liste des demandes formateurs  </b>   </h3>
                             </div>
-
-                            <div class="table-stats order-table ov-h" style="float: left;">
+                            <div class="col col-md-8" style="float: left;">
+                                <ul class="nav d-flex justify-content-center">
+                                    <li class="nav-item mx-lg-4">
+                                        <a class="filter-btn nav-link btn-outline-primary active shadow rounded-pill text-light px-4 light-300" id="acceptes-tab" data-toggle="tab" href="#acceptes" role="tab" aria-controls="acceptes" aria-selected="true"  (click)="accept()">Acceptés</a>
+                                    </li>
+                                    <li class="nav-item mx-lg-4">
+                                        <a class="filter-btn nav-link btn-outline-primary shadow rounded-pill text-dark px-4 light-300"  id="enattente-tab" data-toggle="tab" href="#enattente" role="tab" aria-controls="enattente" aria-selected="true"  (click)="enattente()" >En Attente</a>
+                                    </li>
+                                    <li class="nav-item mx-lg-4">
+                                        <a class="filter-btn nav-link btn-outline-primary shadow rounded-pill text-dark px-4 light-300"  id="refuses-tab" data-toggle="tab" href="#refuses" role="tab" aria-controls="refuses" aria-selected="true" (click)="refuses()"  >Réfusés</a>
+                                    </li>
+                                </ul>
+                                </div>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="acceptes" role="tabpanel" aria-labelledby="acceptes-tab">
+                                    <br><br><br>
+                            <div class="table-stats order-table ov-h " style="float: left; ">
+                                 
                                 <table class="table ">
                                     <thead>
                                         <tr>
@@ -32,62 +52,115 @@
                                             <th>Formateur</th>
                                             <th>Date début</th>
                                             <th>Date Fin</th>
-                                            
-                                            <th>Status</th>¨
+                                            <th>Actions</th>
+                                           
                                          </tr>
                                     </thead>
                                     <tbody>
                                         <tr *ngFor ="let inscription of inscriptions"> 
-                                             <td>  <a [routerLink]="['/programmes', formationId,'inscriptions',inscription.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> 
+                                             <td  *ngIf="inscription.statut === 'Accepté' ">  <a [routerLink]="['/programmes', formationId,'inscriptions',inscription.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> 
                                                 {{inscription.formateur}} </a>
                                             </td>
-                                            <td> 
+                                            <td  *ngIf="inscription.statut === 'Accepté' "> 
                                                 <a [routerLink]="['/programmes', formationId,'inscriptions',inscription.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> 
                                                      <span class="name">{{inscription.Date_debut}}</span>
                                                 </a> 
                                             </td>
-                                            <td> 
+                                            <td  *ngIf="inscription.statut === 'Accepté' "> 
                                                 <a [routerLink]="['/formations', formationId,'inscriptions',inscription.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> 
                                                 <span class="product">{{inscription.Date_fin}}</span>
                                                 </a>
                                              </td>
-                                            <td>
-                                                <a [routerLink]="['/formations', formationId,'inscriptions',inscription.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> 
-                                                <span class="badge badge-declined" style="background-color: blue;">{{inscription.statut}}</span>
-                                                </a>
+                                            <td *ngIf="inscription.statut === 'Accepté' ">
+                                                <button class="btn btn-primary rounded-pill text-light" (click)="ConsulterProg()"> Consulter Programme</button>
+
                                             </td>
 
                                        
                                         </tr>
-                                       
-                                       <!---- <tr>
-                                            
-                                            <td> Personne 2 </td>
-                                            <td>  <span class="name">20/04/2021</span> </td>
-                                            <td> <span class="product">20/05/2021</span> </td>
-                                            <td><span class="badge badge-pending">Réfusé</span></td>
-                                            <td></td>
-                                            
-                                        </tr>
-                                        <tr>
-                                            
-                                            <td> Personne 3 </td>
-                                            <td>  <span class="name">20/04/2021</span> </td>
-                                            <td> <span class="product">20/05/2021</span> </td>
-                                            <td><span class="badge badge-complete">Accepté</span></td>
-                                            <td></td>
-                                            
-                                        </tr>
-                                            <tr> 
-                                            <td> Personne 3 </td>
-                                            <td>  <span class="name">20/04/2021</span> </td>
-                                            <td> <span class="product">20/05/2021</span> </td>
-                                            <td><span class="badge badge-complete" style="background-color: chartreuse;">Conditionnel</span></td>
-                                            <td></td>
-                                        </tr>
-                                    -->
+                                        
                                     </tbody>
                                 </table>
+                            </div>
+                            </div>
+                            <div class="tab-pane fade " id="enattente" role="tabpanel" aria-labelledby="enattente-tab">
+                                <br><br><br>
+                                <div class="table-stats order-table ov-h" style="float: left;">
+                                     
+                                    <table class="table ">
+                                        <thead>
+                                            <tr>
+                                                 
+                                                <th>Formateur</th>
+                                                <th>Date début</th>
+                                                <th>Date Fin</th>
+                                                
+                                                 ¨
+                                             </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor ="let inscription of inscriptions"> 
+                                                 <td  *ngIf="inscription.statut === 'En attente' ">  <a [routerLink]="['/programmes', formationId,'inscriptions',inscription.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> 
+                                                    {{inscription.formateur}} </a>
+                                                </td>
+                                                <td *ngIf="inscription.statut === 'En attente' "> 
+                                                    <a [routerLink]="['/programmes', formationId,'inscriptions',inscription.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> 
+                                                         <span class="name">{{inscription.Date_debut}}</span>
+                                                    </a> 
+                                                </td>
+                                                <td *ngIf="inscription.statut === 'En attente' "> 
+                                                    <a [routerLink]="['/formations', formationId,'inscriptions',inscription.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> 
+                                                    <span class="product">{{inscription.Date_fin}}</span>
+                                                    </a>
+                                                 </td>
+                                                
+    
+                                           
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                                </div>
+                                <div class="tab-pane fade show" id="refuses" role="tabpanel" aria-labelledby="refuses-tab">
+                                    <br><br><br>
+                                    <div class="table-stats order-table ov-h" style="float: left;">
+                                         
+                                        <table class="table ">
+                                            <thead>
+                                                <tr>
+                                                     
+                                                    <th>Formateur</th>
+                                                    <th>Date début</th>
+                                                    <th>Date Fin</th>
+                                                    
+                                                   
+                                                 </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor ="let inscription of inscriptions"> 
+                                                     <td *ngIf="inscription.statut === 'réfuse' ">  <a [routerLink]="['/programmes', formationId,'inscriptions',inscription.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> 
+                                                        {{inscription.formateur}} </a>
+                                                    </td>
+                                                    <td *ngIf="inscription.statut === 'réfuse' "> 
+                                                        <a [routerLink]="['/programmes', formationId,'inscriptions',inscription.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> 
+                                                             <span class="name">{{inscription.Date_debut}}</span>
+                                                        </a> 
+                                                    </td>
+                                                    <td *ngIf="inscription.statut === 'réfuse' "> 
+                                                        <a [routerLink]="['/formations', formationId,'inscriptions',inscription.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> 
+                                                        <span class="product">{{inscription.Date_fin}}</span>
+                                                        </a>
+                                                     </td>
+                                                    
+        
+                                               
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    </div>
                             </div>
 
                             
