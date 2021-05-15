@@ -1,10 +1,13 @@
+<div>
+  <app-navbar></app-navbar> 
+
 <div class="content">
   <div class="animated fadeIn">
       <div class="row">
           <div class="col-md-12">
               <div class="card">
                   <div class="card-header">
-                      <strong class="card-title">Programme Hancho</strong>
+                      <strong class="card-title">Nouveau Programme </strong>
                   </div>
                   <div class="card-body">
                       <div class="col-sm-12">
@@ -44,6 +47,7 @@
                             
                             <!-- Tab panes -->
                             <div class="tab-content" id="nav-tabContent">
+                              <form   class="form-horizontal tab-content" id="nav-tabContent" (ngSubmit)="valider_formation(form)" novalidate>
 
                               <div class="tab-pane fade show active" id="presentation" role="tabpanel" aria-labelledby="presentation-tab">
 
@@ -51,69 +55,40 @@
                                 <div class="col-sm-12">
                                   <br><br><br>
                                   <div class="jumbotron" style="background-color: white;">
-                                     <form   class="form-horizontal">
-                                      <div class="row form-group">
+                                     <!--<form   class="form-horizontal" (ngSubmit)="valider_formation(form)" novalidate>-->
+                                      <!--<div class="form-group" [class.has-error]="first_nameControl.invalid">
+                                        <label>Nom  </label>
+                                        <input type="text" class="form-control"   placeholder="Nom" [(ngModel)]="userModel.first_name" id="first_name" name="first_name" #first_nameControl="ngModel" required>
+            
+                                        
+                                        <span class="help-block" *ngIf="first_nameControl.invalid   && submitted" >
+                                            Veuillez entrer votre Nom
+                                          </span>
+                                    </div>-->
+                                      <div class="row form-group"  [class.has-error]="titreControl.invalid">
                                         <div class="col col-md-3">
                                             <label   class=" form-control-label">Titre</label></div>
                                             <div class="input-group col col-md-4">
-                                              <input type="titre" id="titre" name="titre"  class="form-control"> 
+                                              <input type="text" id="titre" name="titre"  class="form-control" placeholder="Titre de Programme" [(ngModel)]="programmeModel.titre"   #titreControl="ngModel" required> 
                                             </div>
+                                            <span class="help-block" *ngIf="titreControl.invalid   && submitted" >
+                                              Veuillez entrer un titre de Programme
+                                            </span>
                                         </div>
-                                          <div class="row form-group">
-                                              <div class="col col-md-3">
-                                                  <label   class=" form-control-label" style="margin-top: 15px;">Date début</label>
-                                              </div>
-                                             
-                                              <mat-form-field appearance="fill">
-                                                <mat-label>Choose a date</mat-label>
-                                                <input matInput [matDatepicker]="date_debut">
-                                                <mat-datepicker-toggle matSuffix [for]="date_debut"></mat-datepicker-toggle>
-                                                <mat-datepicker #date_debut></mat-datepicker>
-                                              </mat-form-field>
-                                            <div class="col col-md-2">
-                                              <label   class=" form-control-label" style="margin-top: 15px;">Date Fin</label>
-                                          </div>
-                                          <div class="input-group col col-md-3">
-                                           
-                                            <mat-form-field appearance="fill">
-                                              <mat-label>Choose a date</mat-label>
-                                              <input matInput [matDatepicker]="date_fin">
-                                              <mat-datepicker-toggle matSuffix [for]="date_fin"></mat-datepicker-toggle>
-                                              <mat-datepicker #date_fin></mat-datepicker>
-                                            </mat-form-field>
-
-                                          </div>
-                                          </div>
+                                        
                                           
                                           
-                                          <div class="row form-group">
-                                            <div class="col col-md-2" style="margin-right: 40px;margin-top: 10px;">
-                                                <label   class=" form-control-label">Heure début</label>
-                                            </div>&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <div class="col col-md-3" style="margin-top: 10px;" > 
-                                            <ejs-timepicker [value]='heure_debut' [min]='minValue' [max]='maxValue'></ejs-timepicker>
-                                            </div>
-            
-            
-            
-                                            <div class="col col-md-2" style="margin-right: 40px;margin-top: 10px;">
-                                                <label   class=" form-control-label">Heure Fin</label>
-                                            </div>&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <div class="col col-md-3" style="margin-top: 10px;" > 
-                                            <ejs-timepicker [value]='heure_fin' [min]='minValue' [max]='maxValue'></ejs-timepicker>
-                                            </div>
-                                             
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            
-                                                 
-                                               
-                                                   
-                                        </div>
-                                          <div class="row form-group">
+                                          <div class="row form-group" [class.has-error]="descriptionControl.invalid">
                                             <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Description</label></div>
-                                            <div class="col-12 col-md-4"><textarea name="textarea-input" id="textarea-input"  class="form-control"></textarea></div>
-                                        </div>
-                                        </form>
+                                            <div class="col-12 col-md-5"><textarea name="description" id="description" placeholder="Description du Programme" [(ngModel)]="programmeModel.description" #descriptionControl="ngModel" required  class="form-control"></textarea></div>
+                                            <!---- <span class="help-block " *ngIf="descriptionControl.invalid   && submitted" >
+                                              Veuillez entrer une  description 
+                                            </span>-->
+                                          </div>
+                                          <br>
+                                          <br>
+                                        
+                                      <!----  </form>-->
                                       
                                   </div>
                                 </div>
@@ -648,8 +623,10 @@
                             </div>
 
 
+                            <button   class="btn btn-primary btn-flat m-b-30 m-t-30"  style="margin-left: 350px;">Valider</button>
+                            <button type="button" class="btn btn-danger" style="margin-left: 350px;">Annuler</button>
 
-
+                           </form>
                             </div>
                             </div>
                   </div>
@@ -658,3 +635,4 @@
       </div>
   </div>
 </div>            
+</div>

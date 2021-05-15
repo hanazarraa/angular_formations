@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ExpandEventArgs, Accordion, AccordionClickArgs} from '@syncfusion/ej2-navigations';
 import { Programme } from 'src/app/models/programme';
 import { ProgrammeService } from 'src/app/services/programme.service';
+import { TokenstorageService } from 'src/app/services/tokenstorage.service';
+import { UserService } from 'src/app/services/user.service';
   @Component({
   selector: 'app-formations',
   templateUrl: './formations.component.html',
@@ -17,8 +19,11 @@ export class FormationsComponent implements OnInit {
   programmes : Programme[]=new Array<Programme>();
   formations:any;
   programmeID:any;
+  currentUser: any;
+ 
+    constructor(private token: TokenstorageService, public userService:UserService, private router:Router,private programmeService:ProgrammeService,private route:ActivatedRoute) {
+  //  console.log(localStorage );
 
-   constructor(  private router:Router,private programmeService:ProgrammeService,private route:ActivatedRoute) {
     this.programmeID= this.route.snapshot.paramMap.get('programmeID');
     console.log(this.programmeID);
  }
@@ -27,6 +32,7 @@ export class FormationsComponent implements OnInit {
   
   ngOnInit(){
   
+   // this.currentUser = this.token.getUser(this.token);
 
    
      
@@ -71,7 +77,7 @@ export class FormationsComponent implements OnInit {
   }
    
   Ajouter(){
-     this.router.navigate(['programmes/add']);
+     this.router.navigate(['responsable/programmes/add']);
  }
   
 }

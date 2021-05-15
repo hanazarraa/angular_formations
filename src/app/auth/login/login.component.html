@@ -8,15 +8,19 @@
                         <img class="align-content" src="images/logo.png" alt="">
                     </a>
                 </div>
-                <div class="login-form">
-                    <form>
+            
+                 <div class="login-form">
+                    <form class="form-group" (ngSubmit)="login()">
+                        <div class="alert alert-warning" *ngIf='invalidLogin'>{{errorMessage}}</div>
+          <div class="alert alert-success" *ngIf='loginSuccess'>{{successMessage}}</div>
+        
                         <div class="form-group">
-                            <label>Addresse email</label>
-                            <input type="email" class="form-control" placeholder="Email">
+                            <label>Nom d'utilisateur</label>
+                            <input type="email" class="form-control" placeholder="Email" [(ngModel)]="userModel.username" id="username" name="username">
                         </div>
                         <div class="form-group">
                             <label>Mot de Passe</label>
-                            <input type="password" class="form-control" placeholder="Password">
+                            <input type="password" class="form-control" placeholder="Password"  [(ngModel)]="userModel.password" id="password" name="password">
                         </div>
                         <div class="checkbox">
                             <label>
@@ -27,7 +31,7 @@
                             </label>
 
                         </div>
-                        <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30" routerLink="/programmes" >Se Connecter</button>
+                        <button  class="btn btn-primary btn-flat m-b-30 m-t-30"   >Se Connecter</button>
                         <!--<div class="social-login-content">
                             <div class="social-button">
                                 <button type="button" class="btn social facebook btn-flat btn-addon mb-3"><i class="ti-facebook"></i>Sign in with facebook</button>

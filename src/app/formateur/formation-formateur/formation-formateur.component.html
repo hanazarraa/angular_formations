@@ -1,6 +1,7 @@
 
  
- 
+ <div>
+  <app-navbar></app-navbar> 
  <div class="content">
 
     <div class="animated fadeIn">
@@ -41,7 +42,7 @@
                             <tbody>
                                 <tr *ngFor="let programme of programmes">
                                     <td scope="row">{{programme.id}}</td>
-                                    <td><a  [routerLink]="[programme.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" ><b> {{programme.titre_Fils}}</b></a></td>
+                                    <td><a  [routerLink]="[programme.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" ><b> {{programme.titre}}</b></a></td>
                                     <td>{{programme.description}}</td>
                                     <td>20 H</td>
                                     <td>
@@ -120,4 +121,4 @@
         </div>
     </div>
 </div>
-  
+  </div>

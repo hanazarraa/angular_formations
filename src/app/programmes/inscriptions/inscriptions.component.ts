@@ -43,6 +43,6 @@ refuses(){
 
 }
 ConsulterProg(){
-  this.router.navigate(["/programmes/"+this.formationId]);
+  this.router.navigate(["/responsable/programmes/"+this.formationId]);
 }
 }

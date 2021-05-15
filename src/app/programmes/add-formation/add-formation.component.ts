@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
  import { ToastrService } from 'ngx-toastr';
 import { Consigne } from 'src/app/models/consigne.model';
 import { Doc } from 'src/app/models/doc.model';
@@ -10,6 +10,8 @@ import { Reponse } from 'src/app/models/reponse';
 import { Reunion } from 'src/app/models/reunion.model';
 import { Travail } from 'src/app/models/travail.model';
 import { MatFormField }from      '@angular/material/form-field';
+import { Programme } from 'src/app/models/programme';
+import { ProgrammeService } from 'src/app/services/programme.service';
 @Component({
   selector: 'app-add-formation',
   templateUrl: './add-formation.component.html',
@@ -17,7 +19,11 @@ import { MatFormField }from      '@angular/material/form-field';
 })
 export class AddFormationComponent implements OnInit {
   @ViewChild('closebtn') closebtn:any;
-   
+  programmeModel=new Programme();
+  form:FormGroup;
+  submitted:boolean=false;
+  loading:boolean;
+ 
   inscriptions:any;
   addForm: FormGroup;
 
@@ -99,7 +105,12 @@ export class AddFormationComponent implements OnInit {
 
   public maxValue: Date = new Date(this.fullYear, this.month, this.date, 20, 0 ,0);
  
-  constructor(private toastr: ToastrService) { }  
+  constructor(private toastr: ToastrService,private fb :FormBuilder,private programmeService:ProgrammeService ) {
+    this.form = this.fb.group({
+      titre: ['', Validators.required ],
+      description:['',Validators.required]
+   });
+   }  
   hide(){
     $("#addquestion").hide();
     }
@@ -282,6 +293,17 @@ deleteReponse(index:any) {
 valider(){
   this.closebtn.nativeElement.click();
 
+}
+valider_formation(form:FormGroup){
+  this.submitted=true;
+  console.log(this.programmeModel);
+  this.programmeService.AjouterProgramme(this.programmeModel).subscribe((result:any)=>{
+    console.log(result);
+  },(error:any)=>{
+    console.log(error);
+  }
+  )
+  
 }
 presentation(){
   $("#presentation-tab").removeClass("text-dark").addClass("text-light") ;

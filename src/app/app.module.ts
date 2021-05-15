@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from "@angular/common";
 
 import { AppRoutingModule } from './app-routing.module';
@@ -55,7 +55,15 @@ import { ConsulterFormationFormateurComponent } from './formateur/consulter-form
 import { CoursesProgramEmployeComponent } from './employe/courses-program-employe/courses-program-employe.component';
 import { ConsulterFormationEmployeComponent } from './employe/consulter-formation-employe/consulter-formation-employe.component';
 import { ConsulterCoursEmployeComponent } from './employe/consulter-cours-employe/consulter-cours-employe.component';
- @NgModule({
+import { RegisterComponent } from './auth/register/register.component';
+import { TokenInterceptor } from './auth/TokenInterceptor';
+import { JwtInterceptor } from './auth/JwtInterceptor';
+import { JwtModule } from '@auth0/angular-jwt';
+import { AuthorizationService } from './services/authorization.service';
+import { AccessDeniedComponent } from './auth/access-denied/access-denied.component';
+import { LogoutComponent } from './auth/logout/logout.component';
+
+  @NgModule({
   declarations: [
     AppComponent,
      NavbarComponent,
@@ -90,7 +98,10 @@ import { ConsulterCoursEmployeComponent } from './employe/consulter-cours-employ
    CoursesProgramEmployeComponent,
    ConsulterFormationEmployeComponent,
    ConsulterCoursEmployeComponent,
-
+   RegisterComponent,
+   AccessDeniedComponent,
+   LogoutComponent,
+ 
     //AccordionModule
   ],
   imports: [
@@ -117,18 +128,39 @@ import { ConsulterCoursEmployeComponent } from './employe/consulter-cours-employ
     // MatIconModule,
    // AgGridModule.withComponents([]),
      NgbModule,
-    FormsModule,   
+    FormsModule,
+    ReactiveFormsModule,   
   // TimepickerModule.forRoot(),
   // FullCalendarModule,
    //   ,// register FullCalendar with you app
     ToastrModule.forRoot(), BrowserAnimationsModule, 
-  // TreeViewModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return sessionStorage.getItem('auth-token');
+        },
+       // whitelistedDomains: ['budgetivity.com', 'budgetivity.local']
+      }
+      // jwtOptionsProvider: {
+      //   provide: JWT_OPTIONS,
+      //   useFactory: jwtOptionsFactory,
+      //   deps: [TokenService]
+      // }
+    }),
   
     
       
      
   ],
-  providers: [],
+  providers: [
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+     },
+     AuthorizationService
+    ],
+   
   bootstrap: [AppComponent]
 })
 export class AppModule { }

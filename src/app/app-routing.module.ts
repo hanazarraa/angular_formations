@@ -28,24 +28,37 @@ import { ConsulterCoursResponsableComponent } from './programmes/consulter-cours
 import { ConsulterFormationFormateurComponent } from './formateur/consulter-formation-formateur/consulter-formation-formateur.component';
 import { ConsulterFormationEmployeComponent } from './employe/consulter-formation-employe/consulter-formation-employe.component';
 import { ConsulterCoursEmployeComponent } from './employe/consulter-cours-employe/consulter-cours-employe.component';
+import { AuthorizationGuard } from './authorization.guard';
+import { AccessDeniedComponent } from './auth/access-denied/access-denied.component';
+import { LogoutComponent } from './auth/logout/logout.component';
 const routes: Routes = [
   
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterComponent},
-  {path:'programmes',component:ProgrammeComponent,
+  {path:'access-denied',component:AccessDeniedComponent},
+  {path:'logout',component:LogoutComponent},
+  {path:'responsable',component:ProgrammeComponent, data: {
+    allowedRoles: ['R']
+
+  },
+  canActivate: [AuthorizationGuard],
  
     children:[
-      {path :'' , component:FormationsComponent},
-      {path:'add',component:AddFormationComponent},
-      {path:':programmeID',component:ConsulterFormationComponent},
-       {path:':programmeID/inscriptions',component:InscriptionsComponent},
-       {path:':programmeID/inscriptions/:inscriptionID',component:InscriptionsEmployesComponent},
-       {path:':programmeID/cours/ajouter',component:CreerCoursResponsableComponent},
-       {path:':programmeID/cours/:coursID',component:ConsulterCoursResponsableComponent}
+      {path :'programmes' , component:FormationsComponent},
+      {path:'programmes/add',component:AddFormationComponent},
+      {path:'programmes/:programmeID',component:ConsulterFormationComponent},
+       {path:'programmes/:programmeID/inscriptions',component:InscriptionsComponent},
+       {path:'programmes/:programmeID/inscriptions/:inscriptionID',component:InscriptionsEmployesComponent},
+       {path:'programmes/:programmeID/cours/ajouter',component:CreerCoursResponsableComponent},
+       {path:'programmes/:programmeID/cours/:coursID',component:ConsulterCoursResponsableComponent}
 
       ]
  },
-  {path:'formateur/programmes',component:ProgrammeFormateurComponent,
+  {path:'formateur/programmes',component:ProgrammeFormateurComponent, data: {
+    allowedRoles: ['F']
+
+  },
+  canActivate: [AuthorizationGuard],
    children:[
      {path:'',component:FormationFormateurComponent},
      {path:':programmeID',component:ConsulterFormationFormateurComponent},

@@ -1,4 +1,4 @@
-<body class="bg-dark">
+ <body class="bg-dark">
 
     <div class="sufee-login d-flex align-content-center flex-wrap">
         <div class="container">
@@ -9,36 +9,129 @@
                     </a>
                 </div>
                 <div class="login-form">
-                    <form>
-                        <div class="form-group">
-                            <label>Nom d'utilisateur</label>
-                            <input type="email" class="form-control" placeholder="Nom d'utilisateur">
+                    <form class="form-group"   (ngSubmit)="register(form)" novalidate >
+                        <div class="form-group" [class.has-error]="first_nameControl.invalid">
+                            <label>Nom  </label>
+                            <input type="text" class="form-control"   placeholder="Nom" [(ngModel)]="userModel.first_name" id="first_name" name="first_name" #first_nameControl="ngModel" required>
+
+                            
+                            <span class="help-block" *ngIf="first_nameControl.invalid   && submitted" >
+                                Veuillez entrer votre Nom
+                              </span>
+                        </div>
+                        <div class="form-group" >
+                            <label>Prenom  </label>
+                            <input type="text" class="form-control" placeholder="Prenom" [(ngModel)]="userModel.last_name" id="last_name" name="last_name" #last_nameControl="ngModel" required>
+                            <span class="help-block" *ngIf="last_nameControl.invalid   && submitted" >
+                                Veuillez entrer votre Prénom
+                              </span>
                         </div>
                         <div class="form-group">
-                            <label>Adresse email</label>
-                            <input type="email" class="form-control" placeholder="Adresse Email">
+                            <label>Email  </label>
+                            <input type="email" class="form-control" placeholder="Adresse email" [(ngModel)]="userModel.email" id="email" name="email" #emailControl="ngModel" required>
+                            <span class="help-block" *ngIf="emailControl.invalid   && submitted" >
+                                Veuillez entrer votre Email
+                              </span>
+                        </div>
+                        <div class="form-group">
+                            <label>Role </label>
+                            <div class="col col-md-9">
+                                <div class="form-check-inline form-check">
+                                    <label for="inline-radio1" class="form-check-label ">
+                                        <input type="radio"  (change)="changeRole($event)" id="inline-radio1" name="role" value="R" class="form-check-input" [(ngModel)]="userModel.role" #roleControl="ngModel" required>Responsable
+                                    </label>
+                                    <label for="inline-radio2" class="form-check-label ">
+                                        <input type="radio" (change)="changeRole($event)" id="inline-radio2" name="role" value="F" class="form-check-input" [(ngModel)]="userModel.role" #roleControl="ngModel" required>Formateur
+                                    </label>
+                                    <label for="inline-radio3" class="form-check-label ">
+                                        <input type="radio" id="inline-radio3" (change)="changeRole($event)" name="role" value="P" class="form-check-input" [(ngModel)]="userModel.role" #roleControl="ngModel" required>Participant
+                                    </label>
+                                </div>
+                                <span class="help-block" *ngIf="emailControl.invalid   && submitted" >
+                                    Veuillez entrer votre Role
+                                  </span>
+                            </div>
+                             
+                            </div>
+                           
+                            <div class="form-group" style="display:none" id="poste_formateur_div">
+                                <label>Poste </label>
+                                <input type="text" class="form-control" placeholder="Poste" [(ngModel)]="formateurModel.poste" id="poste" name="poste" #posteControl="ngModel" required>
+                                <span class="help-block" *ngIf="posteControl.invalid   && submitted" >
+                                    Veuillez entrer votre poste
+                                  </span>
+                            </div>
+                            <div class="form-group" style="display:none" id="specialite_formateur_div">
+                                <label>Specialité </label>
+                                <input type="text" class="form-control" placeholder="Specialité" [(ngModel)]="formateurModel.specialite" id="specialite" name="specialite" #specialiteControl="ngModel" required>
+                                <span class="help-block" *ngIf="specialiteControl.invalid   && submitted" >
+                                    Veuillez entrer votre Spécialité
+                                  </span>
+                            </div>
+                            <div class="form-group" style="display:none" id="entreprise_formateur_div">
+                                <label>Entreprise </label>
+                                <input type="text" class="form-control" placeholder="Entreprise" [(ngModel)]="formateurModel.entreprise" id="entreprise" name="entreprise" #entrepriseControl="ngModel" required>
+                                <span class="help-block" *ngIf="entrepriseControl.invalid   && submitted" >
+                                    Veuillez entrer votre Entreprise
+                                  </span>
+                            </div>
+                            <div class="form-group" style="display:none" id="poste_participant_div">
+                                <label>Poste </label>
+                                <input type="text" class="form-control" placeholder="Poste" [(ngModel)]="participantModel.poste" id="poste" name="poste" #posteControl="ngModel" required>
+                                <span class="help-block" *ngIf="posteControl.invalid   && submitted" >
+                                    Veuillez entrer votre poste
+                                  </span>
+                            </div>
+                            <div class="form-group" style="display:none" id="entreprise_participant_div">
+                                <label>Entreprise </label>
+                                <input type="text" class="form-control" placeholder="Entreprise" [(ngModel)]="participantModel.entreprise" id="entreprise" name="entreprise" #entrepriseControl="ngModel" required>
+                                <span class="help-block" *ngIf="entrepriseControl.invalid   && submitted" >
+                                    Veuillez entrer votre Entreprise
+                                  </span>
+                            </div>
+                            <div class="form-group">
+                                <label>Nom d'utilisateur  </label>
+                                <input type="text" class="form-control" placeholder="Nom d'utilisateur" [(ngModel)]="userModel.username" id="username" name="username" #usernameControl="ngModel" required> 
+                                <span class="help-block" *ngIf="usernameControl.invalid   && submitted" >
+                                    Veuillez entrer votre Nom d'utilisateur
+                                  </span>
+                            </div>
+                        <div class="form-group">
+                            <label>Mot de Passe</label>
+                            <input type="password" class="form-control" placeholder="Mot de Passe"  [(ngModel)]="userModel.password" id="password" name="password" #passwordControl="ngModel" required>
+                            <span class="help-block" *ngIf="passwordControl.invalid   && submitted" >
+                                Veuillez entrer votre Mot de passe
+                              </span>
                         </div>
                         <div class="form-group">
                             <label>Mot de Passe</label>
-                            <input type="password" class="form-control" placeholder="Mot de Passe">
+                            <input type="password" class="form-control" placeholder="Mot de Passe"  [(ngModel)]="userModel.password2" id="password2" name="password2" #password2Control="ngModel" required>
+                            <span class="help-block" *ngIf="password2Control.invalid   && submitted" >
+                                Veuillez Confirmer votre Mot de passe
+                              </span>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Acceptez les conditions et la politique
+                                <input type="checkbox"> Mémoriser le mot de passe
                             </label>
+                            <label class="pull-right">
+                                <a href="#">Mot de passe oublié</a>
+                            </label>
+
                         </div>
-                        <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30" (click)="inscrire()">S'inscrire</button>
+                        <button  class="btn btn-primary btn-flat m-b-30 m-t-30"   >S'inscrire</button>
                         <!--<div class="social-login-content">
                             <div class="social-button">
-                                <button type="button" class="btn social facebook btn-flat btn-addon mb-3"><i class="ti-facebook"></i>Register with facebook</button>
-                                <button type="button" class="btn social twitter btn-flat btn-addon mt-2"><i class="ti-twitter"></i>Register with twitter</button>
+                                <button type="button" class="btn social facebook btn-flat btn-addon mb-3"><i class="ti-facebook"></i>Sign in with facebook</button>
+                                <button type="button" class="btn social twitter btn-flat btn-addon mt-2"><i class="ti-twitter"></i>Sign in with twitter</button>
                             </div>
                         </div>-->
                         <div class="register-link m-t-15 text-center">
-                            <p>Vous avez déjà un compte? <a href="/login"> Se Connecter</a></p>
+                            <p>Vous avez deja un compte ? <a href="/login"  > Se Connecter</a></p>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    </body>
