@@ -37,10 +37,7 @@
                             <label>Role </label>
                             <div class="col col-md-9">
                                 <div class="form-check-inline form-check">
-                                    <label for="inline-radio1" class="form-check-label ">
-                                        <input type="radio"  (change)="changeRole($event)" id="inline-radio1" name="role" value="R" class="form-check-input" [(ngModel)]="userModel.role" #roleControl="ngModel" required>Responsable
-                                    </label>
-                                    <label for="inline-radio2" class="form-check-label ">
+                                      <label for="inline-radio2" class="form-check-label ">
                                         <input type="radio" (change)="changeRole($event)" id="inline-radio2" name="role" value="F" class="form-check-input" [(ngModel)]="userModel.role" #roleControl="ngModel" required>Formateur
                                     </label>
                                     <label for="inline-radio3" class="form-check-label ">
@@ -80,6 +77,13 @@
                                 <input type="text" class="form-control" placeholder="Poste" [(ngModel)]="participantModel.poste" id="poste" name="poste" #posteControl="ngModel" required>
                                 <span class="help-block" *ngIf="posteControl.invalid   && submitted" >
                                     Veuillez entrer votre poste
+                                  </span>
+                            </div>
+                            <div class="form-group" style="display:none" id="specialite_participant_div">
+                                <label>Specialité </label>
+                                <input type="text" class="form-control" placeholder="Specialité" [(ngModel)]="participantModel.specialite" id="specialite" name="specialite" #specialiteControl="ngModel" required>
+                                <span class="help-block" *ngIf="specialiteControl.invalid   && submitted" >
+                                    Veuillez entrer votre Spécialité
                                   </span>
                             </div>
                             <div class="form-group" style="display:none" id="entreprise_participant_div">
