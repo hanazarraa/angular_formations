@@ -12,7 +12,9 @@ import { User } from '../models/user';
 })
 export class UserService {
   cachedRequests: Array<HttpRequest<any>> = [];
-
+  headers: Headers = new Headers();
+  private usersUrl='http://localhost:8000/auth/users/';
+ 
    // http options used for making API calls
    private httpOptions: any;
  
@@ -29,15 +31,14 @@ export class UserService {
    public errors: any = [];
   USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser'
 
-  private usersUrl: string;
-  constructor( private http: HttpClient
+   constructor( private http: HttpClient
     ) {
       this.httpOptions = {
         headers: new HttpHeaders({'Content-Type': 'application/json'})
       };
     }
     public login(user:any) {
-      return this.http.post<any>(`http://localhost:8000/auth/signin/`,JSON.stringify(user),this.httpOptions);
+      return this.http.post<any>(`http://localhost:8000/auth/api-token-auth/`,JSON.stringify(user),this.httpOptions);
 
       /*this.http.post(`http://localhost:8000/auth/api-token-auth/`, JSON.stringify(user), this.httpOptions).subscribe(
         data => {
@@ -132,6 +133,20 @@ export class UserService {
  
   getUsers():Observable<any>{
     return this.http.get('http://localhost:8000/auth/users/');
+  
+  }
+  getUserByID(id:any):Observable<any>{
+    //console.log(this.userService.token)
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+       });
+       console.log(localStorage);
+        this.headers.append('Authorization', 'Bearer ' + localStorage.getItem('auth-token'));
+        const options = {
+      headers
+    };
+    return this.http.get(`${this.usersUrl}${id}/`,options );
   
   }
   createBasicAuthToken(username: String, password: String) {

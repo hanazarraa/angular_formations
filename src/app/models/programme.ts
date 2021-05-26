@@ -4,6 +4,9 @@ export class Programme {
     public id?:number;
    public titre?:string;
    public description?:string;
-   public duree?:Time;
+   //public duration?:Time;
+   public duration?:string;
+   public min?:number;
+   public max?:number;
  
 }

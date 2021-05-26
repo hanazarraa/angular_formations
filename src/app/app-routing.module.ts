@@ -31,6 +31,7 @@ import { ConsulterCoursEmployeComponent } from './employe/consulter-cours-employ
 import { AuthorizationGuard } from './authorization.guard';
 import { AccessDeniedComponent } from './auth/access-denied/access-denied.component';
 import { LogoutComponent } from './auth/logout/logout.component';
+import { AddFormationResponsableComponent } from './programmes/add-formation-responsable/add-formation-responsable.component';
 const routes: Routes = [
   
   {path:'login',component:LoginComponent},
@@ -45,7 +46,7 @@ const routes: Routes = [
  
     children:[
       {path :'programmes' , component:FormationsComponent},
-      {path:'programmes/add',component:AddFormationComponent},
+      {path:'programmes/add',component:AddFormationResponsableComponent},
       {path:'programmes/:programmeID',component:ConsulterFormationComponent},
        {path:'programmes/:programmeID/inscriptions',component:InscriptionsComponent},
        {path:'programmes/:programmeID/inscriptions/:inscriptionID',component:InscriptionsEmployesComponent},

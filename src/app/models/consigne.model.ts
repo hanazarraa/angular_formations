@@ -1,6 +1,11 @@
+import { Travail } from "./travail.model";
+import { User } from "./user";
+
 export class Consigne  {
-    public  titre:string;
-    public piece_jointe:string;
+    public  travail?:Travail;
+    public remis_par?:User;
+    public piece_jointe:File;
+    public p:string;
     constructor(){
 
     }

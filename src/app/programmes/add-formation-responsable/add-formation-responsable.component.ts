@@ -1,40 +1,38 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { Competence } from 'src/app/models/competence';
 import { Consigne } from 'src/app/models/consigne.model';
 import { Doc } from 'src/app/models/doc.model';
 import { Enregistrement } from 'src/app/models/enregistrement.model';
 import { DynamicGrid } from 'src/app/models/grid.model';
+import { Niveau } from 'src/app/models/niveau';
+import { Programme } from 'src/app/models/programme';
+import { Programmecompetenceniveau } from 'src/app/models/programmecompetenceniveau';
+import { Question } from 'src/app/models/question';
+import { Quizz } from 'src/app/models/quizz';
 import { Remise } from 'src/app/models/remise.model';
 import { Reponse } from 'src/app/models/reponse';
 import { Reunion } from 'src/app/models/reunion.model';
 import { Travail } from 'src/app/models/travail.model';
-import { MatFormField }from      '@angular/material/form-field';
-import { ActivatedRoute } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Niveau } from 'src/app/models/niveau';
-import { Competence } from 'src/app/models/competence';
-import { Quizz } from 'src/app/models/quizz';
-import { TravailService } from 'src/app/services/travail.service';
-import { ReponseService } from 'src/app/services/reponse.service';
-import { QuestionService } from 'src/app/services/question.service';
-import { Question } from 'src/app/models/question';
-import { Programmecompetenceniveau } from 'src/app/models/programmecompetenceniveau';
-import { Programme } from 'src/app/models/programme';
-import { ConsigneService } from 'src/app/services/consigne.service';
-import { UserService } from 'src/app/services/user.service';
-import { ProgrammeService } from 'src/app/services/programme.service';
 import { CompetenceService } from 'src/app/services/competence.service';
+import { ConsigneService } from 'src/app/services/consigne.service';
 import { NiveauService } from 'src/app/services/niveau.service';
 import { ProgrammeCompetenceNiveauService } from 'src/app/services/programme-competence-niveau.service';
-import { data } from 'jquery';
+import { ProgrammeService } from 'src/app/services/programme.service';
+import { QuestionService } from 'src/app/services/question.service';
+import { ReponseService } from 'src/app/services/reponse.service';
+import { TravailService } from 'src/app/services/travail.service';
+import { UserService } from 'src/app/services/user.service';
+import * as HtmlDurationPicker from 'html-duration-picker';
 
 @Component({
-  selector: 'app-consulter-formation',
-  templateUrl: './consulter-formation.component.html',
-  styleUrls: ['./consulter-formation.component.scss']
+  selector: 'app-add-formation-responsable',
+  templateUrl: './add-formation-responsable.component.html',
+  styleUrls: ['./add-formation-responsable.component.scss']
 })
-export class ConsulterFormationComponent implements OnInit {
+export class AddFormationResponsableComponent implements OnInit {
   @ViewChild('closebtn') closebtn:any;
   @ViewChild('formRecipe') formRecipe: NgForm;   
   @ViewChild('consigneForm') public consigneForm : NgForm;
@@ -48,14 +46,10 @@ rows: FormArray;
 itemForm: FormGroup;
 
 ngAfterViewInit() {
- // HtmlDurationPicker.init();
+  HtmlDurationPicker.init();
 }
 
 //rows=<any>[];
-successMessage:string;
-formatted:string;
- updateSuccess:boolean;
-errorMessage:string;
 
 programmeModel=new Programme();
 programmeCompetenceniveauModel=new Programmecompetenceniveau();
@@ -65,7 +59,7 @@ loading:boolean;
 competences : Competence[]=new Array<Competence>();
 niveaux:Niveau[]=new Array<Niveau>();
 inscriptions:any;
- programme:any;
+ 
 dynamicArray: Array<DynamicGrid> = [];  
 newDynamic: any = {}; 
 programmeCompetenceNiveauArray:Array<Programmecompetenceniveau>=[];
@@ -87,8 +81,6 @@ newEnregistrement:any={};
 reunions:Array<Reunion>=[];
 newReunion:any={};
 reponses:Array<Reponse>=[];
-responses:Array<Reponse>=[];
-responseArray:Reponse[][]=new Array<Array<Reponse>>();
 newReponse:any={};
 items=[{id:"1",titre:"compétence 1"},
 {id:"2",titre:'compétence 2'},
@@ -127,39 +119,25 @@ prev = -1;
 questionModel=new Question();
 onPrev() {
  this.prev = this.current--;
- console.log(this.questions[this.current].id);
- this.reponseService.getReponsesByQuestionID(this.questions[this.current].id)
-.subscribe(data=>{
-  this.reponses=data;
-  console.log(this.reponses);
-}); 
 }
 
-onNext() {
+onNext(current:any) {
 //  console.log(this.questionModel);
   //console.log(this.quizzModel);
  // this.quizzModel.questions.push(this.questionModel);
  // console.log(this.quizzModel);
 
   //this.questionModel={};
-  console.log(this.current);
    this.prev = this.current++ ;
-   console.log(this.questions[this.current].id);
-    this.reponseService.getReponsesByQuestionID(this.questions[this.current].id)
-   .subscribe(data=>{
-     this.reponses=data;
-     console.log(this.reponses);
-   /*  for(var reponse of this.reponses){
-     }*/
-   }); 
-   
 
 }
   valider_question(){
    // console.log(this.quizzModel);
-  // let row:Reponse[]  = new Array<Reponse>();      
-  //  this.responseArray.push(row);
-  this.questions[this.current].reponses=new Array<Reponse>();
+   this.questionModel={};
+   this.questionModel.reponses=new Array<Reponse>();
+
+  // this.questionModel.reponses=[];
+
     this.questions.push(this.questionModel) ;
     console.log(this.questions);
    console.log("avant");
@@ -181,9 +159,6 @@ supprimerQuestion(index:any){
   if(this.questions.length==0){
     console.log("error");
   }else{
-    this.questionService.deleteQuestion(this.questions[index].id).subscribe((result:any)=>{
-      console.log(result);
-    });
     this.questions.splice(index,1);
     console.log(this.questions);
     this.prev = this.current--;
@@ -222,16 +197,15 @@ public minValue: Date = new Date(this.fullYear, this.month , this.date, 7, 0, 0)
 public heure_fin: Date = new Date(this.fullYear, this.month , this.date, 10, 0, 0);
 
 public maxValue: Date = new Date(this.fullYear, this.month, this.date, 20, 0 ,0);
-public programmeId:any;
-constructor(private route:ActivatedRoute,private reponseService:ReponseService,private questionService:QuestionService,private changeDetectorRef: ChangeDetectorRef,private http:HttpClient,private consigneService:ConsigneService,private userService:UserService,private _fb:FormBuilder,private toastr: ToastrService,private fb :FormBuilder,private programmeService:ProgrammeService,private CompetenceService:CompetenceService,private NiveauService:NiveauService,private progcompnivService:ProgrammeCompetenceNiveauService
+
+constructor(private reponseService:ReponseService,private questionService:QuestionService,private changeDetectorRef: ChangeDetectorRef,private http:HttpClient,private consigneService:ConsigneService,private userService:UserService,private _fb:FormBuilder,private toastr: ToastrService,private fb :FormBuilder,private programmeService:ProgrammeService,private CompetenceService:CompetenceService,private NiveauService:NiveauService,private progcompnivService:ProgrammeCompetenceNiveauService
    ,private travailService:TravailService) {
  this.addForm = this.fb.group({
    items: [null, Validators.required],
    items_value: ['no', Validators.required]
  });
 
- this.programmeId = this.route.snapshot.paramMap.get('programmeID');
-console.log(this.programmeId);
+
  this.rows = this.fb.array([]);
 
  this.form = this.fb.group({
@@ -277,7 +251,7 @@ validerQuizz(form:NgForm ){
   this.quizzes.push(this.quizzModel);
  //.quizzModel.titre=""
   console.log(this.quizzes);
-  this.onNext( );
+  this.onNext(this.current);
   //this.changeDetectorRef.detectChanges();
  // this.closebtn.nativeElement.click();
 
@@ -313,107 +287,17 @@ onChange(event) {
 
 ngOnInit(): void {
   $('#testModal').on('hide', function() {
-     $('#titre', this).val('');
+    console.log("bb");
+    $('#titre', this).val('');
   });
   $('#testModal').on('hidden.bs.modal', function () {
-     $(this)
+    console.log("hh");
+    $(this)
        
       //  .find("input[type=file]")
       //  .val("")
         .end();
 });
-this.CompetenceService.getCompetences()
- .subscribe(
-   (competences:Competence[])=> 
-    { console.log(competences);
-      this.competences=competences}
-    );
-    this.NiveauService.getNiveaux()
-    .subscribe(
-      (niveaux:Niveau[])=> 
-       { console.log(niveaux);
-         this.niveaux=niveaux}
-       );
-this.submitted=false;
- this.programmeService.getProgrammeByID(this.programmeId)
-.subscribe(data => {
-  this.programme = data;
-  
-   console.log(this.programme);
-
-  
- // console.log(this.customer);
-}, error => console.log(error));
-
-this.travailService.getTravailByProgrammeID(this.programmeId)
-  .subscribe(data=>{
-    this.traveaux=data;
-    console.log(this.traveaux);
-  },error=>console.log(error));
-this.progcompnivService.getCompNiveauByProgrammeID(this.programmeId)
-.subscribe(data=>{
-  this.dynamicArray=data;
-  console.log(this.dynamicArray);
-});
- this.questionService.getQuestionByProgrammeID(this.programmeId)
- .subscribe(data=>{
-   this.questions=data;
-   console.log(this.questions);
-   for(let i=0;i<this.questions.length;i++){
-   // let row:Reponse[]  = new Array<Reponse>();      
-     this.questions[i].reponses=new Array<Reponse>();
-     //console.log(this.responseArray[i]);
-     this.reponseService.getReponsesByQuestionID(this.questions[i].id).subscribe((result:any)=>{
-      console.log(result);
-      //this.responses =result;
-      //console.log(this.responses);
-
-      for(let j=0;j<result.length;j++){
-        this.questions[i].reponses.push(result[j]);
-
-
-        //console.log(result[j]);
-        //this.responseArray[i][j]=result[j];
-        //console.log("f",this.responseArray[i][j]);
-    
-
-      }
-      console.log(this.questions[i]);
-      //this.responseArray.push(row);
-      //console.log(this.responseArray);
-      //console.log(this.responseArray[i]);
-
-      
-      
-    });
-    console.log("response array for question",0,this.responseArray[1]);
-
-  }
-
-    
- });
- for(var i=0;i<this.questions.length;i++){
-   this.responseArray[i]=[];
-   this.reponseService.getReponsesByQuestionID(this.questions[i].id).subscribe((result:any)=>{
-     console.log(result);
-    // this.responseArray[i]=result;
-    // console.log("response array ",i,this.responseArray[i]);
-   });
- }
-    
- //  console.log(this.questions[this.current].reponses);
-
- /*console.log(this.current);
- console.log(this.questions[this.current]);
- this.reponseService.getReponsesByQuestionID(this.questions[this.current].id)
- .subscribe(data=>{
-   this.reponses=data;
-   console.log(this.reponses);
- });*/
- 
-  
-
-
   $("#validModal").on('click',function(){
     console.log("i was clicked");
   })
@@ -458,7 +342,18 @@ console.log(this.id)
  });*/
 
 
- 
+ this.CompetenceService.getCompetences()
+ .subscribe(
+   (competences:Competence[])=> 
+    { console.log(competences);
+      this.competences=competences}
+    );
+    this.NiveauService.getNiveaux()
+    .subscribe(
+      (niveaux:Niveau[])=> 
+       { console.log(niveaux);
+         this.niveaux=niveaux}
+       );
      this.newprogcompniv={programme:"",competence:"",niveau:""};
    
 
@@ -633,31 +528,13 @@ if(this.quizzes.length ==1) {
 }  
 }
 addReponse() {    
-  console.log("new reponse in question ",this.current);
- //this.responseArray=[];
-   console.log(this.newReponse);
-  //console.log(this.responseArray[this.current]);
-  //console.log(this.reponses);
- // let row=this.responseArray[this.current];
- // row.push(this.newReponse);
- // console.log(row);
- if(!this.questions[this.current].reponses){
-    this.questions[this.current].reponses=new  Array<Reponse>();
-    console.log(this.questions[this.current]);
-
- }
-  this.questions[this.current].reponses.push(this.newReponse);
-  //console.log(this.responseArray);
- /* this.newReponse.question=this.questions[this.current].id;
-  this.reponseService.AjouterReponse(this.newReponse).subscribe((result:any)=>{
-    console.log(result);
-    console.log("new reponse");
-  });*/
+ console.log(this.current);
+  console.log(this.newReponse);
 //this.newReponse = {id: "", option:"" ,result:false};  
- //this.questions[this.current-1].reponses.push(this.newReponse); 
- //console.log(this.questions[this.current-1]);
+ this.questions[this.current-1].reponses.push(this.newReponse); 
+ console.log(this.questions[this.current-1]);
  this.newReponse={};
- this.toastr.success('New rep added successfully in question');  
+ this.toastr.success('New row added successfully', 'New Row');  
  //console.log(this.dynamicArray);  
  return true;  
 }   
@@ -671,13 +548,14 @@ deleteRow(index:any) {
    this.toastr.warning('Row deleted successfully', 'Delete row');  
    return true;  
 }  */
-this.progcompnivService.deleteCompetence(this.dynamicArray[index].id).subscribe((result:any)=>{
-  console.log("competence deleted successfully");
-});
+  if(this.dynamicArray.length ==1) {  
+   this.toastr.error("Can't delete the row when there is only one row", 'Warning');  
+     return false;  
+ } else {  
      this.dynamicArray.splice(index, 1);  
      this.toastr.warning('Row deleted successfully', 'Delete row');  
      return true;  
- 
+ }  
 }
 deleteReponse(index:any) {  
   /* if(this.programmeCompetenceNiveauArray.length ==1) {  
@@ -688,17 +566,15 @@ deleteReponse(index:any) {
      this.toastr.warning('Row deleted successfully', 'Delete row');  
      return true;  
   }  */
-
-    let row=this.responseArray[this.current];
-    this.reponseService.supprimerReponse(row[index].id).subscribe((result:any)=>{
-      console.log("deleted from db");
-    });
-     row.splice(index, 1);  
-     console.log(this.responseArray);
-      // console.log(this.questions[this.current-1].reponses);
+    if(this.questions[this.current-1].reponses.length ==1) {  
+     this.toastr.error("Can't delete the row when there is only one row", 'Warning');  
+       return false;  
+   } else {  
+       this.questions[this.current-1].reponses.splice(index, 1);  
+       console.log(this.questions[this.current-1].reponses);
        this.toastr.warning('Row deleted successfully', 'Delete row');  
        return true;  
-   
+   }  
   }
   
 deleteConsigne(index:any) {  
@@ -754,13 +630,14 @@ if(this.reunions.length ==1) {
 }
 
 deleteTravail(index:any) {  
-  this.travailService.deleteTravail(this.traveaux[index].id).subscribe((result:any)=>{
-    console.log("travail deleted successfully");
-  });
+if(this.traveaux.length ==1) {  
+ this.toastr.error("Can't delete the row when there is only one row", 'Warning');  
+   return false;  
+} else {  
    this.traveaux.splice(index, 1);  
    this.toastr.warning('Row deleted successfully', 'Delete row');  
    return true;  
-
+}  
 }
 
 DJANGO_SERVER = 'http://127.0.0.1:8000'
@@ -836,58 +713,9 @@ console.log(this.traveaux)
 this.submitted=true;
 console.log(this.programmeModel);
 
- this.programmeService.modifierProgramme(this.programmeId,this.programme).subscribe((result:any)=>{
+ this.programmeService.AjouterProgramme(this.programmeModel).subscribe((result:any)=>{
  console.log(result);
- this.updateSuccess=true;
- this.successMessage = 'Programme Mis a jour avec succés';
- console.log(this.updateSuccess);
- for(let i=0;i<this.questions.length;i++){
-  // console.log("now",this.current);
-   if(this.questions[i].id){
-    
-     this.questionService.updateQuestion(this.questions[i].id,this.questions[i]).subscribe((result:any)=>{
-       console.log(result);
-       let row=this.questions[i].reponses;
-       for(var j=0;j<row.length;j++){
-         if(row[j].id){
-          this.reponseService.ModifierReponse(row[j].id,row[j]).subscribe((result:any)=>{
-            console.log(result);
-          });
-         }else{
-          row[j].question=this.questions[i].id;
-          this.reponseService.AjouterReponse(row[j]).subscribe((result:any)=>{
-            console.log(result);
-          });
-         }
-       }
-     });
-   }else{
-    this.questions[i].programme=this.programmeId;
-    this.questions[i].cree_par=this.id;
-     this.questionService.AjouterQuestion(this.questions[i]).subscribe((result:any)=>{
-       console.log(result);
-       let row=this.questions[i].reponses;
-       for(var j=0;j<row.length;j++){
-        row[j].question=result.id;
-        this.reponseService.AjouterReponse(row[j]).subscribe((result:any)=>{
-          console.log(result);
-        });
-       }
-     });
-   }
-
- }
- 
- /*for(var reponse of this.reponses){
-   console.log(this.reponse)
-   if(reponse.id){
-     this.reponseService.ModifierReponse(reponse.id,reponse).subscribe((result:any)=>{
-       console.log(result);
-     });
-   }
- }*/
-
-/* for (var question of this.questions) {
+ for (var question of this.questions) {
   console.log(question); 
   question.programme=result.id;
   question.cree_par=this.id;
@@ -906,42 +734,19 @@ console.log(this.programmeModel);
     console.log(error);
   });
 
-}*/
-for (var dynamic of this.dynamicArray) {
-   console.log(dynamic); 
-   if(dynamic.id){
-
-      this.progcompnivService.updateCompNiveau(dynamic.id,dynamic).subscribe((result:any)=>{
+}
+ /*for (var dynamic of this.dynamicArray) {
+   console.log(dynamic.competence); 
+   dynamic.programme=result.id;
+   this.progcompnivService.AjouterProgramme_Competence_Niveau(dynamic).subscribe((result:any)=>{
      console.log(result);
-      
-
+   },(error:any)=>{
+     console.log(error);
    });
-  }
-  else{
-    dynamic.programme=this.programmeId;
-    this.progcompnivService.AjouterProgramme_Competence_Niveau(dynamic).subscribe((result:any)=>{
-      console.log(result);
 
-    });
-  }
- 
+ }*/
 
- }
- for( var travail of this.traveaux ){
-   if(travail.id){
-     this.travailService.updateTravail(travail.id,travail).subscribe((result:any)=>{
-       console.log(result);
-     });
-   }else{
-     travail.programme=this.programmeId;
-     travail.partage_par=this.id;
-     this.travailService.AjouterTravail(travail).subscribe((result:any)=>{
-       console.log(result);
-     });
-   }
- }
-
- /* for (var travail of this.traveaux) {
+  for (var travail of this.traveaux) {
    console.log(travail.titre); 
    travail.programme=result.id;
    travail.partage_par=this.id;
@@ -975,12 +780,10 @@ for (var dynamic of this.dynamicArray) {
      console.log(error);
    });
 
- }*/
+ }
 
 },(error:any)=>{
  console.log(error);
- this.updateSuccess=false;
- this.errorMessage="Echec de mis a jour du programmme";
 
 }
 );

@@ -62,7 +62,10 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AuthorizationService } from './services/authorization.service';
 import { AccessDeniedComponent } from './auth/access-denied/access-denied.component';
 import { LogoutComponent } from './auth/logout/logout.component';
-
+import { NgSelectModule } from '@ng-select/ng-select';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { AddFormationResponsableComponent } from './programmes/add-formation-responsable/add-formation-responsable.component';
+ import {DurationPickerModule}  from 'ngx-duration-picker';
   @NgModule({
   declarations: [
     AppComponent,
@@ -101,10 +104,14 @@ import { LogoutComponent } from './auth/logout/logout.component';
    RegisterComponent,
    AccessDeniedComponent,
    LogoutComponent,
+   AddFormationResponsableComponent,
  
     //AccordionModule
   ],
   imports: [
+    BsDatepickerModule.forRoot(),    
+
+    NgSelectModule,
     MatExpansionModule,
     DragDropModule,
     MatInputModule,
@@ -118,6 +125,8 @@ import { LogoutComponent } from './auth/logout/logout.component';
     BrowserModule,
     AppRoutingModule,
      NgxSelectModule,
+     DurationPickerModule,
+
     // NgxMatSelectSearchModule,
     HttpClientModule,
     AccordionModule,

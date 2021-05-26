@@ -27,13 +27,10 @@ export class ConsulterFormationEmployeComponent implements OnInit {
   dynamicArray: Array<DynamicGrid> = [];  
   newDynamic: any = {}; 
   traveaux:Array<Travail>=[
-    {titre:"travail 1",date_debut:"28/4/2021",date_echeance:"2/5/2021",ponderation:"30%",resultat:"indéfini"},
-    {titre:"travail 2",date_debut:"5/5/2021",date_echeance:"10/5/2021",ponderation:"20%",resultat:"indéfini"}
-  ];
+    ];
   newTravail:any={};
   consignes:Array<Consigne>=[
-    {titre:"Consigne 1.pdf",piece_jointe:""},
-    {titre: "Consigne 2.pdf",piece_jointe:""}
+    
   ];
   newConsigne:any={};
   remises:Array<Remise>=[
@@ -48,8 +45,7 @@ export class ConsulterFormationEmployeComponent implements OnInit {
   reunions:Array<Reunion>=[];
   newReunion:any={};
   reponses:Array<Reponse>=[
-    {id:"",option:"option 1",result:true},
-    {id:"",option:"option 2",result:false}
+     
   ];
   newReponse:any={};
   competences=["Angular","Django"];

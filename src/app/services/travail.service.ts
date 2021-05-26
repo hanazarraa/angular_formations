@@ -6,12 +6,12 @@ import { UserService } from './user.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ProgrammeService {
+export class TravailService {
   headers: Headers = new Headers();
-  private programmesUrl='http://localhost:8000/api/programmes/';
+   travauxUrl:string='http://localhost:8000/api/travaux/';
   constructor(private httpclient:HttpClient,private userService:UserService) { }
 
-  getProgrammes():Observable<any>{
+  getTravaux():Observable<any>{
     //console.log(this.userService.token)
 
     const headers = new HttpHeaders({
@@ -22,24 +22,10 @@ export class ProgrammeService {
         const options = {
       headers
     };
-    return this.httpclient.get('http://localhost:8000/api/programmes/',options);
+    return this.httpclient.get('http://localhost:8000/api/travaux/',options);
   
   }
-  getProgrammeByID(id:any):Observable<any>{
-    //console.log(this.userService.token)
-
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-       });
-       console.log(localStorage);
-        this.headers.append('Authorization', 'Bearer ' + localStorage.getItem('auth-token'));
-        const options = {
-      headers
-    };
-    return this.httpclient.get(`${this.programmesUrl}${id}/`,options );
-  
-  }
-  AjouterProgramme(programme:any):Observable<any>{
+  AjouterTravail(travail:any):Observable<any>{
     //console.log(this.userService.token)
 
     const headers = new HttpHeaders({
@@ -50,10 +36,10 @@ export class ProgrammeService {
         const options = {
       headers
     };
-    return this.httpclient.post('http://localhost:8000/api/programmes/',programme,options);
+    return this.httpclient.post('http://localhost:8000/api/travaux/',travail,options);
   
   }
-  modifierProgramme(id:any,programme:any):Observable<any>{
+  getTravailByProgrammeID(id:any):Observable<any>{
     //console.log(this.userService.token)
 
     const headers = new HttpHeaders({
@@ -64,7 +50,33 @@ export class ProgrammeService {
         const options = {
       headers
     };
-    return this.httpclient.put(`${this.programmesUrl}${id}/`,programme,options );
+    return this.httpclient.get(`${this.travauxUrl}?programme=${id}`,options );
   
+  }
+  updateTravail(id:any,travail:any):Observable<any>{
+    //console.log(this.userService.token)
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+       });
+       console.log(localStorage);
+        this.headers.append('Authorization', 'Bearer ' + localStorage.getItem('auth-token'));
+        const options = {
+      headers
+    };
+    return this.httpclient.put(`${this.travauxUrl}${id}/`,travail,options );
+  
+  }
+  deleteTravail(id:any):Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+       });
+       console.log(localStorage);
+        this.headers.append('Authorization', 'Bearer ' + localStorage.getItem('auth-token'));
+        const options = {
+      headers
+    };
+    return this.httpclient.delete(`${this.travauxUrl}${id}/`,options);
+
   }
 }

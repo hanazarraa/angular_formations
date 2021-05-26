@@ -12,7 +12,7 @@
                     <div class="card-header">
                         <strong class="card-title">Programme</strong>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
                        
-                               <ul class="nav nav-tabs card-header-tabs pull-right"  id="myTab" role="tablist">
+                              <!---- <ul class="nav nav-tabs card-header-tabs pull-right"  id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active btn-light" id="list-tab" data-toggle="tab" href="#list" role="tab" aria-controls="list" aria-selected="true">Liste</a>
                                 </li>
@@ -20,7 +20,8 @@
                                     <a class="nav-link btn-light" id="agenda-tab" data-toggle="tab" href="#agenda" role="tab" aria-controls="agenda" aria-selected="false">Agenda</a>
                                 </li>
                                 
-                            </ul>
+                            </ul>-->
+
                        
                       </div>
                      
@@ -43,6 +44,8 @@
                                       <th scope="col">ID</th>
                                       <th scope="col">Titre</th>
                                       <th scope="col">Description</th>
+                                      <th scope="col">Min</th>
+                                      <th scope="col">Max</th>
                                       <th scope="col">Durée</th>
                                       <th scope="col">Actions</th>
   
@@ -53,13 +56,17 @@
                                       <td scope="row">{{programme.id}}</td>
                                       <td><a  [routerLink]="[programme.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> <b> {{programme.titre}}</b></a></td>
                                       <td>{{programme.description}}</td>
-                                      <td>20 H</td>
-                                      <td><div class="dropdown-container" tabindex="-1">
-                                          <div class="three-dots"></div>
-                                          <div class="dropdown">
+                                      <td>{{programme.min}}</td>
+                                      <td> {{programme.max}} </td>
+                                      <td>{{programme.duration}}</td>
+                                      <td> 
                                             <a class="btn-primary btn-sm" [routerLink]="[programme.id,'inscriptions']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> Inscriptions</a>
-                                             </div>
-                                        </div>
+                                            <br><br>
+                                             <a class="btn-primary btn-sm" [routerLink]="[programme.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> Consulter Programme</a>
+
+
+                                              
+                                         
                                       </td>
                                    </tr>
                                    

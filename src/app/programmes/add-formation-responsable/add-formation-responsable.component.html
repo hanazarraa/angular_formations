@@ -1,0 +1,567 @@
+<div class="content">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Programme Hancho</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-sm-12">
+                            <!-- Nav tabs -->
+
+                            <!--<ul class="nav nav-pills ">
+                             
+                              <li>
+                                <a class="active" id="presentation-tab" data-toggle="tab" href="#presentation" >Présentation</a>
+                              </li>
+                              <li>
+                                <a  id="cmpv-tab" data-toggle="tab" href="#cmpv" >CMPV</a>
+                              </li>
+                              <li >
+                                <a  id="evaluation-tab" data-toggle="tab" href="#evaluation">Evaluation</a>
+                              </li>
+                              <li >
+                                <a  id="materiel-tab" data-toggle="tab" href="#materiel">Matériel Pédagogique</a>
+                              </li>
+                              <li >
+                                <a  id="reunion-tab" data-toggle="tab" href="#reunions">Reunions</a>
+                              </li>
+                             
+                              </ul>-->
+                            <ul class="nav d-flex justify-content-center">
+                                <li class="nav-item mx-lg-4">
+                                    <a class="filter-btn nav-link btn-outline-primary active shadow rounded-pill text-light px-4 light-300"
+                                        id="presentation-tab" data-toggle="tab" href="#presentation" role="tab"
+                                        aria-controls="presentation" aria-selected="true"
+                                        (click)="presentation()">Présentation</a>
+                                </li>
+                                <li class="nav-item mx-lg-4">
+                                    <a class="filter-btn nav-link btn-outline-primary shadow rounded-pill text-dark px-4 light-300"
+                                        id="cmpv-tab" data-toggle="tab" href="#cmpv" role="tab" aria-controls="cmpv"
+                                        aria-selected="true" (click)="cmpv()">CMPV</a>
+                                </li>
+                                <li class="nav-item mx-lg-4">
+                                    <a class="filter-btn nav-link btn-outline-primary shadow rounded-pill text-dark px-4 light-300"
+                                        id="evaluation-tab" data-toggle="tab" href="#evaluation" role="tab"
+                                        aria-controls="evaluation" aria-selected="true"
+                                        (click)="evaluation()">Evaluation</a>
+                                </li>
+                            </ul>
+
+
+                            <!-- Tab panes -->
+                            <div class="tab-content" id="nav-tabContent">
+                                <form class="form-horizontal tab-content" id="nav-tabContent"
+                                    (ngSubmit)="valider_formation(form)" novalidate>
+                                    <div class="tab-pane fade show active" id="presentation" role="tabpanel"
+                                        aria-labelledby="presentation-tab">
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <br><br><br>
+                                                <div class="jumbotron" style="background-color: white;">
+                                                    <div class="row form-group" [class.has-error]="titreControl.invalid">
+                                                        <div class="col col-md-3">
+                                                          <label class=" form-control-label">Titre</label>
+                                                        </div>
+                                                        <div class="input-group col col-md-4">
+                                                          <input type="text" id="titre" name="titre" class="form-control"
+                                                            placeholder="Titre de Programme" [(ngModel)]="programmeModel.titre"
+                                                            #titreControl="ngModel" required>
+                                                        </div>
+                                                        <span class="help-block" *ngIf="titreControl.invalid   && submitted">
+                                                          Veuillez entrer un titre de Programme
+                                                        </span>
+                                                      </div>
+                          
+                          
+                          
+                                                      <div class="row form-group" [class.has-error]="descriptionControl.invalid">
+                                                        <div class="col col-md-3"><label for="textarea-input"
+                                                            class=" form-control-label">Description</label></div>
+                                                        <div class="col-12 col-md-5"><textarea name="description" id="description"
+                                                            placeholder="Description du Programme" [(ngModel)]="programmeModel.description"
+                                                            #descriptionControl="ngModel" required class="form-control"></textarea></div>
+                                                      
+                                                      </div>
+                                                      <div class="row form-group" [class.has-error]="durationControl.invalid">
+                                                        <div class="col col-md-3"><label for="textarea-input"
+                                                            class=" form-control-label">Durée</label></div>
+                                                        <div class="col-12 col-md-5">
+                                                            <!--<ngx-duration-picker showPreview="false"
+                                                            [options]="{ showWeeks: false , showDays : false, showMonths : false, showYears: false }" [(ngModel)]="programmeModel.duration" required #durationControl="ngModel" id="duration" name="duration"></ngx-duration-picker>-->
+ 
+                                                            <!--<input type="text" class="form-control" [className]="'html-duration-picker form-control' " [(ngModel)]="programmeModel.duration" #durationControl="ngModel" id="duration" name="duration" required>-->
+
+
+                                                      <input type="text" class="form-control" name="duration" id="duration" [(ngModel)]="programmeModel.duration"
+                                                          #durationControl="ngModel" required placeholder="Durée">
+
+                                                    </div>
+                                                    <span class="help-block" *ngIf="durationControl.invalid   && submitted">
+                                                      Veuillez entrer une Durée de Programme
+                                                    </span>
+                                                    </div>
+                                                    <div class="row form-group" [class.has-error]="minControl.invalid">
+                                                      <div class="col col-md-3"><label for="textarea-input"
+                                                          class=" form-control-label">Min</label></div>
+                                                      <div class="col-12 col-md-5">
+                                                          <!--<ngx-duration-picker showPreview="false"
+                                                          [options]="{ showWeeks: false , showDays : false, showMonths : false, showYears: false }" [(ngModel)]="programmeModel.duration" required #durationControl="ngModel" id="duration" name="duration"></ngx-duration-picker>-->
+
+                                                          <input type="text" class="form-control"   [(ngModel)]="programmeModel.min" #minControl="ngModel" id="min" name="min" required placeholder="Min">
+
+                                                    </div>
+                                                    </div>
+                                                    <div class="row form-group" [class.has-error]="maxControl.invalid">
+                                                      <div class="col col-md-3"><label for="textarea-input"
+                                                          class=" form-control-label">Max</label></div>
+                                                      <div class="col-12 col-md-5">
+                                                          <!--<ngx-duration-picker showPreview="false"
+                                                          [options]="{ showWeeks: false , showDays : false, showMonths : false, showYears: false }" [(ngModel)]="programmeModel.duration" required #durationControl="ngModel" id="duration" name="duration"></ngx-duration-picker>-->
+
+                                                          <input type="text" class="form-control"   [(ngModel)]="programmeModel.max" #maxControl="ngModel" id="max" name="max" required placeholder="Max">
+
+                                                    </div>
+                                                    </div>
+                                                      <br>
+                                                      <br>
+                          
+                          
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                    <div class="tab-pane" id="cmpv">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <br><br><br>
+                                                <div class="jumbotron" style="background-color: white;">
+                                                    <div class="row form-group">
+
+
+
+
+
+
+                                                        <table class="table table-striped table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Competence</th>
+                                                                    <th>Niveau</th>
+                                                                    <th>Action</th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+
+
+
+                                                                <tr
+                                                                    *ngFor="let dynamic of dynamicArray; index as i; trackBy: customTrackBy">
+
+                                                                    <td>
+                                                                        <ngx-select [items]="competences"
+                                                                            optionTextField="titre"
+                                                                            [(ngModel)]="dynamicArray[i].competence"
+                                                                            contenteditable="true"
+                                                                            name='competence{{i}}'></ngx-select>
+                                                                        <!--<input [(ngModel)]="dynamicArray[i].competence" class="form-control" type="text" name="competence" id="competence"/>  -->
+                                                                    </td>
+                                                                    <td>
+                                                                        <!--<ngx-select [items]="niveaux" [(ngModel)]="dynamicArray[i].niveau" id="niveau" name="niveau" ></ngx-select>-->
+                                                                        <ngx-select [items]="niveaux"
+                                                                            optionTextField="titre"
+                                                                            [(ngModel)]="dynamicArray[i].niveau"
+                                                                            contenteditable="true" name='niveau{{i}}'>
+                                                                        </ngx-select>
+                                                                    </td>
+                                                                    <td (click)="deleteRow(i)">
+                                                                        <i class="fa fa-trash fa-2x"></i>
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td (click)="addRow()">
+                                                                        <i class="fa fa-plus fa-2x"></i>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="evaluation">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <br><br><br>
+                                                <div class="jumbotron" style="background-color: white;">
+                                                    <ul class="nav d-flex justify-content-center">
+                                                        <li class="nav-item mx-lg-4">
+                                                            <a class="filter-btn nav-link btn-outline-primary active shadow rounded-pill text-light px-4 light-300"
+                                                                id="travaux-tab" data-toggle="tab" href="#travaux"
+                                                                role="tab" aria-controls="travaux" aria-selected="true"
+                                                                (click)="travaux()">Travaux</a>
+                                                        </li>
+                                                        <li class="nav-item mx-lg-4">
+                                                            <a class="filter-btn nav-link btn-outline-primary shadow rounded-pill text-dark px-4 light-300"
+                                                                id="qcm-tab" data-toggle="tab" href="#qcm" role="tab"
+                                                                aria-controls="qcm" aria-selected="true"
+                                                                (click)="qcm()">QCM</a>
+                                                        </li>
+
+                                                    </ul>
+                                                    <div class="tab-content" id="nav-tabContent">
+                                                        <form class="form-horizontal tab-content" id="nav-tabContent"
+                                                            (ngSubmit)="valider_formation(form)" novalidate>
+                                                            <div class="tab-pane fade show active" id="travaux"
+                                                                role="tabpanel" aria-labelledby="travaux-tab">
+
+                                                                <h2>Liste des travaux</h2>
+                                                                <div class="row form-group">
+
+
+
+
+                                                                    <table class="table">
+                                                                        <thead>
+                                                                          <tr>
+                                    
+                                                                            <th>Titre</th>
+                                                                            <th>Date début</th>
+                                    
+                                                                            <th>Date Limite</th>
+                                                                            <th>Test</th>
+                                                                            <th>Pondération</th>
+                                                                            <!--<th>Résultat</th>-->
+                                                                            <th>Action</th>
+                                                                          </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                    
+                                    
+                                    
+                                                                          <tr *ngFor="let travail of traveaux; index as i; trackBy: customTrackBy">
+                                    
+                                                                            <td>
+                                                                              <input [(ngModel)]="traveaux[i].titre" class="form-control" type="text"
+                                                                                name="titre{{i}}" />
+                                                                            </td>
+                                                                            <td>
+                                                                           
+                                                                              <input type="date" class="form-control" name="date_debut{{i}}"
+                                                                                [(ngModel)]="traveaux[i].date_debut">
+                                    
+                                    
+                                    
+                                                                            </td>
+                                                                            <td>
+                                                                              <input type="date" class="form-control" name="date_limite{{i}}"
+                                                                                [(ngModel)]="traveaux[i].date_limite">
+                                    
+                                                                            </td>
+                                    
+                                                                            <td>
+                                                                              <button type="button" data-toggle="modal"   data-id="{{i}}"  data-target="#testModal" (click)="showModal(i,travail)"> <i
+                                                                                  class="fas fa-external-link-alt"></i></button>
+                                    
+                                                                            
+                                                                            {{travail.titre}}
+                                                                            {{modal.index}}
+                                                                            
+                                                                          </td>
+                                    
+                                    
+                                    
+                                                                            <td>
+                                                                              <input type="text" name="ponderation{{i}}"
+                                                                                [(ngModel)]="traveaux[i].ponderation" class="form-control">
+                                                                            </td>
+                                                                            <td (click)="deleteTravail(i)">
+                                                                              <i class="fa fa-trash fa-2x"></i>
+                                    
+                                                                            </td>
+                                                                          </tr>
+                                    
+                                                                          <tr>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                            <td></td>
+                                                                            <td (click)="addTravail()">
+                                                                              <i class="fa fa-plus fa-2x"></i>
+                                                                            </td>
+                                                                          </tr>
+                                                                        </tbody>
+                                                                      </table>
+                                                                          
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="tab-pane fade show" id="qcm" role="tabpanel"
+                                                                aria-labelledby="qcm-tab">
+                                                                <br>
+                                                                <br>
+
+                                                                <h3><strong
+                                                                        style="margin-left: 400px;margin-top: 200px;">QCM</strong>
+                                                                </h3>
+                                                                <div class="container">
+                                                                    <div class="slide-wrapper">
+                                                                        
+                                                                        <app-slider *ngIf="current === 0" [left]="isLeftTransition(0)">
+                                                                            <button class="btn  btn-outline-primary shadow rounded-pill" (click)="creerQuizz()"  >
+                                                                              Creer un Quizz</button>
+                                                                        </app-slider>
+                                                                           
+ 
+                                                                        <app-slider  *ngIf="current > 0"
+                                                                            [left]="isLeftTransition(1)">
+                                                                            <div class="container"
+                                                                                style="margin-left:300px;">
+ 
+                                                                                <div class="row">
+                                                                                    <a *ngIf="current!==0"
+                                                                                        (click)="onPrev()"
+                                                                                        class="button"
+                                                                                        style="width: 20px;height: 20px;margin-right: 50px;"><i
+                                                                                            class="fa fa-arrow-left"
+                                                                                          ></i>
+                                                                                    </a>
+                                                                                   
+ 
+
+                                                                                    <h5 *ngIf="current >0" > Question {{current}}</h5>
+                                                                                    <h5 *ngIf="current === 0" style="margin-left: 50px;"> Question {{ current }}</h5>
+
+                                                                                    <a 
+                                                                                    (click)="onNext()"
+                                                                                    class="button disabled"
+                                                                                    style="width: 20px;height: 20px;margin-left: 50px;"><i
+                                                                                        class="fa fa-arrow-right"
+                                                                                       ></i>
+                                                                                </a>
+                                                                                   
+                                                                                    <div class="fa-hover col-lg-3 col-md-3"
+                                                                                        style="margin-left: 50px;"><a
+                                                                                            (click)=" valider_question()"
+                                                                                            class="button"
+                                                                                            style="width: 80px;height: 20px;">
+                                                                                            Nouveau </a></div>
+
+                                                                                </div>
+                                                                                <div class="form-horizontal" >
+                                                                                    <div class="row form-group">
+                                                                                        <div class="col-md-6"><textarea
+                                                                                                name="titre_question_{{current-1}}"
+                                                                                                [(ngModel)]="questions[current-1].titre"
+                                                                                                id="titre_question_{{current-1}}"
+                                                                                                
+                                                                                                rows="9"
+                                                                                                placeholder="Consigne"
+                                                                                                class="form-control"></textarea>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row form-group">
+                                                                                         
+                                                                                        <table  class="table" style="background-color: white; width: 240px;">
+                                                                                           
+                                                                                            <tbody>
+                                
+                                
+                                
+                                                                                                <tr
+                                                                                                    *ngFor="let reponse of questions[current-1].reponses; index as i; trackBy: customTrackBy">
+                                                                                                    <td style="width:40px;" >
+                                                                                                        <input type="checkbox" id="isvalid{{i}}" name="isvalid{{i}}" [(ngModel)]="questions[current-1].reponses[i].isvalid" class="form-check-input">
+                                                                                                        
+                                                                                                    </td>
+                                
+                                                                                                    <td style="width: 80px;">
+                                                                                                        <input type="text"  
+                                                                                                        name="option__{{i}}"
+                                                                                                        id="option__{{i}}"
+                                                                                                        [(ngModel)]="questions[current-1].reponses[i].option"
+                                                                                                        class="form-control"
+                                                                                                        >
+                                                                                                        <!--<input [(ngModel)]="dynamicArray[i].competence" class="form-control" type="text" name="competence" id="competence"/>  -->
+                                                                                                    </td>
+                                                                                                    
+                                                                                                   
+                                                                                                    <td  style="width: 40px;" (click)="deleteReponse(i)">
+                                                                                                        <i class="fa fa-trash fa-2x"></i>
+                                                                                                    </td>
+                                                                                                </tr>
+                                
+                                                                                                <tr>
+                                                                                                    <td></td>
+                                                                                                    <td></td>
+                                                                                                    <td (click)="addReponse()">
+                                                                                                        <i class="fa fa-plus fa-2x"></i>
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                        </table>
+
+                                                                                    </div>
+                                                                                    <div class="row form-group">
+                                                                                        <!--<button type="button"
+                                                                                            class="btn btn-primary"
+                                                                                            (click)="valider_question()">Valider
+                                                                                            la question</button>-->
+                                                                                           
+                                                                                        <button type="button" 
+                                                                                            class="btn btn-danger"
+                                                                                            (click)="supprimerQuestion(current-1)">Supprimer
+                                                                                            la question</button>
+                                                                                    </div>
+
+                                                                                </div>
+
+
+
+                                                                            </div>
+                                                                        </app-slider>
+                                                                    </div>
+
+                                                                </div>
+
+
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
+                                                 
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--<div class="modal fade" id="testModal" tabindex="-1" role="dialog" name="testModal"
+                    aria-labelledby="largeModalLabel" aria-hidden="true"> 
+                    <div class="modal-dialog modal-lg" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header" style="height: 60px;">
+                          <h2 class="modal-title" id="largeModalLabel"></h2>
+                          <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close" #closebtn>
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body" id="consignes">
+                          <mat-tab-group>
+                            <mat-tab label="Consigne" style="color: black;">
+                                <form #consigneForm="ngForm"> 
+                             
+                              <table class="table table-striped table-bordered">
+                                <thead>
+                                  <tr>
+                                    <th>Consigne  </th>
+                                     <th>Action</th>
+
+                                  </tr>
+                                </thead>
+                                <tbody>
+                              
+                               {{modal.index}}
+
+                                  <tr *ngFor="let consigne of  traveaux[modal.index].consignes  index as j; trackBy: customTrackBy">
+                                     <td>
+                                      <input type="file" class="form-control-file" (change)="onChange($event)"
+                                    [(ngModel)]="traveaux[modal.index].consignes[j].piece_jointe" value="traveaux[modal.index].consignes[j].piece_jointe" name='piece_jointe{{modal.index}}{{j}}' id='piece_jointe{{modal.index}}{{j}}'>
+                                    
+                                        </td>
+                                    
+                                    <td (click)="deleteConsigne(i)">
+                                      <i class="fa fa-trash fa-2x"></i>
+                                    </td>
+                                  </tr>
+
+                                  <tr>
+                                    
+                                    <td></td>
+                                    <td (click)="addConsigne()">
+                                      <i class="fa fa-plus fa-2x"></i>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                              </form>
+
+
+
+                            </mat-tab>
+                            <mat-tab label="Remise">
+
+                              <table id="example" class="table table-striped" style="width:100%">
+                                <thead>
+                                  <tr>
+                                    <th>Actions</th>
+                                    <th>Titre</th>
+                                    <th>Piece Jointe</th>
+
+
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let remise of remises; let i = index;">
+                                    <td (click)="deleteRemise(i)">
+                                      <i class="fa fa-trash fa-2x"></i>
+                                    </td>
+                                    <td>
+                                      <input type="text" id="titre" [(ngModel)]="remises[i].titre"
+                                        class="form-control">
+                                    </td>
+                                    <td>
+                                      <input type="file" class="form-control-file"
+                                        id="piece_jointe" [(ngModel)]="remises[i].piece_jointe">
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td (click)="addRemise()">
+                                      <i class="fa fa-plus"></i>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+
+                            </mat-tab>
+                          </mat-tab-group>
+
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">Annuler</button>
+                          <button type="button" class="btn btn-primary"
+                            (click)="valider()">Valider</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>-->
+                                    <button class="btn btn-primary btn-flat m-b-30 m-t-30" style="margin-left: 450px;">Valider</button>
+                                    <button type="button" class="btn btn-danger" style="margin-left: 50px;">Annuler</button>
+
+                                </form>
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

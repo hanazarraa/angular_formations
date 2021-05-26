@@ -38,6 +38,7 @@ errorMessage = 'Invalid Credentials';
     
   }
   login() {
+    console.log(localStorage);
     console.log(this.userModel);
  this.userService.login(this.userModel).subscribe((result:any)=> {
   console.log(result);

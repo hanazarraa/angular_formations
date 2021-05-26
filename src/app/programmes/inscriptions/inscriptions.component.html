@@ -6,19 +6,19 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                       <strong class="card-title">Programme Hancho</strong>
+                       <strong class="card-title">Programme {{programme.titre}}</strong>
                     </div>
                     <div class="card-body"> 
                         <div class="col-sm-12">
                             <div class="col col-md-8">
-                                <h3>  Titre du groupe :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Programme IC Canada </h3>
+                                <h3>  Titre du groupe :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Programme {{programme.titre}} </h3>
                             </div>
                             <div class="row">
                             <div class="col col-md-8" style="float: left;">
-                                <h3>&nbsp;&nbsp;Durée :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     30H </h3>
+                                <h3>&nbsp;&nbsp;Durée :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     {{programme.duration}} </h3>
                             </div>
                             <div class="col col-md-4" style="float:right">
-                                <h3 class="page-header">Capacité    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Min :   10   &nbsp;&nbsp; Max: 20  </h3>
+                                <h3 class="page-header">Capacité    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Min :   {{programme.min}}   &nbsp;&nbsp; Max: {{programme.max}}  </h3>
                             </div>
                             </div>
                             <br>
@@ -59,22 +59,24 @@
                                          </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor ="let inscription of inscriptions"> 
-                                             <td  *ngIf="inscription.statut === 'Accepté' ">  <a [routerLink]="['/programmes', formationId,'inscriptions',inscription.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> 
-                                                {{inscription.formateur}} </a>
+                                        <tr *ngFor ="let demande of demandesFA ;let i=index"> 
+                                             
+                                             <td   >  
+                                                {{demande.formateur_name}}
+                                            
                                             </td>
-                                            <td  *ngIf="inscription.statut === 'Accepté' "> 
-                                                <a [routerLink]="['/programmes', formationId,'inscriptions',inscription.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> 
-                                                     <span class="name">{{inscription.Date_debut}}</span>
-                                                </a> 
+                                            <td  > 
+                                                      <span class="name">{{demande.date_debut}}</span>
+                                                
                                             </td>
-                                            <td  *ngIf="inscription.statut === 'Accepté' "> 
-                                                <a [routerLink]="['/formations', formationId,'inscriptions',inscription.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> 
-                                                <span class="product">{{inscription.Date_fin}}</span>
-                                                </a>
+                                            <td   > 
+                                                 <span class="product">{{demande.date_fin}}</span>
+                                                
                                              </td>
-                                            <td *ngIf="inscription.statut === 'Accepté' ">
-                                                <button class="btn btn-primary rounded-pill text-light" (click)="ConsulterProg()"> Consulter Programme</button>
+                                            <td >
+                                                <button class="btn btn-primary rounded-pill text-light" (click)="ConsulterProg()"> Consulter Programme</button><br><br>
+                                                <a class="btn btn-primary rounded-pill text-light" [routerLink]="['/responsable/programmes', formationId,'inscriptions',demande.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" > Consulter Liste des participants</a>
+
 
                                             </td>
 
@@ -97,31 +99,100 @@
                                                 <th>Date début</th>
                                                 <th>Date Fin</th>
                                                 
-                                                 ¨
+                                                 <th>Actions</th>
                                              </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor ="let inscription of inscriptions"> 
-                                                 <td  *ngIf="inscription.statut === 'En attente' ">  <a [routerLink]="['/responsable/programmes', formationId,'inscriptions',inscription.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> 
-                                                    {{inscription.formateur}} </a>
+                                            <tr *ngFor ="let demande of demandesFEnAttente;let i=index"> 
+                                                 <td   >  
+                                                    {{demandesFEnAttente[i].formateur_name}} 
                                                 </td>
-                                                <td *ngIf="inscription.statut === 'En attente' "> 
-                                                    <a [routerLink]="['/programmes', formationId,'inscriptions',inscription.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> 
-                                                         <span class="name">{{inscription.Date_debut}}</span>
-                                                    </a> 
+                                                <td > 
+                                                          <span class="name">{{demandesFEnAttente[i].date_debut}}</span>
+                                                   
                                                 </td>
-                                                <td *ngIf="inscription.statut === 'En attente' "> 
-                                                    <a [routerLink]="['/formations', formationId,'inscriptions',inscription.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> 
-                                                    <span class="product">{{inscription.Date_fin}}</span>
-                                                    </a>
+                                                <td> 
+                                                     <span class="product">{{demandesFEnAttente[i].date_fin}}</span>
+                                                    
                                                  </td>
                                                 
+                                                 <td  > 
+                                                    <button type="button" class="btn btn-success btn-sm"  data-toggle="modal" data-target="#acceptModal" (click)="showAcceptModel(i,demande)">Accepter</button>
+                                                    <br><br> <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#declineModal" (click)="showAcceptModel(i,demande)">Réfuser</button>
+     
+                                               
+                                                 </td>
     
                                            
                                             </tr>
                                             
                                         </tbody>
                                     </table>
+                                    <div class="modal fade" id="acceptModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-sm" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="staticModalLabel">Confirmer</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closebutton>
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>
+                                                     Etes Vous sur d'accepter cette Demande 
+                                                   </p>
+                                               </div>
+                                               <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal"  >Annuler</button>
+                                                <button type="button" class="btn btn-success" (click)="Accepter(demande)" >Confirmer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal fade" id="declineModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-sm" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="staticModalLabel">Confirmer</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closebtn>
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>
+                                                 Etes Vous sur de Refuser cette Demande 
+                                               </p>
+                                           </div>
+                                           <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"  >Annuler</button>
+                                            <button type="button" class="btn btn-danger" (click)="Refuser(demande)" >Confirmer</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                <!--<div class="modal fade" id="declineModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-sm" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="staticModalLabel">Confirmer</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closebutton>
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>
+                                                 Etes Vous sur de Réfuser cette Demande 
+                                               </p>
+                                              
+                                           </div>
+                                           <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"  >Annuler</button>
+                                            <button type="button" class="btn btn-danger" (click)="Refuser(demande)" >Confirmer</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>-->
+
                                 </div>
                                 </div>
                                 <div class="tab-pane fade show" id="refuses" role="tabpanel" aria-labelledby="refuses-tab">
@@ -135,25 +206,23 @@
                                                     <th>Formateur</th>
                                                     <th>Date début</th>
                                                     <th>Date Fin</th>
+
                                                     
                                                    
                                                  </tr>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor ="let inscription of inscriptions"> 
-                                                     <td *ngIf="inscription.statut === 'réfuse' ">  <a [routerLink]="['/programmes', formationId,'inscriptions',inscription.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> 
-                                                        {{inscription.formateur}} </a>
+                                                  <tr *ngFor ="let demande of demandesFRefuse;let i=index"> 
+                                                    <td> 
+                                                         {{demande.formateur_name}}  
                                                     </td>
-                                                    <td *ngIf="inscription.statut === 'réfuse' "> 
-                                                        <a [routerLink]="['/programmes', formationId,'inscriptions',inscription.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> 
-                                                             <span class="name">{{inscription.Date_debut}}</span>
-                                                        </a> 
+                                                    <td  > 
+                                                              <span class="name">{{demande.date_debut}}</span>
+                                                          
                                                     </td>
-                                                    <td *ngIf="inscription.statut === 'réfuse' "> 
-                                                        <a [routerLink]="['/formations', formationId,'inscriptions',inscription.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> 
-                                                        <span class="product">{{inscription.Date_fin}}</span>
-                                                        </a>
-                                                     </td>
+                                                    <td  > 
+                                                         <span class="product">{{demande.date_fin}}</span>
+                                                      </td>
                                                     
         
                                                
