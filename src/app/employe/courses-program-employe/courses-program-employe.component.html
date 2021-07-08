@@ -100,17 +100,17 @@
                    
                 >
                   <mat-expansion-panel-header>
-                     <mat-panel-title><a  href="/employé/programmes/{{programmeID}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">hancho</a></mat-panel-title>
+                     <mat-panel-title><a  href="/employé/mesprogrammes/{{programmeID}}?demande={{demandeID}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">{{demandef.programme_name}}</a></mat-panel-title>
                    </mat-expansion-panel-header>
                   
                   <ng-container>
             
                     <mat-accordion cdkDropList (cdkDropListDropped)="drop($event)">
-                      <mat-expansion-panel #panel cdkDrag *ngFor="let course of courses"
+                      <mat-expansion-panel #panel cdkDrag *ngFor="let course of courses$ | async"
                          
                       >
                         <mat-expansion-panel-header>
-                            <mat-panel-title><a [routerLink]="['/employé/programmes',programmeID,'cours',course.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> {{ course.titre }}</a></mat-panel-title>
+                            <mat-panel-title><a  href="/employé/mesprogrammes/{{programmeID}}/cours/{{course.id}}?demande={{demandeID}}"     routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> {{ course.titre }}</a></mat-panel-title>
                             
                            
                            

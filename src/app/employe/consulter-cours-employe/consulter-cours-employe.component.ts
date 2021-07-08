@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Doc } from 'src/app/models/doc.model';
 import { Enregistrement } from 'src/app/models/enregistrement.model';
 import { Reunion } from 'src/app/models/reunion.model';
+import { CourseService } from 'src/app/services/course.service';
+import { DemandeFormateurService } from 'src/app/services/demande-formateur.service';
 
 @Component({
   selector: 'app-consulter-cours-employe',
@@ -16,10 +19,20 @@ export class ConsulterCoursEmployeComponent implements OnInit {
   newEnregistrement:any={};
   reunions:Array<Reunion>=[];
   newReunion:any={};
-
-  constructor(private toastr: ToastrService) { }
+coursID:any;
+demande:any;
+cours:any;
+  constructor(private toastr: ToastrService,private route:ActivatedRoute,private demandeFService:DemandeFormateurService,private coursService:CourseService) { 
+    this.coursID= this.route.snapshot.paramMap.get('coursID');
+    console.log(this.route.snapshot.paramMap.get('coursID'));
+  
+  }
 
   ngOnInit(): void {
+   this.coursService.getCoursById(this.coursID).subscribe(data=>{
+     this.cours=data;
+     console.log(data);
+   });
     this.newDocument={titre:"",piece_jointe:""};
     this.newEnregistrement={lien_zoom:"",date:""};
    this.newReunion={titre:"",date:"",lien:""};

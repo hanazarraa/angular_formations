@@ -20,18 +20,32 @@ export class FormationsComponent implements OnInit {
   formations:any;
   programmeID:any;
   currentUser: any;
- 
+  query:string;
+  public searchFilter: any = '';
+message:string="programme";
+msg:any;
     constructor(private token: TokenstorageService, public userService:UserService, private router:Router,private programmeService:ProgrammeService,private route:ActivatedRoute) {
   //  console.log(localStorage );
-
+   this.msg= this.router.getCurrentNavigation().extras.state;
+      this.message="Le programme "+this.router.getCurrentNavigation().extras.state+ " est supprimé avec succés"; 
+    // console.log(this.msg);
     this.programmeID= this.route.snapshot.paramMap.get('programmeID');
-    console.log(this.programmeID);
+//console.log(this.programmeID);
  }
    
 
   
   ngOnInit(){
-  
+    
+    this.route.data.subscribe(data => {
+      console.log(data);
+      //this.pr = data;
+    });
+               console.log(history.state);
+ //this.msg=history.state
+   //  this.route.data.subscribe(data => {
+   //   console.log(this.route);
+  //});
    // this.currentUser = this.token.getUser(this.token);
 
    

@@ -6,5 +6,6 @@ export class Reponse {
 
     public isvalid:boolean;
     public question:any;
+    public selected : boolean;
     constructor(){}
 }

@@ -100,7 +100,7 @@
                    
                 >
                   <mat-expansion-panel-header>
-                     <mat-panel-title><a  href="/formateur/programmes/{{programmeID}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">hancho</a></mat-panel-title>
+                     <mat-panel-title><a  href="/formateur/mesprogrammes/{{programmeID}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">{{programme.titre}}</a></mat-panel-title>
                    </mat-expansion-panel-header>
                   
                   <ng-container>
@@ -110,7 +110,7 @@
                          
                       >
                         <mat-expansion-panel-header>
-                            <mat-panel-title><a [routerLink]="['/formateur/programmes',programmeID,'cours',course.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> {{ course.titre }}</a></mat-panel-title>
+                            <mat-panel-title><a href=" /formateur/mesprogrammes/{{programmeID}}/cours/{{course.id}}?demande={{demandeID}}" [queryParams]="{demande:demandeID}"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"  > {{ course.titre }}</a></mat-panel-title>
                             
                            
                            
@@ -126,11 +126,9 @@
                   <ng-container>
                     <div *ngIf="panel.expanded">
                         
-                      <mat-form-field>
-                           <input type="text" matInput value="{{course.titre}}">
-                        </mat-form-field>
+                       
                     </div>
-                    <button class="btn-light"><i class="fa fa-archive">&nbsp; &nbsp;Archiver</i> </button> <br><br>
+                    <!--<button class="btn-light"><i class="fa fa-archive">&nbsp; &nbsp;Archiver</i> </button> <br><br>-->
                     <button class="btn-light"><i class="fa fa-trash-o">&nbsp; &nbsp;Supprimer</i> </button>
                       <!--<mat-accordion>
                           <mat-expansion-panel>

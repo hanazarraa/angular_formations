@@ -10,11 +10,17 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class NavbarComponent implements OnInit {
   isLoggedIn:boolean;
+  id:any;
+  token:any;
 username?:string;
   constructor(private userService:UserService,private router:Router,private tokenStorageService:TokenstorageService) { }
 
   ngOnInit(): void {
+    this.token=localStorage.getItem('auth-token');
+
   console.log(this.userService.getToken());
+  this.id=this.userService.updateData(this.token).user_id;
+console.log(this.id);
     }
   
   }

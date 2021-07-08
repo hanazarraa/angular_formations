@@ -53,6 +53,20 @@ export class QuestionService {
     return this.httpclient.get(`${this.questionsUrl}?programme=${id}`,options );
   
   }
+  getQuestionByProgrammeIDFormateur(id:any,formateur:any):Observable<any>{
+    //console.log(this.userService.token)
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+       });
+       console.log(localStorage);
+        this.headers.append('Authorization', 'Bearer ' + localStorage.getItem('auth-token'));
+        const options = {
+      headers
+    };
+    return this.httpclient.get(`${this.questionsUrl}?programme=${id}&formateur=${formateur}`,options );
+  
+  }
  updateQuestion(id:any,question:any):Observable<any>{
     //console.log(this.userService.token)
 

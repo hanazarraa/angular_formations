@@ -337,7 +337,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <a routerLink=".."><i class="fa fa-arrow-left" style="color: black;"></i> </a>  &nbsp;&nbsp;<strong class="card-title">Programme Hancho</strong>
+                        <a routerLink=".."><i class="fa fa-arrow-left" style="color: black;"></i> </a>  &nbsp;&nbsp;<strong class="card-title">Programme {{programme.titre}}</strong>
                     </div>
                     <div class="card-body">
                         <div class="col-sm-12">
@@ -346,24 +346,24 @@
                             </div>
                             <div class="row">
                             <div class="col col-md-8" style="float: left;">
-                                <h3>&nbsp;&nbsp;Durée :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     30H </h3>
+                                <h3>&nbsp;&nbsp;Durée :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     {{programme.duration}}H </h3>
                             </div>
                             <div class="col col-md-4" style="float:right">
-                                <h3>Capacité    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Min :   10   &nbsp;&nbsp; Max: 20  </h3>
+                                <h3>Capacité    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Min :  {{programme.min}}   &nbsp;&nbsp; Max: {{programme.max}}  </h3>
                             </div>
                             </div>
                             <div class="row"> 
                             <div class="col col-md-8" style="float: left;">
-                                <h3> Formateur :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Personne 1  </h3>
+                                <h3> Formateur :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <a href="/profile/{{demandeF.formateur}}"><b> {{demandeF.formateur_name}}</b></a>   </h3>
                             </div>
                             <div class="col col-md-4" style="float: right;">
-                                <h3> Statut :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     {{statutParent}}  </h3>
+                                <h3> Statut :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      </h3>
 
                             </div>
                             </div>
                             <br>
                             <div class="col col-md-8" style="float: left;">
-                                <h3>&nbsp;&nbsp;<b> Liste des demandes formateurs  </b>   </h3>
+                                <h3>&nbsp;&nbsp;<b> Liste des demandes participants  </b>   </h3>
                             </div>
                             <div class="col col-md-8" style="float: left;">
                                 <ul class="nav d-flex justify-content-center">
@@ -385,24 +385,26 @@
                                 <div class="tab-content" id="nav-tabContent">
                                 <div class="tab-pane fade show active" id="acceptes" role="tabpanel" aria-labelledby="acceptes-tab">
                                     <br><br><br>
-                            <div class="table-stats order-table ov-h " style="float: left; ">
-                                 
-                                <table class="table ">
-                                    <thead>
+                                    <div *ngIf="(demandesA$ | async)?.length == 0" style="margin-left: 500px;margin-top: 100px;"><h3> <b> Aucune demande Acceptée est trouvée</b></h3></div>
+                                
+                                  
+                                    <div class="table-stats order-table ov-h" style="float: left;">
+                                         <table class="table " *ngIf="(demandesA$ | async)?.length > 0">
+                                                   <thead>
                                         <tr>
                                              
-                                            <th>Employé</th>
+                                            <th>Participant</th>
                                             <th>Date demande</th>
                                            
                                          </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor ="let inscription of inscriptions"> 
-                                             <td  *ngIf="inscription.Statut === 'Accepté' ">  
-                                               {{inscription.Employe}}
-                                            </td>
-                                            <td  *ngIf="inscription.Statut === 'Accepté' "> 
-                                                      <span class="name">{{inscription.Date_demande}}</span>
+                                        <tr *ngFor ="let demande of demandesA$|async"> 
+                                             <td  >  
+                                                <a href="/profile/{{demande.participant}}"><b> {{demande.participant_name}} </b> </a>
+                                             </td>
+                                            <td > 
+                                                      <span class="name">{{demande.date_demande}}</span>
                                                 
                                             </td>
                                              
@@ -416,13 +418,15 @@
                             </div>
                             <div class="tab-pane fade " id="enattente" role="tabpanel" aria-labelledby="enattente-tab">
                                 <br><br><br>
-                                <div class="table-stats order-table ov-h" style="float: left;">
-                                     
-                                    <table class="table ">
-                                        <thead>
+                                     <div *ngIf="(demandesEA$ | async)?.length == 0" style="margin-left: 500px;margin-top: 100px;"><h3> <b> Aucune demande En Attente est trouvée</b></h3></div>
+                                
+                                  
+                                    <div class="table-stats order-table ov-h" style="float: left;">
+                                         <table class="table " *ngIf="(demandesEA$ | async)?.length > 0">
+                             <thead>
                                             <tr>
                                                  
-                                                <th>Employé</th>
+                                                <th>Participant</th>
                                                 <th>Date demande</th>
                                                 <th>Actions</th>
                                                  
@@ -430,17 +434,17 @@
                                              </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor ="let inscription of inscriptions"> 
-                                                 <td  *ngIf="inscription.Statut === 'En Attente' ">  
-                                                    {{inscription.Employe}}
+                                            <tr *ngFor ="let demande of demandesEA$ |  async"> 
+                                                 <td   >  
+                                                    <a href="/profile/{{demande.participant}}"><b> {{demande.participant_name}} </b> </a>
 
                                                 </td>
-                                                <td *ngIf="inscription.Statut === 'En Attente' "> 
-                                                          <span class="name">{{inscription.Date_demande}}</span>
+                                                <td > 
+                                                          <span class="name">{{demande.date_demande}}</span>
                                                  </td>
-                                                <td *ngIf="inscription.Statut === 'En Attente' "> 
-                                                    <button type="button" class="btn btn-success btn-sm"  data-toggle="modal" data-target="#acceptModal">Accepter</button>
-                                                    <br><br> <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#declineModal">Réfuser</button>
+                                                <td > 
+                                                    <button type="button" class="btn btn-success btn-sm"  data-toggle="modal" data-target="#acceptModal" (click)="showModal(i,demande)">Accepter</button>
+                                                    <br><br> <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#declineModal" (click)="showModal(i,demande)">Réfuser</button>
      
                                                
                                                  </td>
@@ -460,7 +464,7 @@
                                                            </div>
                                                            <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal"  >Annuler</button>
-                                                            <button type="button" class="btn btn-success" (click)="Accepter(inscription)" >Confirmer</button>
+                                                            <button type="button" class="btn btn-success" (click)="Accepter(demande)" >Confirmer</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -482,7 +486,7 @@
                                                        </div>
                                                        <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal"  >Annuler</button>
-                                                        <button type="button" class="btn btn-danger" (click)="Refuser(inscription)" >Confirmer</button>
+                                                        <button type="button" class="btn btn-danger" (click)="Refuser(demande)" >Confirmer</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -498,25 +502,27 @@
                                 </div>
                                 <div class="tab-pane fade show" id="refuses" role="tabpanel" aria-labelledby="refuses-tab">
                                     <br><br><br>
+                                    <div *ngIf="(demandesR$ | async)?.length == 0" style="margin-left: 500px;margin-top: 100px;"><h3> <b> Aucune demande Réfusée est trouvée</b></h3></div>
+                                
+                                  
                                     <div class="table-stats order-table ov-h" style="float: left;">
-                                         
-                                        <table class="table ">
-                                            <thead>
+                                         <table class="table " *ngIf="(demandesR$ | async)?.length > 0">
+                             <thead>
                                                 <tr>
                                                      
-                                                    <th>Employé</th>
+                                                    <th>Participant</th>
                                                     <th>Date demande</th>
                                                     
                                                    
                                                  </tr>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor ="let inscription of inscriptions"> 
-                                                     <td *ngIf="inscription.Statut === 'Réfusé' ">   
-                                                        {{inscription.Employe}}
+                                                <tr *ngFor ="let demande of demandesR$ | async"> 
+                                                     <td  >   
+                                                        <a href="/profile/{{demande.participant}}"><b> {{demande.participant_name}} </b> </a>
                                                     </td>
-                                                    <td *ngIf="inscription.Statut === 'Réfusé' "> 
-                                                              <span class="name">{{inscription.Date_demande}}</span>
+                                                    <td  > 
+                                                              <span class="name">{{demande.date_demande}}</span>
                                                         
                                                     </td>
                                                     

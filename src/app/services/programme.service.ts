@@ -39,6 +39,21 @@ export class ProgrammeService {
     return this.httpclient.get(`${this.programmesUrl}${id}/`,options );
   
   }
+  
+  supprimerProgramme(id:any):Observable<any>{
+    //console.log(this.userService.token)
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+       });
+       console.log(localStorage);
+        this.headers.append('Authorization', 'Bearer ' + localStorage.getItem('auth-token'));
+        const options = {
+      headers
+    };
+    return this.httpclient.delete(`${this.programmesUrl}${id}/`,options );
+  
+  }
   AjouterProgramme(programme:any):Observable<any>{
     //console.log(this.userService.token)
 
@@ -66,5 +81,30 @@ export class ProgrammeService {
     };
     return this.httpclient.put(`${this.programmesUrl}${id}/`,programme,options );
   
+  }
+  getlist(formateur:any,date:any):Observable<any>{
+    console.log(date);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+       });
+       console.log(localStorage);
+        this.headers.append('Authorization', 'Bearer ' + localStorage.getItem('auth-token'));
+        const options = {
+      headers
+    };
+    return this.httpclient.get(`${this.programmesUrl}getprogs/?date_fin__lte=${date}`,options );
+  
+  }
+  getrecommenderList(formateur:any):Observable<any>{
+
+ const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+       });
+       console.log(localStorage);
+        this.headers.append('Authorization', 'Bearer ' + localStorage.getItem('auth-token'));
+        const options = {
+      headers
+    };
+    return this.httpclient.get('http://localhost:8000/api1/Recommend_program/?formateur='+formateur,options);
   }
 }

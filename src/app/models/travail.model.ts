@@ -13,7 +13,7 @@ export class Travail  {
      ponderation?:string; 
      partage_par?:User;
      programme?:Programme; 
-     consignes?:Consigne[];
+     consignes?:any;
   //  resultat?:string;  
 
 

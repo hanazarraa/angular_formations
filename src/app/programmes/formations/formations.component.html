@@ -10,7 +10,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Programme</strong>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
+                        <strong class="card-title">Liste des Programmes</strong>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
                        
                               <!---- <ul class="nav nav-tabs card-header-tabs pull-right"  id="myTab" role="tablist">
                                 <li class="nav-item">
@@ -28,41 +28,61 @@
                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 
                      <div class="card-body"> 
-                        <button class="btn btn-primary text-light rounded-pill" style="width: 300px;margin-top: 20px;margin-left: 20px;" type="button" (click)="Ajouter()">
+
+                      <div class="alert alert-danger" *ngIf="msg" >{{message}}</div>
+                      
+
+                        <button class="btn  btn-outline-primary shadow rounded-pill" style="width: 300px;margin-top: 20px;margin-left: 20px;" type="button" (click)="Ajouter()">
                             <svg xmlns="http://www.w3.org/2000/svg
               " width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                             </svg>&nbsp;&nbsp;Ajouter un Programme   &nbsp;&nbsp; 
+                             </svg>&nbsp;&nbsp;Créer un Programme   &nbsp;&nbsp; 
                          </button>  
                           
                                  
                          <div class="card-body"> 
+                          <form>
+                            <div class="form-group">
+                              <div class="input-group">
+                                <div class="input-group-addon">
+                                  <i class="fa fa-search"></i>
+                                </div>
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  name="query"
+                                  placeholder="Taper pour rechercher..."
+                                  [(ngModel)]="query"
+                                />
+                              </div>
+                            </div>
+                          </form>
                           <table class="table" style="border-radius: 0ch;">
                               <thead>
                                   <tr style="border-radius: 0ch;">
                                       <th scope="col">ID</th>
                                       <th scope="col">Titre</th>
                                       <th scope="col">Description</th>
-                                      <th scope="col">Min</th>
-                                      <th scope="col">Max</th>
+                                      <!--<th scope="col">Min</th>
+                                      <th scope="col">Max</th>-->
                                       <th scope="col">Durée</th>
                                       <th scope="col">Actions</th>
   
                                   </tr>
                               </thead>
                               <tbody>
-                                  <tr *ngFor="let programme of programmes">
+                                  <tr *ngFor="let programme of programmes | searchFilter: query">
                                       <td scope="row">{{programme.id}}</td>
                                       <td><a  [routerLink]="[programme.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> <b> {{programme.titre}}</b></a></td>
                                       <td>{{programme.description}}</td>
-                                      <td>{{programme.min}}</td>
-                                      <td> {{programme.max}} </td>
-                                      <td>{{programme.duration}}</td>
+                                     <!----<td>{{programme.min}}</td>
+                                      <td> {{programme.max}} </td>-->
+                                      <td>{{programme.duration}} H</td>
                                       <td> 
-                                            <a class="btn-primary btn-sm" [routerLink]="[programme.id,'inscriptions']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> Inscriptions</a>
+                                            <a class="btn  btn-outline-primary shadow rounded-pill" [routerLink]="[programme.id,'inscriptions']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Gestion des Inscriptions</a>
                                             <br><br>
-                                             <a class="btn-primary btn-sm" [routerLink]="[programme.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> Consulter Programme</a>
+                                             <a class="btn  btn-outline-primary shadow rounded-pill" [routerLink]="[programme.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> Gestion Programme</a>
 
 
                                               

@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -111,6 +111,27 @@ export class UserService {
  
   
     return this.http.post<any>(`http://localhost:8000/auth/register/`,JSON.stringify(user),this.httpOptions);
+  }
+  updateUser(id:any,user: any,selectedFile:any ): Observable<HttpEvent<any>> {
+    const uploadData: FormData = new FormData();
+    if(selectedFile){
+    uploadData.append('avatar', selectedFile, selectedFile.name);
+    }
+    uploadData.append('username',user.username);
+    uploadData.append('first_name',user.first_name);
+    uploadData.append('last_name',user.last_name);
+    uploadData.append('email',user.email);
+
+    const req = new HttpRequest('PUT', `http://localhost:8000/auth/update_profile/${id}/`, uploadData, {
+      reportProgress: true,
+      responseType: 'json'
+    });
+
+    return this.http.request(req);
+    //return this.http.put<any>(`http://localhost:8000/auth/update_profile/${id}/`,JSON.stringify(user),this.httpOptions);
+  }
+  updateUserp(id:any,user:any){
+    return this.http.put<any>(`http://localhost:8000/auth/users/${id}/`,user,this.httpOptions);
   }
   registerResponsable(responsable:Responsable){
     return this.http.post<any>(`http://localhost:8000/auth/register_resp/`,JSON.stringify(responsable),this.httpOptions);

@@ -1,0 +1,150 @@
+
+ <app-sidebar-formateur></app-sidebar-formateur>
+
+ <div id="right-panel" class="right-panel">
+  
+  
+    <app-navbar></app-navbar> 
+   <div class="content">
+  
+      <div class="animated fadeIn">
+          <div class="row">
+  
+              <div class="col-md-12">
+                  <div class="card">
+                      <div class="card-header">
+                          <strong class="card-title"> Mes Programmes</strong>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
+                         
+                                 <!--<ul class="nav nav-tabs card-header-tabs pull-right"  id="myTab" role="tablist">
+                                  <li class="nav-item">
+                                      <a class="nav-link active btn-light" id="list-tab" data-toggle="tab" href="#list" role="tab" aria-controls="list" aria-selected="true">Liste</a>
+                                  </li>
+                                  <li class="nav-item">
+                                      <a class="nav-link btn-light" id="agenda-tab" data-toggle="tab" href="#agenda" role="tab" aria-controls="agenda" aria-selected="false">Agenda</a>
+                                  </li>
+                                  
+                              </ul>-->
+                         
+                        </div>
+                       
+                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  
+                  
+                       <div class="card-body"> 
+                        <form>
+                            <div class="form-group" *ngIf="demandesA.length > 0">
+                              <div class="input-group">
+                                <div class="input-group-addon">
+                                  <i class="fa fa-search"></i>
+                                </div>
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  name="query"
+                                  placeholder="Taper pour rechercher..."
+                                  [(ngModel)]="query"
+                                />
+                              </div>
+                            </div>
+                          </form>
+                          <div *ngIf="demandesA.length == 0" style="margin-left: 300px;margin-top: 50px;">
+                            <b>Vous n'etes pas inscrit a aucun programme</b>
+                          </div>
+                          <table class="table" style="border-radius: 0ch;" *ngIf="demandesA.length > 0" >
+                              <thead>
+                                  <tr style="border-radius: 0ch;">
+                                      <th scope="col">ID</th>
+                                      <th scope="col">Titre</th>
+                                      <th scope="col">Description</th>
+                                      <th scope="col">Date Début</th>
+                                      <th scope="col">Date Fin</th>
+                                      <th scope="col">Durée</th>
+                                      <th scope="col">Actions</th>
+  
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr *ngFor="let demande of demandesA    | searchFilter: query">
+                                      <td scope="row">{{ demande.programme }}</td>
+                                  <td><a   [routerLink]="[demande.programme]" [queryParams]= "{demande : demande.id}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" ><b> {{ demande.programme_name }}</b></a></td>
+                                      <td>{{ demande.programme_desc }}</td>
+                                      <td>{{demande.date_debut}}</td>
+                                      <td>{{demande.date_fin}}</td>
+                                      <td>{{ demande.programme_duree }}</td>
+                                      <td>
+                                          
+                                            <a class="btn  btn-outline-primary shadow rounded-pill" [routerLink]="[demande.programme,'inscriptions']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> Inscriptions</a>
+  
+                                         
+                                        
+                                      </td>
+                                   </tr>
+                                   
+                              </tbody>
+                          </table>
+                          <!--<div class="menu-nav" *ngFor="let programme of programmes">
+                              <div class="menu-item">{{programme.titre_Fils}}</div>
+                               <div class="dropdown-container" tabindex="-1">
+                                <div class="three-dots"></div>
+                                <div class="dropdown">
+                                  <a [routerLink]="['/formateur/programmes', programme.id,'inscriptions']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><div>Inscriptions</div></a>
+                                  <a href="#"><div>Consulter Programme</div></a>
+                                  <a href="#"><div>Consulter cours</div></a>
+                                </div>
+                              </div>
+                            </div>-->
+                          <!--<div class="dropdown"  *ngFor="let programme of programmes" >
+  
+                                   <h4 >{{programme.titre_Fils}}</h4>
+     
+                                      <button class="btn btn-light dropdown"  style="float: right;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  >
+                                          <svg xmlns="http://www.w3.org/2000/svg"  style="width: 10px;" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+                                              <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                                            </svg> 
+                                       </button>
+                                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="position: absolute;">
+                                          <a class="dropdown-item" >Liste des inscriptions</a>
+                                           </div>
+                                        </div>-->
+                                       <!--<ejs-accordion>
+                                          <e-accordionitems>
+                                            <e-accordionitem expanded="true" *ngFor="let programme of programmes">
+                                              <ng-template #header>
+                                                <div (contextmenu)="onRightClick()">{{programme.titre_Fils}}</div> 
+                                              </ng-template>
+                                              <ng-template #content>
+                                                <ejs-accordion>
+                                                  <e-accordionitems>
+                                                    <e-accordionitem>
+                                                      <ng-template #header>
+                                                        <div><a class="btn btn-primary" style="margin-bottom: 2px;" [routerLink]="['/formateur/programmes', programme.id,'inscriptions']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> Inscriptions </a></div>
+                                                      </ng-template>
+                                                    </e-accordionitem>
+                                                    <e-accordionitem>
+                                                      <ng-template #header>
+                                                        <div><a class="btn btn-primary" style="margin-bottom: 2px;" [routerLink]="['/programmes', programme.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> Consulter Programme</a></div>
+                                                      </ng-template>
+                                                    </e-accordionitem>
+                                                    <e-accordionitem>
+                                                      <ng-template #header>
+                                                        <div><a class="btn btn-primary" style="margin-bottom: 2px;" [routerLink]="['/formateur/programmes', programme.id,'cours']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> Consulter  Cours</a></div>
+                                                      </ng-template>
+                                                    </e-accordionitem>
+                                                    
+                                                  </e-accordionitems>
+                                                </ejs-accordion>
+                                              </ng-template>
+                                            </e-accordionitem>
+                                            
+                                          </e-accordionitems>
+                                        </ejs-accordion>-->
+                       <!--</div>-->
+                                 
+                   </div>
+              </div>
+  
+  
+          </div>
+      </div>
+  </div>
+    </div>

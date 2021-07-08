@@ -1,3 +1,4 @@
+import { DemandeParticipant } from "./demande-participant";
 import { Formateur } from "./formateur";
 import { Programme } from "./programme";
 
@@ -11,4 +12,5 @@ export class DemandeFormateur {
     public statut?:string;
     public programme?:Programme;
     public formateur?:Formateur;
+    public demandes_participants?:DemandeParticipant[];
 }

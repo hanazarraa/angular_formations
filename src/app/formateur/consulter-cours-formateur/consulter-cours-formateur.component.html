@@ -1,14 +1,13 @@
 <app-courses-program-formateur></app-courses-program-formateur>
 <div id="right-panel" class="right-panel">
   <app-navbar></app-navbar> 
-
 <div class="content">
     <div class="animated fadeIn">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Cours Introduction</strong>
+                        <strong class="card-title">   {{coursModel.titre}}</strong>
                     </div>
                     <div class="card-body">
                         <div class="col-sm-12">
@@ -18,7 +17,7 @@
                                     <a class="filter-btn nav-link btn-outline-primary active shadow rounded-pill text-light px-4 light-300" id="presentation-tab" data-toggle="tab" href="#presentation" role="tab" aria-controls="presentation" aria-selected="true"  (click)="presentation()" >Présentation</a>
                                 </li>
                                 <li class="nav-item mx-lg-4">
-                                    <a class="filter-btn nav-link btn-outline-primary shadow rounded-pill text-dark px-4 light-300"  id="materiel-tab" data-toggle="tab" href="#materiel" role="tab" aria-controls="materiel" aria-selected="true" (click)="materiel()"  >Matériel Pédagogique</a>
+                                    <a class="filter-btn nav-link btn-outline-primary shadow rounded-pill text-dark px-4 light-300"  id="materiel-tab" data-toggle="tab" href="#materiel" role="tab" aria-controls="materiel" aria-selected="true" (click)="materiel()"  >Documents</a>
                                 </li>
                                 <li class="nav-item mx-lg-4">
                                     <a class="filter-btn nav-link btn-outline-primary shadow rounded-pill text-dark px-4 light-300"  id="reunions-tab" data-toggle="tab" href="#reunions" role="tab" aria-controls="reunions" aria-selected="true"    (click)="reunion()" >Réunions</a>
@@ -28,6 +27,7 @@
                           
                           <!-- Tab panes -->
                           <div class="tab-content" id="nav-tabContent">
+                            <form   class="form-horizontal tab-content" id="nav-tabContent"> 
 
                             <div class="tab-pane fade show active" id="presentation" role="tabpanel" aria-labelledby="presentation-tab">
 
@@ -35,37 +35,115 @@
                               <div class="col-sm-12">
                                 <br><br><br>
                                 <div class="jumbotron" style="background-color: white;">
-                                   <form   class="form-horizontal">
-                                    <div class="row form-group">
+                                     <div class="row form-group">
                                         <div class="col col-md-2">
                                             <label   class=" form-control-label">Titre</label>
                                         </div>
-                                            <div class="input-group col col-md-3">
-                                              <input type="titre" id="titre" name="titre"  class="form-control"> 
+                                            <div class="input-group col col-md-6">
+                                              <input type="titre" id="titre" name="titre"  class="form-control" [(ngModel)]="coursModel.titre"> 
                                             </div>
-                                            <div class="col col-md-2">
-                                                <label   class=" form-control-label">Programme</label>
-                                            </div>
-                                                <div class="input-group col col-md-3">
-                                                  <input type="titre" id="titre" name="titre"  class="form-control"> 
-                                                </div>
+                                            
                                         </div>
-
-                                  </form>
-                                </div>
+                                        <div class="row form-group">
+                                        <div class="col col-md-2">
+                                          <label   class=" form-control-label">Description</label>
+                                      </div>
+                                          <div class="input-group col col-md-6">
+                                            <textarea class="form-control" id="description" name="description" [(ngModel)]="coursModel.description"></textarea>
+                                           </div>
+                                        </div>
+                                        <div class="row form-group">
+                                          <div class="col col-md-2">
+                                            <label   class=" form-control-label">Date </label>
+                                        </div>
+                                            <div class="input-group col col-md-6">
+                                              <input class="form-control" id="date" name="date" [(ngModel)]="coursModel.date" type="date"> 
+                                             </div>
+                                          </div>
+                                          <div class="row form-group">
+                                            <div class="col col-md-2">
+                                              <label   class=" form-control-label">Heure début </label>
+                                          </div>
+                                              <div class="input-group col col-md-6">
+                                                <input class="form-control" id="startHour" name="startHour" [(ngModel)]="coursModel.startHour" type="time"> 
+                                               </div>
+                                            </div>
+                                            <div class="row form-group">
+                                              <div class="col col-md-2">
+                                                <label   class=" form-control-label">Heure Fin </label>
+                                            </div>
+                                                <div class="input-group col col-md-6">
+                                                  <input class="form-control" id="endHour" name="endHour" [(ngModel)]="coursModel.endHour" type="time"> 
+                                                 </div>
+                                              </div>
+                                            
+                                 </div>
                               </div>
                             </div>
                             </div>
                             <div class="tab-pane fade show " id="materiel" role="tabpanel" aria-labelledby="materiel-tab">
                                 <div class="row">
-                                  <div class="col-sm-6">
+                                  <div class="col-sm-12">
                                       <br><br><br>
                                      <div class="card"> 
                                        <div class="card-body"> <h4 class="box-title"> Liste des Documents</h4></div>
                                        <div class="card-body"> 
                                        <!--<div class="jumbotron" style="background-color: white;">-->
-                                       <form   class="form-horizontal">
-                                        <div class="row form-group">
+                                        <div class="row">
+                                          <div class="col-8">
+                                            <label class="btn btn-default p-0">
+                                              <input type="file" multiple (change)="selectFiles($event)" />
+                                            </label>
+                                          </div>
+                                        
+                                          <div class="col-4">
+                                            <button
+                                              class="btn btn-primary btn-sm"
+                                              [disabled]="!selectedFiles"
+                                              (click)="uploadFiles()"
+                                            >
+                                              Upload
+                                            </button>
+                                          </div>
+                                        </div>
+                                        
+                                        <!--<div *ngFor="let progressInfo of progressInfos" class="mb-2">
+                                          <span>{{ progressInfo.fileName }}</span>
+                                          <div class="progress">
+                                            <div
+                                              class="progress-bar progress-bar-info progress-bar-striped"
+                                              role="progressbar"
+                                              attr.aria-valuenow="{{ progressInfo.value }}"
+                                              aria-valuemin="0"
+                                              aria-valuemax="100"
+                                              [ngStyle]="{ width: progressInfo.value + '%' }"
+                                            >
+                                              {{ progressInfo.value }}%
+                                            </div>
+                                          </div>
+                                        </div>-->
+                                        
+                                        <div *ngIf="message.length" class="alert alert-secondary my-3" role="alert">
+                                          <ul *ngFor="let msg of message; let i = index">
+                                            <li>{{ msg }}</li>
+                                          </ul>
+                                        </div>
+                                        
+                                           <ul
+                                            class="list-group list-group-flush"
+                                            *ngFor="let file of files;let i=index "
+                                          >
+                                            <li class="list-group-item">
+                                              <!--<a href="{{ file.piece_jointe }}">{{ {{ files[i].name}}  }}</a> --><!--<button class="button" (click)="downloadFile(file)" >download</button>-->
+                                             <a *ngIf="file.id" href="{{file.piece_jointe}}">  {{ file.file_name}}  </a> 
+                                             {{file.name}}
+                                             <button class="btn" style="color: red;margin-left: 20px;" (click)="supprimer_file(i)"  ><i class="fa fa-times"></i> </button>
+                                             <button *ngIf="file.id"    class="btn" style="margin-left: 10px;" (click)="downloadFile(file)"><i class="fa fa-download"></i></button>
+                                            
+                                            </li>
+                                          </ul>
+                                       
+                                         <!--<div class="row form-group">
                                         
                                        
                                        
@@ -106,87 +184,97 @@
                                                 </table>  
                                       
                                   
-                                       </div>
-                                       </form>
-                                      <!---- </div>-->
+                                       </div>-->
+                                       <!---- </div>-->
                                        </div>
                                        </div>
                                        </div>
 
 
-                                       <div class="col-sm-6">
-                                        <br><br><br>
-                                        <div class="card"> 
-                                          <div class="card-body"> <h4 class="box-title"> Liste des enregistrements</h4></div>
-                                          <div class="card-body">
-                                        <!--<div class="jumbotron" style="background-color: white;">-->
-                                           <form   class="form-horizontal">
-                                            <div class="row form-group">
-                                            
-                                             
-                                           
-                                            
-                                                <table id="example" class="table table-striped" style="width:100%">
-                                                <thead>
-                                                    <tr>
-                                                      <th>Action</th>    
-                                                        <th>Lien Enregistrement</th>
-                                                        <th>Date</th>
-                                                      
-                                                          
-                                                    </tr>
-                                                </thead>
-                                                <tbody > 
-                                                  <tr *ngFor="let Enregistrement of enregistrements let i = index;">  
-                                                      <td (click)="deleteEnregistrement(i)">    
-                                                        <i class="fa fa-trash fa-2x"></i>    
-                                                      </td>  
-                                                      <td> 
-                                                        <input type="text" id="lien"  [(ngModel)]="enregistrements[i].lien_zoom"  class="form-control"> 
-    
-                                                    </td>
-                                                    <td style="width: 200px;">
-                                                      <div class="input-group col">
-                                                        <input class="form-control" placeholder="yyyy-mm-dd"
-                                                               name="dp" [(ngModel)]="enregistrements[i].date" ngbDatepicker #d="ngbDatepicker">
-                                                        
-                                                          <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
-                                                        
-                                                      </div>    
-                                                    </td>
-                                                  
-                                                  
-                                                     
-                                                    </tr>
-                                                     <tr>    
-                                                    <td (click)="addEnregistrement()">    
-                                                      <i class="fa fa-plus"></i>  
-                                                    </td>     
-                                                  </tr>
-                                                  </tbody>
-                                                    </table>  
-                                          
-                                      
-                                           </div>
-                                           </form>
-                                          </div>
-                                        </div>
+                                         <br><br><br>
+                                        
                                            <!--</div>-->
-                                           </div>
+                                            
                                        </div>
                               </div>
                               <div class="tab-pane fade show" id="reunions" role="tabpanel" aria-labelledby="reunions-tab">
                                  <div class="row">
                                   <div class="col-sm-12">
-                                    <br><br><br>
-                                    <div class="jumbotron" style="background-color: white;">
-                                       <form   class="form-horizontal">
-                                        <div class="row form-group">
+                                    <br> 
+                                    <!--<div class="jumbotron" style="background-color: white;">-->
                                         
-                                         
-                                       
+                                         <div class="card"> 
+                                         <div class="card-body"> <h4 class="box-title"> Reunion</h4></div>
+                                         <div class="card-body"> 
+                                  
                                         
-                                            <table id="example" class="table table-striped" style="width:80%">
+                                          <!--<div class="row form-group">
+                                            <div class="col col-md-2">
+                                              <label   class=" form-control-label">Titre du reunion </label>
+                                          </div>
+                                              <div class="input-group col col-md-6">
+                                                 <input class="form-control" id="titre_reunion" name="titre_reunion" [(ngModel)]="reunions.titre" type="text">  
+                                               </div>
+                                            </div>-->
+                                            <div class="row form-group">
+                                              <div class="col col-md-2">
+                                                <label   class=" form-control-label">Lien du reunion </label>
+                                            </div>
+                                                <div class="input-group col col-md-6">
+                                                   <input class="form-control"  *ngIf="reunionModel" id="lien_reunion" name="lien_reunion" [(ngModel)]="reunionModel.lien" type="text">  
+                                                 </div>
+                                              </div>
+                                              </div>
+                                              </div>
+                                              
+                                        <br> 
+                                        <div class="card"> 
+                                          <div class="card-body"> <h4 class="box-title"> Enregistrements</h4></div>
+                                          <div class="card-body">
+                                        <!--<div class="jumbotron" style="background-color: white;">-->
+                                             <div class="row form-group">
+                                            
+                                             
+                                           
+                                            
+                                                <table   class="table" style="width:90%;margin-left: 10px;">
+                                                <thead>
+                                                  <th>Lien Enregistrement</th>
+                                                  <th>Date </th>
+                                                  <th>Action</th>
+                                                  </thead>
+                                                  <tbody> 
+                                                  <tr
+                                                  *ngFor="let Enregistrement of enregistrements; index as i; trackBy: customTrackBy">
+
+                                                  <td>
+                                                    <input type="text" id="lien_zoom{{i}}" name="lien_zoom{{i}}" [(ngModel)]="enregistrements[i].lien_zoom"  class="form-control"> 
+
+                                                   </td>
+                                                  <td>
+                                                       <input type="date" id="date{{i}}" [(ngModel)]="enregistrements[i].date" class="form-control" name="date{{i}}">
+                                                  </td>
+                                                  <td (click)="deleteEnregistrement(i)">
+                                                      <i class="fa fa-trash fa-2x"></i>
+                                                  </td>
+                                              </tr>
+
+                                              <tr>
+                                                  <td></td>
+                                                  <td></td>
+                                                  <td (click)="addEnregistrement()">
+                                                      <i class="fa fa-plus fa-2x"></i>
+                                                  </td>
+                                              </tr>
+                                                    
+                                                  </tbody>
+                                                    </table>  
+                                          
+                                      
+                                           </div>
+                                           </div>
+                                        </div>
+                                            <!--<table id="example" class="table table-striped" style="width:80%">
                                             <thead>
                                                 <tr>
                                                   <th>Action</th>    
@@ -222,15 +310,18 @@
                                                 </td>     
                                               </tr>
                                               </tbody>
-                                                </table>  
+                                                </table>  -->
                                       
                                   
-                                       </div>
-                                       </form>
-                                        </div>
+                                    
+                                       <!----</div>-->
                                        </div>
                                        </div>
                               </div>
+                              <button class="btn btn-success" style="margin-left: 450px;" (click)="valider_cours()">Valider</button>
+                              <button class="btn btn-light" style="margin-left: 20px;" >Annuler</button>
+
+                              </form>
                           </div>
                         </div>
                     </div>
@@ -240,7 +331,6 @@
     </div>
 </div>
 </div>
-
 
 
                          

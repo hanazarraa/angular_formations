@@ -1,18 +1,26 @@
-
- 
- <div>
+<app-sidebar-formateur></app-sidebar-formateur>
+  <div id="right-panel" class="right-panel">
+  
+  
   <app-navbar></app-navbar> 
+
+
+   
+
+
+
+
  <div class="content">
 
     <div class="animated fadeIn">
         <div class="row">
 
-            <div class="col-md-12">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
                         <strong class="card-title">Programmes</strong>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
                        
-                               <ul class="nav nav-tabs card-header-tabs pull-right"  id="myTab" role="tablist">
+                               <!--<ul class="nav nav-tabs card-header-tabs pull-right"  id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active btn-light" id="list-tab" data-toggle="tab" href="#list" role="tab" aria-controls="list" aria-selected="true">Liste</a>
                                 </li>
@@ -20,7 +28,7 @@
                                     <a class="nav-link btn-light" id="agenda-tab" data-toggle="tab" href="#agenda" role="tab" aria-controls="agenda" aria-selected="false">Agenda</a>
                                 </li>
                                 
-                            </ul>
+                            </ul>-->
                        
                       </div>
                      
@@ -28,31 +36,48 @@
 
                 
                      <div class="card-body"> 
+                      <form>
+                        <div class="form-group">
+                          <div class="input-group">
+                            <div class="input-group-addon">
+                              <i class="fa fa-search"></i>
+                            </div>
+                            <input
+                              type="text"
+                              class="form-control"
+                              name="query"
+                              placeholder="Taper pour rechercher..."
+                              [(ngModel)]="query"
+                            />
+                          </div>
+                        </div>
+                      </form>
                         <table class="table" style="border-radius: 0ch;">
                             <thead>
                                 <tr style="border-radius: 0ch;">
                                     <th scope="col">ID</th>
                                     <th scope="col">Titre</th>
                                     <th scope="col">Description</th>
-                                    <th scope="col">Durée</th>
+                                     <th scope="col">Durée</th>
                                     <th scope="col">Actions</th>
 
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let programme of programmes">
+                                <tr *ngFor="let programme of programmes$ |async   | searchFilter: query">
                                     <td scope="row">{{programme.id}}</td>
-                                    <td><a  [routerLink]="[programme.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" ><b> {{programme.titre}}</b></a></td>
-                                    <td>{{programme.description}}</td>
-                                    <td>20 H</td>
+                                    <td><a  [routerLink]="[programme.id,'view']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" ><b> {{programme.titre}}</b></a></td>
+                                    <td>{{programme.description }}</td>
+                                    <td>{{programme.duration}}   &nbsp;&nbsp;H</td>
                                     <td>
                                         
-                                          <a class="btn-primary btn-sm rounded-pill text-light" [routerLink]="[programme.id,'inscriptions']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> Inscriptions</a>
+                                          <a class="btn  btn-outline-primary shadow rounded-pill" [routerLink]="[programme.id,'inscriptions']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> Inscriptions</a>
 
                                        
                                       
                                     </td>
                                  </tr>
+                                 
                                  
                             </tbody>
                         </table>
@@ -119,6 +144,101 @@
 
 
         </div>
-    </div>
+        <!--<div class="col-lg-4">
+               <h4 class="card-title box-title"><b> Récommendés pour vous </b></h4>-->
+         
+       <!---- <div class="col-lg-10" *ngFor="let prog of recommprogs;let i=index;" >
+          <div class="card">
+            <div class="card-body">
+           
+                   <div  >
+                      <div class="  dib flat-color-2">
+                          <i  ></i>
+                      </div>
+                      <div class="stat-content">
+                          <div class="text-left dib">
+                              <div  > {{prog}} </div>
+                               
+                          </div>
+                      </div>
+                 
+          </div>
+      </div>
+      </div>
+      </div>-->
+      <!--<div class="col-lg-10"   >
+        <div class="card">
+          <div class="card-body">
+         
+                 <div  >
+                    <div class="  dib flat-color-2">
+                        <i  ></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="text-left dib">
+                            <div  > Intélligence émotionnelle</div>
+                             
+                        </div>
+                    </div>
+               
+        </div>
+        <div  >
+          
+          
+     
+</div>
+</div>
+</div>
+</div>-->
+<!--<div class="col-lg-10"   >
+  <div class="card">
+    <div class="card-body">
+   
+           <div  >
+              <div class="  dib flat-color-2">
+                  <i  ></i>
+              </div>
+              <div class="stat-content">
+                  <div class="text-left dib">
+                      <div  > Gestion d'équipe</div>
+                       
+                  </div>
+              </div>
+         
+  </div>
+  <div  >
+    
+    
+
+</div>
+</div>
+</div>
+</div>
+<div class="col-lg-10"   >
+  <div class="card">
+    <div class="card-body">
+   
+           <div  >
+              <div class="  dib flat-color-2">
+                  <i  ></i>
+              </div>
+              <div class="stat-content">
+                  <div class="text-left dib">
+                      <div  > Gestion de la relation Client</div>
+                       
+                  </div>
+              </div>
+         
+  </div>
+  <div  >
+    
+    
+
+</div>
+</div>
+</div>
+</div>
+      
+  </div>-->
 </div>
   </div>

@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Programme Hancho</strong>
+                        <strong class="card-title">Programme {{demande.programme_name}}</strong>
                     </div>
                     <div class="card-body">
                         <div class="col-sm-12">
@@ -57,65 +57,42 @@
                                     <div class="jumbotron" style="background-color: white;">
                                        <form   class="form-horizontal">
                                         <div class="row form-group">
-                                          <div class="col col-md-3">
-                                              <label   class=" form-control-label">Titre</label></div>
-                                              <div class="input-group col col-md-4">
-                                                <input type="titre" id="titre" name="titre"  class="form-control"> 
+                                          <div class="col col-md-2">
+                                              <label   class=" form-control-label"> <strong>  Titre  </strong> </label></div>
+                                              <div class="input-group col col-md-2">
+                                                 {{demande.programme_name}}
                                               </div>
-                                          </div>
-                                            <div class="row form-group">
-                                                <div class="col col-md-3">
-                                                    <label   class=" form-control-label" style="margin-top: 15px;">Date début</label>
-                                                </div>
-                                               
-                                                <mat-form-field appearance="fill">
-                                                  <mat-label>Choose a date</mat-label>
-                                                  <input matInput [matDatepicker]="date_debut">
-                                                  <mat-datepicker-toggle matSuffix [for]="date_debut"></mat-datepicker-toggle>
-                                                  <mat-datepicker #date_debut></mat-datepicker>
-                                                </mat-form-field>
-                                              <div class="col col-md-2">
-                                                <label   class=" form-control-label" style="margin-top: 15px;">Date Fin</label>
+                                              <div class="col col-md-2"  >
+                                                <label   class=" form-control-label"  > <strong>  Formateur </strong></label>
                                             </div>
                                             <div class="input-group col col-md-3">
                                              
-                                              <mat-form-field appearance="fill">
-                                                <mat-label>Choose a date</mat-label>
-                                                <input matInput [matDatepicker]="date_fin">
-                                                <mat-datepicker-toggle matSuffix [for]="date_fin"></mat-datepicker-toggle>
-                                                <mat-datepicker #date_fin></mat-datepicker>
-                                              </mat-form-field>
+                                              <label   class=" form-control-label"  >{{demande.formateur_name}}</label>
+
+                                            </div>
+                                          </div>
+                                          <br>
+                                            <div class="row form-group">
+                                                <div class="col col-md-2">
+                                                    <label   class=" form-control-label"  > <strong>  Date début  </strong> </label>
+                                                </div>
+                                               
+                                                <label   class=" form-control-label"  >{{demande.date_debut}}</label>
+                                                
+                                              <div class="col col-md-2" style="margin-left: 100px;">
+                                                <label   class=" form-control-label"  > <strong>   Date Fin </strong></label>
+                                            </div>
+                                            <div class="input-group col col-md-3">
+                                             
+                                              <label   class=" form-control-label"  >{{demande.date_fin}}</label>
 
                                             </div>
                                             </div>
                                             
-                                            
+                                       <br>
                                             <div class="row form-group">
-                                              <div class="col col-md-2" style="margin-right: 40px;margin-top: 10px;">
-                                                  <label   class=" form-control-label">Heure début</label>
-                                              </div>&nbsp;&nbsp;&nbsp;&nbsp;
-                                              <div class="col col-md-3" style="margin-top: 10px;" > 
-                                              <ejs-timepicker [value]='heure_debut' [min]='minValue' [max]='maxValue'></ejs-timepicker>
-                                              </div>
-              
-              
-              
-                                              <div class="col col-md-2" style="margin-right: 40px;margin-top: 10px;">
-                                                  <label   class=" form-control-label">Heure Fin</label>
-                                              </div>&nbsp;&nbsp;&nbsp;&nbsp;
-                                              <div class="col col-md-3" style="margin-top: 10px;" > 
-                                              <ejs-timepicker [value]='heure_fin' [min]='minValue' [max]='maxValue'></ejs-timepicker>
-                                              </div>
-                                               
-                                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              
-                                                   
-                                                 
-                                                     
-                                          </div>
-                                            <div class="row form-group">
-                                              <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Description</label></div>
-                                              <div class="col-12 col-md-4"><textarea name="textarea-input" id="textarea-input"  class="form-control"></textarea></div>
+                                              <div class="col col-md-2"><label for="textarea-input" class=" form-control-label"><strong>  Description </strong></label></div>
+                                              <div class="col-12 col-md-4"> {{demande.programme_desc}}</div>
                                           </div>
                                           </form>
                                         
@@ -138,27 +115,25 @@
                                             <thead>
                                                 <tr>
                                                        
-                                                    <th>Compétence Technique</th>
-                                                    <th>Niveau</th>
-                                                    <th>Résultat</th>
+                                                    <th>Compétences</th>
+                                                   
+                                                   
                                                   
                                                     
                                                 </tr>
                                             </thead>
                                             <tbody > 
-                                              <tr *ngFor="let competence of competences; let i = index;">  
+                                              <tr *ngFor="let competence of competencesniveaux$ | async   ">  
                                                     
                                                   <td> 
-                                                      {{competence}}
+                                                      {{competence.competence_name}}
  
                                                 </td>
-                                                <td>
-                                                    Niveau 3
+                                                <!--<td>
+                                                    {{competence.niveau_name}}
  
-                                                </td>
-                                              <td>
-                                                  Indéfini
-                                              </td>
+                                                </td>-->
+                                              
                                                  
                                                  
                                                 </tr>
@@ -183,14 +158,15 @@
                                                 <a class="filter-btn nav-link btn-outline-primary active shadow rounded-pill text-light px-4 light-300" id="travaux-tab" data-toggle="tab" href="#travaux" role="tab" aria-controls="travaux" aria-selected="true" (click)="travaux()" >Travaux</a>
                                             </li>
                                             <li class="nav-item mx-lg-4">
-                                                <a class="filter-btn nav-link btn-outline-primary shadow rounded-pill text-dark px-4 light-300"  id="qcm-tab" data-toggle="tab" href="#qcm" role="tab" aria-controls="qcm" aria-selected="true"  (click)="qcm()" >QCM</a>
+                                                <a class="filter-btn nav-link btn-outline-primary shadow rounded-pill text-dark px-4 light-300"  id="qcm-tab" data-toggle="tab" href="#qcm" role="tab" aria-controls="qcm" aria-selected="true"  (click)="qcm()" >Quiz</a>
                                             </li>
                                           
                                         </ul>
                                         <div class="tab-content" id="nav-tabContent">
                                             <div class="tab-pane fade show active" id="travaux" role="tabpanel" aria-labelledby="travaux-tab">
-                                              
-                                                <form   class="form-horizontal">
+                                              <app-slider *ngIf="currentt == 0"> 
+                                                <br><br>
+                                                 
                                                     <h2>Liste des travaux</h2>
                                                     <div class="row form-group">
                                                     
@@ -202,132 +178,380 @@
                                                             
                                                                 <th>Titre</th>
                                                                 <th>Statut</th>
-                                                                <th>Date début</th>
+                                                                
                                                               
-                                                                 <th>Date Echeance</th>
+                                                                 <th>Date Limite</th>
+                                                                
+                                                                 <!--<th>Pondération</th>-->
                                                                  <th>Test</th>
-                                                                 <th>Pondération</th>
-                                                                 <th>Résultat</th>
+                                                                <!---- <th>Résultat</th>-->
                                                             </tr>
                                                         </thead>
                                                         <tbody > 
-                                                          <tr *ngFor="let travail of traveaux; let i = index;">  
+                                                          <tr *ngFor="let travail of travaux$ | async">  
                                                               
                                                               <td> 
                                                                 {{travail.titre}}
                                                             </td>
-                                                            <td>Ouvert</td>
-                                                            <td style="width:   200px;">
-                                                                {{travail.date_debut}}
+                                                            
+                                                            <td style="width:   300px;">
+                                                                <b> Ouvert </b>Le {{travail.date_debut}}
                                                             </td>
-                                                            <td style="width:   50px;">
-                                                              {{travail.date_echeance}}
+                                                            <td style="width:   300px;">
+                                                              {{travail.date_limite}}
                                                             </td>
                                                              
-                                                            <td>
-                                                              <button type="button" data-toggle="modal" data-target="#testModal"> <i class="fas fa-external-link-alt"></i></button>
-                                                              
-                                                            </td>
-                                                            <div class="modal fade" id="testModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
-                                                              <div class="modal-dialog modal-lg" role="document">
-                                                                  <div class="modal-content">
-                                                                      <div class="modal-header" style="height: 60px;">
-                                                                          <h2 class="modal-title" id="largeModalLabel">Test</h2>
-                                                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closebtn>
-                                                                              <span aria-hidden="true">&times;</span>
-                                                                          </button>
-                                                                      </div>
-                                                                      <div class="modal-body">
-                                                                        <mat-tab-group>
-                                                                          <mat-tab label="Consigne" style="color: black;"> 
-                                                                            <table  class="table" style="width:80%">
-                                                                              <thead>
-                                                                                  <tr>
-                                                                                      
-                                                                                      <th>Titre</th>
-                                                                                      <th>Actions</th>
-                                                                                    
-                                                                                        
-                                                                                  </tr>
-                                                                              </thead>
-                                                                              <tbody > 
-                                                                                <tr *ngFor="let consigne of consignes; let i = index;">  
-                                                                                    <td>
-                                                                                        {{ consigne.titre }}
-                                                                                    </td>
-                                                                                     <td> 
-                                                                                        <a> <i class="fa fa-cloud-download" (click)="download()"></i></a>
-                                                                                   </td>
-                                                                                  </tr>
-                                                                                  </tbody>
-                                                                                  </table>
-                                                                          
-                                                                          
-                                                                          </mat-tab>
-                                                                          <mat-tab label="Remise">
-                                                                            
-                                                                            <table class="table" style="width:100%">
-                                                                              <thead>
-                                                                                  <tr>
-                                                                                       
-                                                                                      <th>Titre</th>
-                                                                                      <th>Date Remise</th>
-                                                                                      <th>Piece Jointe</th>
-                                                                                      <th>Correction</th>
-                                                                                    
-                                                                                        
-                                                                                  </tr>
-                                                                              </thead>
-                                                                              <tbody > 
-                                                                                <tr *ngFor="let remise of remises; let i = index;">  
-                                                                                    <td> 
-                                                                                        {{remise.titre}}
-                                                                                   </td>  
-                                                                                    <td> 
-                                                                                        20/4/2021
-                                                                                    </td>
-                                                                                    <td> <input type="file" id="file-input" name="file-input" class="form-control-file"></td>
-                                                                                    <td>    
-                                                                                   <a> <i class="fa fa-cloud-download" (click)="download()"></i></a>
-                                                                                    </td>
-                                                                                  </tr>
-                                                                                    </tbody>
-                                                                                  </table>
-                                                                            
-                                                                          </mat-tab>
-                                                                        </mat-tab-group>
-                                                                         
-                                                                      </div>
-                                                                      <div class="modal-footer">
-                                                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                                                          <button type="button" class="btn btn-primary" (click)="valider()">Valider</button>
-                                                                      </div>
-                                                                  </div>
-                                                              </div>
-                                                            </div>
+                                                            
+                                                            
             
-                                                            <td>
+                                                            <!--<td>
                                                                 {{travail.ponderation}}
             
+                                                            </td>-->
+                                                            <td width="200px">  
+                                                              <a class="btn"   style="background-color: white  "  (click)="onNextT(travail)"> <i
+                                                                class="fas fa-external-link-alt"></i>Test</a>
+                  
                                                             </td>
-                                                            <td>
-                                                                {{travail.resultat}}
+                                                            <!--<td>
+                                                              Indefini
+                                                                
             
-                                                            </td>
+                                                            </td>-->
                                                             </tr>
                                                             </tbody>
                                                             </table>  
                                                   
                                               
                                                    </div>
-                                                   </form>
+                                                  </app-slider>
+                                                  <app-slider *ngIf="currentt == 1">
+                                                    <br><br>
+                                                    <h3> Liste des Consignes</h3>
+                                                    <table *ngIf="currentTravail"> 
+                                                      <thead>
+                                                        
+                                                        
+                                                      </thead>
+                                                      <tbody> 
+                                                       <tr 
+                                                       
+                                                       *ngFor="let file of currentTravail.consignes; let i=index" style="margin-top: 100px;"
+                                                     >
+                                                       <!--<li class="list-group-item">-->
+                                                         <!--<a href="{{ file.piece_jointe }}">{{ {{ files[i].name}}  }}</a> --><!--<button class="button" (click)="downloadFile(file)" >download</button>-->
+                                                       <td width="200px">  <a   href="{{file.piece_jointe}}">  {{ file.file_name}}  </a> 
+                                                        </td>
+                                                        <td>
+                                                          <button (click)="onNextT(file)" class="btn btn-primary btn-sm ">Mes Remises</button>
+                                                         <!--<input #myInput type="file" multiple (change)="selectFiles($event,i)"  [(ngModel)]="file.remises[i].piece_jointe" id="piece_jointe{{i}}" name="piece_jointe{{i}}" />--></td> 
+                                                     <!----  </li>-->
+                                                       </tr>
+                                                       </tbody>
+                                                    </table>
+                                                   
+
+
+                                                     
+                                                    <br>
+                                                   <br><br><br><br><br>
+                                                     <br><br>
+                                                    <button (click)="onPrevT()" class="btn btn-link btn-sm"><i class="fa fa-arrow-left"></i>&nbsp;Retour vers la liste des travaux</button>
+
+                                                  </app-slider>
+                                                  <app-slider *ngIf="currentt == 2">
+                                                    <br><br>
+                                                    
+                                                    <div class="container" appDnd (fileDropped)="onFileDropped($event)" style="height: 300px;">
+                                                      <input type="file" #fileDropRef id="fileDropRef"  multiple (change)="fileBrowseHandler($event.target.files)" />
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="63" height="64" viewBox="0 0 63 64">
+                                                        <g fill="#3B454F" fill-rule="nonzero">
+                                                          <path
+                                                            d="M42.656 15.135a1.953 1.953 0 0 1-1.391-.578L31.5 4.795l-9.765 9.762a1.97 1.97 0 1 1-2.785-2.785L30.106.616a1.97 1.97 0 0 1 2.785 0l11.157 11.156a1.97 1.97 0 0 1-1.392 3.363z" />
+                                                          <path
+                                                            d="M31.5 36.791a1.97 1.97 0 0 1-1.969-1.969V2.01a1.97 1.97 0 0 1 3.938 0v32.812a1.97 1.97 0 0 1-1.969 1.969z" />
+                                                          <path
+                                                            d="M55.781 63.041H7.22A7.225 7.225 0 0 1 0 55.822V41.385a4.599 4.599 0 0 1 4.594-4.594h7.234a4.567 4.567 0 0 1 4.402 3.276l2.814 9.382a.658.658 0 0 0 .628.467h23.656a.658.658 0 0 0 .628-.467l2.814-9.385a4.572 4.572 0 0 1 4.402-3.273h7.234A4.599 4.599 0 0 1 63 41.385v14.437a7.225 7.225 0 0 1-7.219 7.219zM4.594 40.729a.656.656 0 0 0-.657.656v14.437a3.286 3.286 0 0 0 3.282 3.282H55.78a3.286 3.286 0 0 0 3.282-3.282V41.385a.656.656 0 0 0-.657-.656h-7.234a.65.65 0 0 0-.628.467L47.73 50.58a4.628 4.628 0 0 1-4.402 3.274H19.672a4.567 4.567 0 0 1-4.402-3.276l-2.814-9.382a.65.65 0 0 0-.628-.467H4.594z" />
+                                                        </g>
+                                                      </svg>
+                                                    
+                                                      <h3>Drag and drop file here</h3>
+                                                      <h3>or</h3>
+                                                      <label for="fileDropRef">Browse for file</label>
+                                                    </div>
+                                                    <div class="files-list"  >
+                                                      
+                                                      <div class="single-file" *ngFor="let file of files1; let i = index">
+                                                        <div class="file-icon" style="width: 50px">
+                                                          <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                            x="0px" y="0px" viewBox="0 0 58 58" style="enable-background:new 0 0 58 58;" xml:space="preserve">
+                                                            <polygon style="fill:#EDEADA;" points="51.5,14 37.5,0 6.5,0 6.5,58 51.5,58 " />
+                                                            <g>
+                                                              <path style="fill:#CEC9AE;"
+                                                                d="M16.5,23h25c0.552,0,1-0.447,1-1s-0.448-1-1-1h-25c-0.552,0-1,0.447-1,1S15.948,23,16.5,23z" />
+                                                              <path style="fill:#CEC9AE;"
+                                                                d="M16.5,15h10c0.552,0,1-0.447,1-1s-0.448-1-1-1h-10c-0.552,0-1,0.447-1,1S15.948,15,16.5,15z" />
+                                                              <path style="fill:#CEC9AE;"
+                                                                d="M41.5,29h-25c-0.552,0-1,0.447-1,1s0.448,1,1,1h25c0.552,0,1-0.447,1-1S42.052,29,41.5,29z" />
+                                                              <path style="fill:#CEC9AE;"
+                                                                d="M41.5,37h-25c-0.552,0-1,0.447-1,1s0.448,1,1,1h25c0.552,0,1-0.447,1-1S42.052,37,41.5,37z" />
+                                                              <path style="fill:#CEC9AE;"
+                                                                d="M41.5,45h-25c-0.552,0-1,0.447-1,1s0.448,1,1,1h25c0.552,0,1-0.447,1-1S42.052,45,41.5,45z" />
+                                                            </g>
+                                                            <polygon style="fill:#CEC9AE;" points="37.5,0 37.5,14 51.5,14 " />
+                                                          </svg>
+                                                        </div>
+                                                        <div class="info">
+                                                          <h4 class="name">
+                                                            {{ file?.name }}
+                                                          </h4>
+                                                          <p class="size">
+                                                            {{ formatBytes(file?.size) }}
+                                                          </p>
+                                                          <app-progress [progress]="file?.progress"></app-progress>
+                                                        </div>
+                                                    
+                                                        <div class="delete" (click)="deleteFile(i)">
+                                                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="18" viewBox="0 0 14 18">
+                                                            <path fill="#B1B1B1" fill-rule="nonzero"
+                                                              d="M1 16c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v10zm3.17-7.83a.996.996 0 0 1 1.41 0L7 9.59l1.42-1.42a.996.996 0 1 1 1.41 1.41L8.41 11l1.42 1.42a.996.996 0 1 1-1.41 1.41L7 12.41l-1.42 1.42a.996.996 0 1 1-1.41-1.41L5.59 11 4.17 9.58a.996.996 0 0 1 0-1.41zM10.5 1L9.79.29C9.61.11 9.35 0 9.09 0H4.91c-.26 0-.52.11-.7.29L3.5 1H1c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1h-2.5z" />
+                                                          </svg>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    
+                                                    <br><br><br><br><br>
+                                                    <button (click)="onPrevT()" class="btn btn-secondary " style="margin-left: 250px "><i class="fa fa-arrow-left"></i>&nbsp;Retour vers la liste des consignes</button>
+                                                    <button   class="btn btn-primary " style="margin-left: 20px;"  data-toggle="modal" data-target="#validateModal">valider le test</button>
+                                                  </app-slider>
+                                                  <app-slider *ngIf="currentt == 3">
+                                                    <h3>Mes Remises</h3>
+                                                    <div class="files-list" *ngIf="remises.length > 0">
+                                                      
+                                                      <div class="single-file" *ngFor="let file of remises; let i = index">
+                                                        <div class="file-icon" style="width: 50px">
+                                                          <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                            x="0px" y="0px" viewBox="0 0 58 58" style="enable-background:new 0 0 58 58;" xml:space="preserve">
+                                                            <polygon style="fill:#EDEADA;" points="51.5,14 37.5,0 6.5,0 6.5,58 51.5,58 " />
+                                                            <g>
+                                                              <path style="fill:#CEC9AE;"
+                                                                d="M16.5,23h25c0.552,0,1-0.447,1-1s-0.448-1-1-1h-25c-0.552,0-1,0.447-1,1S15.948,23,16.5,23z" />
+                                                              <path style="fill:#CEC9AE;"
+                                                                d="M16.5,15h10c0.552,0,1-0.447,1-1s-0.448-1-1-1h-10c-0.552,0-1,0.447-1,1S15.948,15,16.5,15z" />
+                                                              <path style="fill:#CEC9AE;"
+                                                                d="M41.5,29h-25c-0.552,0-1,0.447-1,1s0.448,1,1,1h25c0.552,0,1-0.447,1-1S42.052,29,41.5,29z" />
+                                                              <path style="fill:#CEC9AE;"
+                                                                d="M41.5,37h-25c-0.552,0-1,0.447-1,1s0.448,1,1,1h25c0.552,0,1-0.447,1-1S42.052,37,41.5,37z" />
+                                                              <path style="fill:#CEC9AE;"
+                                                                d="M41.5,45h-25c-0.552,0-1,0.447-1,1s0.448,1,1,1h25c0.552,0,1-0.447,1-1S42.052,45,41.5,45z" />
+                                                            </g>
+                                                            <polygon style="fill:#CEC9AE;" points="37.5,0 37.5,14 51.5,14 " />
+                                                          </svg>
+                                                        </div>
+                                                        <div class="info">
+                                                          <h4 class="name">
+                                                           <a href="{{file.piece_jointe}}">  {{ file?.file_name }}</a>
+                                                          </h4>
+                                                         
+                                                          
+                                                        </div>
+                                                    
+                                                        <!--<div class="delete" (click)="deleteFile(i)">
+                                                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="18" viewBox="0 0 14 18">
+                                                            <path fill="#B1B1B1" fill-rule="nonzero"
+                                                              d="M1 16c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v10zm3.17-7.83a.996.996 0 0 1 1.41 0L7 9.59l1.42-1.42a.996.996 0 1 1 1.41 1.41L8.41 11l1.42 1.42a.996.996 0 1 1-1.41 1.41L7 12.41l-1.42 1.42a.996.996 0 1 1-1.41-1.41L5.59 11 4.17 9.58a.996.996 0 0 1 0-1.41zM10.5 1L9.79.29C9.61.11 9.35 0 9.09 0H4.91c-.26 0-.52.11-.7.29L3.5 1H1c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1h-2.5z" />
+                                                          </svg>
+                                                        </div>-->
+                                                      </div>
+                                                    </div>
+                                                    <button (click)="onPrevT()" class="btn btn-link btn-sm"><i class="fa fa-arrow-left"></i>&nbsp;Retour vers la liste des consignes</button>
+
+                                                  </app-slider>
+
                                             </div>
                                             <div class="tab-pane fade show" id="qcm" role="tabpanel" aria-labelledby="qcm-tab">
                                               <br>
-                                              <br>
-                                               
-                                              <h3><strong style="margin-left: 400px;margin-top: 200px;">QCM</strong></h3>
-                                              <div class="container">
+                                              <br><app-sider *ngIf="current == 0 && scoresquizz.length == 0">
+                                                <!--<div class="border" style="height: 300px;">-->
+                                                <button (click)="onNext()" class="btn btn-outline-danger" style="margin-top: 120px;margin-left: 350px;">Commencer le quiz</button>
+                                                <!--</div>-->
+
+ 
+                                              </app-sider>
+                                              <app-slider *ngIf="current >0 && questions.length >= current"> 
+                                              <div class="border">
+                                                <div class="question bg-white p-3 border-bottom">
+                                                    <div class="d-flex flex-row justify-content-between align-items-center mcq">
+                                                        <h4> Quiz</h4><span>({{current}} of {{questions.length}})</span>
+                                                    </div>
+                                                </div>
+                                                <div class="question bg-white p-3 border-bottom">
+                                                    <div class="d-flex flex-row align-items-center question-title">
+                                                        <h3 class="text-danger">Q. {{current}}</h3>
+                                                        <h5 class="mt-1 ml-2"  (answers) ="receiveAnswers($event)">{{questions[current-1].titre}}</h5>
+                                                    </div>
+                                                  
+                                                    <div class="ans ml-2" *ngFor="let reponse of questions[current-1].reponses">
+                                                        <label class="radio"> <input type="radio" name="selected" value="{{reponse.id}}"  (click)="setUserAnswer(reponse)" style="width: 400px;"> <span style="width: 300px;">{{reponse.option}}</span>
+                                                        </label>
+                                                    </div>
+                                                 
+                                                </div>
+                                                <div class="d-flex flex-row justify-content-between align-items-center p-3 bg-white">
+                                                  <button  *ngIf="current > 1" class="btn btn-primary d-flex align-items-center btn-danger" type="button" ><i class="fa fa-angle-left mt-1 mr-1"></i>&nbsp;précedent</button>
+                                                  <button  *ngIf="current == 1" class="btn btn-primary d-flex align-items-center btn-danger" type="button" disabled="dis"><i class="fa fa-angle-left mt-1 mr-1"></i>&nbsp;précedent</button>
+
+                                                  <button class="btn btn-primary border-success align-items-center btn-success" *ngIf="questions.length > current" type="button"(click)="onNext(questions[current-1])">Suivant<i class="fa fa-angle-right ml-2"></i></button>
+                                                  <button class="btn btn-primary border-success align-items-center btn-success" *ngIf="current == questions.length" type="button"(click)="onNext(questions[current-1])">Voir le Résultat<i class="fa fa-angle-right ml-2"></i></button>
+
+                                                </div>
+                                            </div> 
+                                            </app-slider>
+                                           
+                                        <app-slider *ngIf="current > questions.length">
+                                          <!--<div   class="border">
+                                            <h4>Quiz is Over!</h4>
+                                            Your score is {{score}} / {{questions.length}}
+                                            <br>
+                                            <button (click)="startQuiz()">Retake Quiz</button>
+                                          </div>-->
+                                           
+                                          <mat-card>
+                                            <mat-card-header>
+                                              <div mat-card-avatar class="header-image"></div>
+                                           
+                                            </mat-card-header>
+                                           
+                                            <mat-card-content>
+                                              <section class="results">
+                                                <section class="statistics">
+                                                  <div  >
+                                                    <h3><b> Congratulations  {{user1.file_name}} {{user1.last_name}}</b></h3>
+                                                </div>
+                                                  
+                                                  
+                                                  <div class="quiz-feedback">
+                                                    <span>Vous avez  {{score}} / {{ questions.length }}</span>
+                                                 
+                                                    <!--<div *ngIf="quizMetadata?.percentage >= 60 && quizMetadata?.percentage < 80">
+                                                      <img mat-card-image [src]="NOT_BAD" alt="Photo of Not Bad">
+                                                      <h3>Not bad! </h3>
+                                                    </div>
+                                                    <div *ngIf="quizMetadata?.percentage < 60">
+                                                      <img mat-card-image [src]="TRY_AGAIN" alt="Photo of Try Again">
+                                                      <h3>Try again! </h3>
+                                                    </div>-->
+                                          
+                                                   
+                                                    <!--<span *ngIf="elapsedMinutes > 1">You scored {{ quizMetadata?.percentage }}% correct.</span>-->
+                                                  </div>
+                                                </section>
+                                          
+                                                <!--<section class="quizSummary">
+                                                  <details>
+                                                    <summary>View a more detailed summary of your quiz</summary>
+                                                    <mat-accordion>
+                                                      <mat-expansion-panel #quizQuestion role="tab" *ngFor="let question of quizData.questions; index as i">
+                                                        <mat-expansion-panel-header>
+                                                          <mat-panel-title>f
+                                                            <strong>Question # : </strong>&nbsp;&nbsp;<em> </em>
+                                                          </mat-panel-title>
+                                          
+                                                          <ng-template matExpansionPanelContent>
+                                                            <div class="quiz-summary-field">
+                                                              <span>
+                                                                <span class="leader">Question # : </span> 
+                                                              </span>
+                                                            </div>
+                                                            <div class="quiz-summary-field">
+                                                              <span>
+                                                                <span class="leader">Your Answer: </span>
+                                                                Option   &mdash;  
+                                                                <mat-icon class="correct" *ngIf="question?.answer === answer">done</mat-icon>
+                                                                <mat-icon class="incorrect" *ngIf="question?.answer !== answer">clear</mat-icon>
+                                                                <span *ngIf="!answer"> (no answer provided)</span>
+                                                              </span>
+                                                            </div>
+                                                            <div class="quiz-summary-field">
+                                                              <span>
+                                                                <span class="leader">Correct Answer: </span>
+                                                                Option   &mdash;  
+                                                              </span>
+                                                            </div>
+                                                            <div class="quiz-summary-field">
+                                                              <span>
+                                                                <span class="leader">Explanation: </span>
+                                                                Option   was correct because  
+                                                              </span>
+                                                            </div>
+                                                          </ng-template>
+                                                        </mat-expansion-panel-header>
+                                                      </mat-expansion-panel>
+                                                    </mat-accordion> 
+                                                  </details>
+                                                </section>-->
+                                              </section>
+                                          
+                                              <section class="return">
+                                                <!--<mat-card-actions>
+                                                  <a class="btn" (click)="restart()">Restart Quiz</a>
+                                                  <a class="btn" href="https://www.codelab.fun">Back to Codelab</a>
+                                                </mat-card-actions>-->
+                                              </section>
+                                          
+                                              <hr />
+                                          
+                                              <!--<section class="challenge-social">
+                                                <h4>Challenge your friends!</h4>
+                                                <div class="social-buttons">
+                                                  <a class="btn email"
+                                                     href="mailto:?subject=Try to beat my quiz score!&amp;body=I scored {{ quizMetadata?.percentage }}% on this awesome Angular quiz. Try to beat my score at {{ codelabUrl }}">Email a friend</a>
+                                                  <a class="btn twitter" target="_blank"
+                                                     href="https://www.twitter.com/share?text=I scored {{ quizMetadata?.percentage }}% on this awesome Angular quiz. Try to beat my score at &amp;hashtag=quiz&amp;url={{ codelabUrl }}">Tweet your score</a>
+                                                </div>
+                                              </section>-->
+                                            </mat-card-content>
+                                          </mat-card>
+                                         
+                                        </app-slider>
+                                        <app-slider *ngIf="current ==0 && scoresquizz.length > 0">
+                                        
+                                          <div   class="border"> 
+                                          <mat-card>
+                                            <mat-card-header>
+                                              <div mat-card-avatar class="header-image"></div>
+                                           
+                                            </mat-card-header>
+                                          
+                                            <mat-card-content>
+                                              <section class="results">
+                                                <section class="statistics">
+                                                  <div  >
+                                                    <h3><b> Congratulations  {{user1.first_name}} {{user1.last_name}} </b></h3>
+                                                </div>
+                                                  
+                                                  
+                                                  <div class="quiz-feedback">
+                                                    <span>Vous avez  {{scoresquizz[0].score}} / {{ questions.length }}</span>
+                                                  
+                                                  </div>
+                                                </section>
+                                           
+                                              </section>
+                                          
+                                              <section class="return">
+                                              
+                                              </section>
+                                          
+                                              <hr />
+                                          
+                                              
+                                            </mat-card-content>
+                                          </mat-card>
+                                          </div>
+                                        </app-slider>
+                                            
+                                            <!--<div class="container">
                                                 <div class="slide-wrapper">
                                                   <app-slider  *ngIf="current === 0" [left]="isLeftTransition(0)">
                                                     <br><br>
@@ -393,7 +617,7 @@
                                                   </app-slider>
                                                  </div>
                                               
-                                              </div>
+                                              </div>-->
                                                
 
                                             </div>
@@ -430,6 +654,183 @@
                                   </div>
                                 </div>
                               </div> 
+                              <div class="modal fade" id="validateModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-sm" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticModalLabel">Valider votre test</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closebutton>
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>
+                                           Une fois , vous avez validé le test , vous n'avez pas l'accés de le modifier 
+                                           </p>
+                                       </div>
+                                       <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-primary" (click)="valider_test()">Confirmer</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                              <div class="modal fade" id="testModal" tabindex="-1" role="dialog" name="testModal"
+                              aria-labelledby="largeModalLabel" aria-hidden="true"> 
+                              <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header" style="height: 60px;">
+                                    <h2 class="modal-title" id="largeModalLabel">travail  </h2>
+                                    <button type="button" class="close" data-dismiss="modal"
+                                      aria-label="Close" #closebtn>
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body" id="consignes">
+                                    <!--<mat-tab-group>
+                                      <mat-tab label="Consigne" style="color: black;" active>-->
+                                            <!--<div class="jumbotron" style="background-color: white;">-->
+                                              
+                                           
+                                             <!----   <label class="btn btn-default p-0">
+                                                  <input #myInput type="file" multiple (change)="selectFiles($event)"  />
+                                                </label>-->
+                                             
+                                            
+                                              <!--<div class="col-4">
+                                                <button
+                                                type="button"
+                                                  class="btn btn-primary btn-sm"
+                                                  id="Upload"
+                                                  [disabled]="!selectedFiles"
+                                                  (click)="uploadFiles()"
+                                                >
+                                                  Upload
+                                                </button>
+                                              </div>-->
+                                          
+                                            
+                                            <!--<div *ngIf="message.length" class="alert alert-secondary my-3" role="alert">
+                                              <ul *ngFor="let msg of message; let i = index">
+                                                <li>{{ msg }}</li>
+                                              </ul>
+                                            </div>-->
+                                             
+        
+        
+        
+                                             <table *ngIf="currentTravail"> 
+                                               <thead>
+                                                 <th width="200px">Consigne</th>
+                                                 
+                                                 <th>Remise</th>
+                                               </thead>
+                                               <tbody> 
+                                                <tr 
+                                                
+                                                *ngFor="let file of currentTravail.consignes; let i=index"
+                                              >
+                                                <!--<li class="list-group-item">-->
+                                                  <!--<a href="{{ file.piece_jointe }}">{{ {{ files[i].name}}  }}</a> --><!--<button class="button" (click)="downloadFile(file)" >download</button>-->
+                                                <td>  <a   href="{{file.piece_jointe}}">  {{ file.file_name}}  </a> 
+                                                 </td>
+                                                 
+
+                                                 <td>   <input #myInput type="file" multiple (change)="selectFiles($event,i)"   id="piece_jointe{{i}}" name="piece_jointe{{i}}" /></td>
+                                              <!----  </li>-->
+                                                </tr>
+                                                </tbody>
+                                             </table>
+                                            
+                                           
+                                          <!--<form #consigneForm="ngForm"> 
+                                       
+                                        <table class="table table-striped table-bordered">
+                                          <thead>
+                                            <tr>
+                                              <th>Consigne  </th>
+                                               <th>Action</th>
+          
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                        
+                                         {{modal.index}}
+          
+                                            <tr *ngFor="let consigne of  traveaux[modal.index].consignes  index as j; trackBy: customTrackBy">
+                                               <td>
+                                                <input type="file" class="form-control-file" (change)="onChange($event)"
+                                              [(ngModel)]="traveaux[modal.index].consignes[j].piece_jointe" value="traveaux[modal.index].consignes[j].piece_jointe" name='piece_jointe{{modal.index}}{{j}}' id='piece_jointe{{modal.index}}{{j}}'>
+                                              
+                                                  </td>
+                                              
+                                              <td (click)="deleteConsigne(i)">
+                                                <i class="fa fa-trash fa-2x"></i>
+                                              </td>
+                                            </tr>
+          
+                                            <tr>
+                                              
+                                              <td></td>
+                                              <td (click)="addConsigne()">
+                                                <i class="fa fa-plus fa-2x"></i>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>-
+                                        </form>-->
+          
+          
+          
+                                     <!---- </mat-tab>
+                                      <mat-tab label="Remise"></mat-tab>-->
+                                      <!--<mat-tab label="Remise">
+          
+                                        <table id="example" class="table table-striped" style="width:100%">
+                                          <thead>
+                                            <tr>
+                                              <th>Actions</th>
+                                              <th>Titre</th>
+                                              <th>Piece Jointe</th>
+          
+          
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            <tr *ngFor="let remise of remises; let i = index;">
+                                              <td (click)="deleteRemise(i)">
+                                                <i class="fa fa-trash fa-2x"></i>
+                                              </td>
+                                              <td>
+                                                <input type="text" id="titre" [(ngModel)]="remises[i].titre"
+                                                  class="form-control">
+                                              </td>
+                                              <td>
+                                                <input type="file" class="form-control-file"
+                                                  id="piece_jointe" [(ngModel)]="remises[i].piece_jointe">
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td (click)="addRemise()">
+                                                <i class="fa fa-plus"></i>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+          
+                                      </mat-tab>-->
+                                    <!--</mat-tab-group>-->
+          
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                      data-dismiss="modal">Annuler</button>
+                                    <button type="button" class="btn btn-primary"
+                                      (click)="valider()">Valider</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div> 
                               <!--end evaluation-->
                               <div class="tab-pane" id="materiel" >
                                 <div class="row">

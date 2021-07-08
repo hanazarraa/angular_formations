@@ -1,4 +1,8 @@
+import { Course } from "./course";
+
 export class Enregistrement  {
-    lien_zoom:string;
-    date:string;
+    constructor(){}
+   public lien_zoom:string;
+  public  date:string;
+   public cours:Course;
 }

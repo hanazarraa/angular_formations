@@ -1,0 +1,262 @@
+<app-sidebar *ngIf="user.role == 'R'"></app-sidebar>
+<app-sidebar-formateur *ngIf="user.role =='F'"></app-sidebar-formateur>
+<app-sidebar-employe *ngIf="user.role =='P'"></app-sidebar-employe>
+<div id="right-panel" class="right-panel">
+    <app-navbar></app-navbar> 
+
+<div class="content">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title" >Editer Mon Profile</strong>
+ 
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-warning" *ngIf='invalid && submitted'>{{errorMessage}}</div>
+                        <div class="alert alert-success" *ngIf='Success && submitted'>{{successMessage}}</div>
+                     
+
+                        <div class="container emp-profile">
+                            <form >
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="profile-img">
+                                             <img src="assets/images/avatar/download.png" alt="" *ngIf="!selectedFile && !user.avatar"/>
+                                            
+                                            <img src="{{user.avatar}}" alt=""  *ngIf="!selectedFile &&  user.avatar"/>
+                                            <img src="{{url}}" alt="" *ngIf="selectedFile">
+                                            <div class="file btn btn-lg btn-primary"  >
+                                                Changer la Photo
+                                                <input type="file" name="avatar" (change)="onFileChanged($event)" #fileInput id="avatar" [(ngModel)]="user.avatar" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="profile-head">
+                                                    <h3>
+                                                        <strong> 
+                                                       {{profile.fullname}}
+                                                       </strong>
+                                                    </h3>
+                                                    <h4 style="color: blue;">
+                                                        {{profile.poste}}
+                                                    </h4>
+                                                   
+                                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">A propos</a>
+                                                </li>
+                                                <!--<li class="nav-item">
+                                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
+                                                </li>-->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                   
+                                           
+                                    <div class="col-md-4">
+                                        <!--<div class="profile-work" *ngIf="user.role !== 'R'">
+                                            <p>WORK LINK</p>
+                                            <a href="">Website Link</a><br/>
+                                            <a href="">Bootsnipp Profile</a><br/>
+                                            <a href="">Bootply Profile</a>
+                                            <p>SKILLS</p>
+                                            <a href="">Web Designer</a><br/>
+                                            <a href="">Web Developer</a><br/>
+                                            <a href="">WordPress</a><br/>
+                                            <a href="">WooCommerce</a><br/>
+                                            <a href="">PHP, .Net</a><br/>
+                                        </div>-->
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="tab-content profile-tab" id="myTabContent">
+                                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>Nom d'utilisateur</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p><input type="text" class="form-control" name="username" id="username" [(ngModel)]="user.username"></p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>Nom</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p><input type="text" class="form-control" name="first_name" id="first_name" [(ngModel)]="user.first_name"></p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>Prenom</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p><input type="text" class="form-control" name="last_name" id="last_name" [(ngModel)]="user.last_name"></p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>Adreese email</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p><input type="email" class="form-control" name="email" id="email" [(ngModel)]="user.email"></p>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>Role</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <select disabled class="form-control">
+                                                                    <option value="user.role" selected *ngIf="user.role =='R'">Responsable </option>
+                                                                    <option value="user.role" selected *ngIf="user.role =='F'">Formateur </option>
+                                                                    <option value="user.role" selected *ngIf="user.role =='P'">Participant </option>
+
+                                                                </select>
+                                                                                                               </div>
+                                                        </div>
+
+                                                        <br><br>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>Num tel</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p><input type="text" class="form-control" name="tel" id="tel" [(ngModel)]="user.tel"></p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>Profession</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p><input type="text" class="form-control" name="poste" id="poste" [(ngModel)]="profile.poste"></p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row" *ngIf="user.role !=='R'">
+                                                            <div class="col-md-6">
+                                                                <label>Spécialité</label>
+                                                            </div>
+                                                            <div class="col-md-6" >
+                                                                <p><input type="text" class="form-control" name="poste" id="poste" [(ngModel)]="profile.specialite"></p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row"  >
+                                                            <div class="col-md-6">
+                                                                <label>Entreprise</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p><input type="text" class="form-control" name="entreprise" id="entreprise" [(ngModel)]="profile.entreprise"></p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row" *ngIf="user.role =='F'"> 
+                                                            <div class="col-md-6">
+                                                                <label>Compétences</label>
+                                                            </div>
+                                                            <div class="col-md-6"> 
+                                                             <tag-input [(ngModel)]="profile.competences"
+                                                             id="competences"
+                                                            name="competences"
+                                                            [modelAsStrings]="true"
+                                                            [displayBy]="'titre'"
+                                                            > 
+                                                 </tag-input>
+                                                         </div>
+                                                        </div>
+                                                        <div class="row" *ngIf="user.role =='F'">
+                                                            <div class="col-md-6">
+                                                                <label>CV</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                 
+                                                                    <input #myInput type="file" multiple (change)="selectFiles($event)"  />
+                                                                   
+                                                              
+                                                                
+                                                                  <button
+                                                                  type="button"
+                                                                    class="btn btn-primary btn-sm"
+                                                                    id="Upload"
+                                                                    [disabled]="!selectedFiles"
+                                                                    (click)="uploadFiles()"
+                                                                  >
+                                                                    Upload
+                                                                  </button>
+                                                                 
+                                                            </div>
+                                                        </div>
+                                                        <div class="row"  >
+                                                           
+                                                            <div class="col-md-6">
+                                                                <button class="btn btn-secondary" type="button" (click)="retour()">Retour vers Profile</button> &nbsp;&nbsp;&nbsp;
+                                                                <button class="btn btn-primary" (click)="Editer()" type="submit">Editer</button>
+                                                            </div>
+                                                        </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>Experience</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p>Expert</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>Hourly Rate</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p>10$/hr</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>Total Projects</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p>230</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>English Level</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p>Expert</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>Availability</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p>6 months</p>
+                                                            </div>
+                                                        </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <label>Your Bio</label><br/>
+                                                        <p>Your detail description</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>           
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

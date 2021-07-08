@@ -66,6 +66,19 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { AddFormationResponsableComponent } from './programmes/add-formation-responsable/add-formation-responsable.component';
  import {DurationPickerModule}  from 'ngx-duration-picker';
+import { ConsulterFormationResponsableComponent } from './programmes/consulter-formation-responsable/consulter-formation-responsable.component';
+import { SidebarFormateurComponent } from './formateur/sidebar-formateur/sidebar-formateur.component';
+import { MesProgrammesFormateurComponent } from './formateur/mes-programmes-formateur/mes-programmes-formateur.component';
+import { MyprogComponent } from './formateur/myprog/myprog.component';
+import { ViewFormationFormateurComponent } from './formateur/view-formation-formateur/view-formation-formateur.component';
+import { SearchFilterPipe } from './search-filter.pipe';
+import { SidebarEmployeComponent } from './employe/sidebar-employe/sidebar-employe.component';
+import { MesprogParticipantComponent } from './employe/mesprog-participant/mesprog-participant.component';
+import { ViewFormationEmployeComponent } from './employe/view-formation-employe/view-formation-employe.component';
+import { TagInputModule } from 'ngx-chips';
+import { ProfileComponent } from './auth/profile/profile.component';
+import { ProfileEditComponent } from './auth/profile-edit/profile-edit.component';
+
   @NgModule({
   declarations: [
     AppComponent,
@@ -105,11 +118,23 @@ import { AddFormationResponsableComponent } from './programmes/add-formation-res
    AccessDeniedComponent,
    LogoutComponent,
    AddFormationResponsableComponent,
+   ConsulterFormationResponsableComponent,
+   SidebarFormateurComponent,
+   MesProgrammesFormateurComponent,
+   MyprogComponent,
+   ViewFormationFormateurComponent,
+   SearchFilterPipe,
+   SidebarEmployeComponent,
+   MesprogParticipantComponent,
+   ViewFormationEmployeComponent,
+   ProfileComponent,
+   ProfileEditComponent,
  
     //AccordionModule
   ],
   imports: [
-    BsDatepickerModule.forRoot(),    
+    BsDatepickerModule.forRoot(),  
+    TagInputModule,  
 
     NgSelectModule,
     MatExpansionModule,

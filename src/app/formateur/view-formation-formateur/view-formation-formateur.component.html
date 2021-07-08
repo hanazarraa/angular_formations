@@ -1,0 +1,59 @@
+<app-sidebar-formateur></app-sidebar-formateur>
+  <div id="right-panel" class="right-panel">
+  
+  
+  <app-navbar></app-navbar>
+<div class="content">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <a (click)="goBack()"><i class="fa fa-arrow-left" style="color: black;"></i> </a>  &nbsp;&nbsp;<strong class="card-title">Programme {{programme.titre}}</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-sm-12">
+                            <div class="col col-md-8">
+                                <h3> <b> Titre  :</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Programme {{programme.titre}} </h3>
+                            </div>
+                            <div class="row">
+                                <div class="col col-md-8" style="float: left;">
+                                    <h3>&nbsp;&nbsp;<b>Description :</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{programme.description}} </h3>
+                                </div>
+                                 
+                            </div>
+                            <div class="row">
+                                <div class="col col-md-12" style="float: left;">
+                                    
+                                    <h3><b>Capacité </b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Min : {{programme.min}} &nbsp;&nbsp;
+                                        Max: {{programme.max}} </h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-md-8" style="float: left;">
+                                    <h3> &nbsp; <b> Durée </b> : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{programme.duration}} H</h3>
+                                </div>
+                                 
+                            </div>
+                            <br><br>
+                            <div class="col col-md-8" style="float: left;">
+                                <h3>  <b> Compétences à developper  </b>   </h3>
+                            </div>
+                              <div class="col col-md-8" style="float: left;">
+                             <table id="table">
+                                  
+                                   <tr *ngFor="let competence of competences">
+                                     <td width="200px">{{ competence.competence_name }}</td>
+                               
+                                 </tr>
+                             </table>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -26,6 +26,8 @@ import { ReponseService } from 'src/app/services/reponse.service';
 import { TravailService } from 'src/app/services/travail.service';
 import { UserService } from 'src/app/services/user.service';
 import * as HtmlDurationPicker from 'html-duration-picker';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-formation-responsable',
@@ -41,6 +43,11 @@ export class AddFormationResponsableComponent implements OnInit {
   formGroup:FormGroup;
  totalRow:number;
 addForm: FormGroup;
+selectedFiles?: FileList;
+progressInfos: any[] = [];
+message: string[] = [];
+enregistrements:any;
+fileInfos?: Observable<any>;
 
 rows: FormArray;
 itemForm: FormGroup;
@@ -50,7 +57,8 @@ ngAfterViewInit() {
 }
 
 //rows=<any>[];
-
+addSuccess:Boolean;
+addMessage:String;
 programmeModel=new Programme();
 programmeCompetenceniveauModel=new Programmecompetenceniveau();
 form:FormGroup;
@@ -59,6 +67,8 @@ loading:boolean;
 competences : Competence[]=new Array<Competence>();
 niveaux:Niveau[]=new Array<Niveau>();
 inscriptions:any;
+successMessage:string;
+errorMessage:any;
  
 dynamicArray: Array<DynamicGrid> = [];  
 newDynamic: any = {}; 
@@ -76,8 +86,7 @@ newRemise:any={};
 documents:Array<Doc>=[];
 newDocument:any={};
 
-enregistrements:Array<Enregistrement>=[];
-newEnregistrement:any={};
+ newEnregistrement:any={};
 reunions:Array<Reunion>=[];
 newReunion:any={};
 reponses:Array<Reponse>=[];
@@ -198,7 +207,7 @@ public heure_fin: Date = new Date(this.fullYear, this.month , this.date, 10, 0, 
 
 public maxValue: Date = new Date(this.fullYear, this.month, this.date, 20, 0 ,0);
 
-constructor(private reponseService:ReponseService,private questionService:QuestionService,private changeDetectorRef: ChangeDetectorRef,private http:HttpClient,private consigneService:ConsigneService,private userService:UserService,private _fb:FormBuilder,private toastr: ToastrService,private fb :FormBuilder,private programmeService:ProgrammeService,private CompetenceService:CompetenceService,private NiveauService:NiveauService,private progcompnivService:ProgrammeCompetenceNiveauService
+constructor(private router:Router,private reponseService:ReponseService,private questionService:QuestionService,private changeDetectorRef: ChangeDetectorRef,private http:HttpClient,private consigneService:ConsigneService,private userService:UserService,private _fb:FormBuilder,private toastr: ToastrService,private fb :FormBuilder,private programmeService:ProgrammeService,private CompetenceService:CompetenceService,private NiveauService:NiveauService,private progcompnivService:ProgrammeCompetenceNiveauService
    ,private travailService:TravailService) {
  this.addForm = this.fb.group({
    items: [null, Validators.required],
@@ -439,45 +448,84 @@ console.log(this.newDynamic)
  return true;  
 }  
 addTravail() {    
-console.log(this.newTravail)
-// this.newTravail.consignes=[];
-this.pieces_travail[this.modal.index]=[];
-
-console.log(this.newTravail.consignes);
- this.traveaux.push(this.newTravail); 
- this.traveaux[this.traveaux.length-1].consignes=[] ;
-
- this.newTravail = {};  
-  console.log(this.traveaux);
- this.toastr.success('New row added successfully', 'New Row');  
- //console.log(this.dynamicArray);  
- return true;  
-}  
-
-modal:any={};
-showModal(x,travail){
-console.log(x);
-this.currentTravail=travail;
-console.log("my index",this.currentTravail.rowIndex);
-this.modal.index=x;
-//this.modconsignes.index=i;
-//console.log("my index",x.rowIndex);
-}
-addConsigne() { 
+  console.log(this.newTravail)
+    this.newTravail.consignes=[];
+   
+  console.log(this.newTravail.consignes);
+   this.traveaux.push(this.newTravail); 
+   //this.traveaux[this.traveaux.length-1].consignes=new Array<Consigne>();
+  
+   this.newTravail = {};  
+    console.log(this.traveaux);
+   this.toastr.success('New row added successfully', 'New Row');  
+   //console.log(this.dynamicArray);  
+   return true;  
+  }  
+  selectFiles(event): void {
+    this.message = [];
+    this.progressInfos = [];
+    this.selectedFiles = event.target.files;
+  }
+  supprimer_file(index:any){
+    if(this.traveaux[this.modal.index].consignes[index].id){
+      this.consigneService.supprimerConsigne(this.traveaux[this.modal.index].consignes[index].id).subscribe(result=>{
+        console.log(this.traveaux[this.modal.index].consignes);
+      });
+    }
+    this.traveaux[this.modal.index].consignes.splice(index,1);
+  }
+  uploadFiles(): void {
+     this.message = [];
+  
+    if (this.selectedFiles) {
+      console.log(this.selectFiles);
+      for (let i = 0; i < this.selectedFiles.length; i++) {
+         this.uploadFile(i, this.selectedFiles[i]);
+         
+    }
+  }
+  }
+  uploadFile(idx: number, file: File): void {
+    this.progressInfos[idx] = { value: 0, fileName: file.name };
+  
+    if (file) {
+      console.log(file.name);
+      
+     // this.files.push(file);
+    //  console.log(this.files);
+      const msg = 'Le fichier ' + file.name+" est importé avec succés";
+      this.message.push(msg);
+      this.traveaux[this.modal.index].consignes.push(file);
+      console.log(this.traveaux[this.modal.index]);
+    //   this.consignes.push(file);
+       
+    }
+  }
+  modal:any={};
+  showModal(x,travail){
+  console.log(x);
+  this.currentTravail=travail;
   console.log("my index",this.currentTravail.rowIndex);
-  console.log("current travail index",this.modal.index)
-  this.traveaux[this.modal.index].consignes.push(this.newConsigne)
-this.newConsigne.piece_jointe=this.piece_jointe;  
- //this.newTravail.consignes.push(this.newConsigne);  
-let index = Array.prototype.indexOf.call(this.traveaux,this.currentTravail);
-
- console.log(this.newTravail.consignes);
- this.newConsigne = {};  
-
- this.toastr.success('New row added successfully', 'New Row');  
- //console.log(this.dynamicArray);  
- return true;  
-}  
+  this.modal.index=x;
+  
+  //this.modconsignes.index=i;
+  //console.log("my index",x.rowIndex);
+  }
+  addConsigne() { 
+    console.log("my index",this.currentTravail.rowIndex);
+    console.log("current travail index",this.modal.index)
+    this.traveaux[this.modal.index].consignes.push(this.newConsigne)
+  this.newConsigne.piece_jointe=this.piece_jointe;  
+   //this.newTravail.consignes.push(this.newConsigne);  
+  let index = Array.prototype.indexOf.call(this.traveaux,this.currentTravail);
+  
+   console.log(this.newTravail.consignes);
+   this.newConsigne = {};  
+  
+   this.toastr.success('New row added successfully', 'New Row');  
+   //console.log(this.dynamicArray);  
+   return true;  
+  }  
 addRemise() {    
 this.newRemise = {titre: "", piece_jointe:""};  
  this.remises.push(this.newRemise);  
@@ -577,17 +625,18 @@ deleteReponse(index:any) {
    }  
   }
   
-deleteConsigne(index:any) {  
-if( this.traveaux[this.modal.index].consignes.length ==1) {  
- this.toastr.error("Can't delete the row when there is only one row", 'Warning');  
-   return false;  
-} else {  
-   this.traveaux[this.modal.index].consignes.splice(index, 1);
-   this.pieces_jointes.splice(index,1);  
-   this.toastr.warning('Row deleted successfully', 'Delete row');  
-   return true;  
-}  
-}
+  deleteConsigne(index:any) {  
+    if( this.traveaux[this.modal.index].consignes.length ==1) {  
+     this.toastr.error("Can't delete the row when there is only one row", 'Warning');  
+       return false;  
+    } else {  
+       this.traveaux[this.modal.index].consignes.splice(index, 1);
+       this.pieces_jointes.splice(index,1);  
+       this.toastr.warning('Row deleted successfully', 'Delete row');  
+       return true;  
+    }  
+    }
+ 
 deleteRemise(index:any) {  
 if(this.remises.length ==1) {  
  this.toastr.error("Can't delete the row when there is only one row", 'Warning');  
@@ -597,6 +646,9 @@ if(this.remises.length ==1) {
    this.toastr.warning('Row deleted successfully', 'Delete row');  
    return true;  
 }  
+}
+Annuler(){
+  this.router.navigate(['/responsable/programmes/']);
 }
 deleteDocument(index:any) {  
 if(this.documents.length ==1) {  
@@ -630,14 +682,17 @@ if(this.reunions.length ==1) {
 }
 
 deleteTravail(index:any) {  
-if(this.traveaux.length ==1) {  
- this.toastr.error("Can't delete the row when there is only one row", 'Warning');  
-   return false;  
-} else {  
+  if(this.traveaux[index].id){
+
+  
+  this.travailService.deleteTravail(this.traveaux[index].id).subscribe((result:any)=>{
+    console.log("travail deleted successfully");
+  });
+}
    this.traveaux.splice(index, 1);  
    this.toastr.warning('Row deleted successfully', 'Delete row');  
    return true;  
-}  
+
 }
 
 DJANGO_SERVER = 'http://127.0.0.1:8000'
@@ -735,7 +790,7 @@ console.log(this.programmeModel);
   });
 
 }
- /*for (var dynamic of this.dynamicArray) {
+for (var dynamic of this.dynamicArray) {
    console.log(dynamic.competence); 
    dynamic.programme=result.id;
    this.progcompnivService.AjouterProgramme_Competence_Niveau(dynamic).subscribe((result:any)=>{
@@ -744,46 +799,36 @@ console.log(this.programmeModel);
      console.log(error);
    });
 
- }*/
-
-  for (var travail of this.traveaux) {
-   console.log(travail.titre); 
-   travail.programme=result.id;
-   travail.partage_par=this.id;
-   this.travailService.AjouterTravail(travail).subscribe((result:any)=>{
-     console.log(result);
-     for(let i=0;i<this.consignes.length;i++){
-       const uploadData=new FormData()
-       uploadData.append("piece_jointe",this.pieces_jointes[i]);
-       uploadData.append("travail",result.id);
-       uploadData.append("remis_par",this.id);
-       console.log(uploadData.get('piece_jointe'));
-       console.log(uploadData.get('travail'));
-       console.log(uploadData.get('remis_par')); 
-       const headers = new HttpHeaders({
-         'Content-Type': 'application/json',
-          });
-          
-           this.headers.append('Authorization', 'Bearer ' + localStorage.getItem('auth-token'));
-           const options = {
-         headers,
-        
-       };
-      
-     
-       this.http.post('http://127.0.0.1:8000/api/consigneUpload/',uploadData).subscribe(
-         result=>console.log(result),
-         error=>console.log(error)
-         );
-     }
-   },(error:any)=>{
-     console.log(error);
-   });
-
  }
+
+ for( var travail of this.traveaux ){
+   
+    travail.programme=result.id;
+    travail.partage_par=this.id;
+    let row=travail.consignes;
+    this.travailService.AjouterTravail(travail).subscribe((result:any)=>{
+      console.log(result);
+      if(row.length>0){
+      for(var consigne of row){
+             this.consigneService.upload(consigne,result.id,this.id).subscribe(result=>{
+               console.log(result);
+             });
+      }
+     }
+    });
+  }
+  this.addSuccess=true;
+ this.successMessage = 'Programme a été ajouté avec succés';
+ console.log(this.addSuccess);
+  // this.router.navigate(['/responsable/programmes/'+result.id]);
 
 },(error:any)=>{
  console.log(error);
+ console.log(error.titre);
+ this.addSuccess=false;
+ console.log(error.error )
+ this.errorMessage=error.error;
+ ;
 
 }
 );

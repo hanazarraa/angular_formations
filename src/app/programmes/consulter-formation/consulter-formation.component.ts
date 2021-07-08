@@ -229,7 +229,12 @@ constructor(private route:ActivatedRoute,private reponseService:ReponseService,p
    items: [null, Validators.required],
    items_value: ['no', Validators.required]
  });
+ this.token=localStorage.getItem('auth-token');
+ console.log(this.token);
 
+ console.log(this.userService.updateData(this.token).user_id);
+this.id=this.userService.updateData(this.token).user_id
+console.log(this.id);
  this.programmeId = this.route.snapshot.paramMap.get('programmeID');
 console.log(this.programmeId);
  this.rows = this.fb.array([]);
@@ -344,8 +349,8 @@ this.submitted=false;
   
  // console.log(this.customer);
 }, error => console.log(error));
-
-this.travailService.getTravailByProgrammeID(this.programmeId)
+console.log(this.id);
+this.travailService.getTravailByProgrammeIDProprietaire(this.programmeId,this.id)
   .subscribe(data=>{
     this.traveaux=data;
     console.log(this.traveaux);
@@ -420,11 +425,7 @@ this.progcompnivService.getCompNiveauByProgrammeID(this.programmeId)
   this.quizzModel.questions=[];
 // this.consignes[0][0]=new Consigne();
 
- this.token=localStorage.getItem('auth-token');
-
- console.log(this.userService.updateData(this.token).user_id);
-this.id=this.userService.updateData(this.token).user_id
-console.log(this.id)
+ 
 // $('.datepicker').datepicker();
 
 /*jQuery(document).delegate('a.add-record', 'click', function(e) {

@@ -11,5 +11,6 @@ export class User {
     date_birth?:Date;
     num_tel?:string;
     adresse?:string;
+    avatar?:File;
 
 }

@@ -1,0 +1,189 @@
+<app-sidebar *ngIf="role == 'R'"></app-sidebar>
+<app-sidebar-formateur *ngIf="role =='F'"></app-sidebar-formateur>
+<app-sidebar-employe *ngIf="role =='P'"></app-sidebar-employe>
+<div id="right-panel" class="right-panel">
+    <app-navbar></app-navbar> 
+<div class="content">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <a  (click)="goBack()"><i class="fa fa-arrow-left" style="color: black;"></i> </a>  &nbsp;&nbsp;<strong class="card-title">Profile</strong>
+                    </div>
+                    <div class="card-body">
+
+
+                        <div class="container emp-profile">
+                            <form >
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="profile-img">
+                                            <img *ngIf="user.avatar" src="{{user.avatar}}" alt=""/>
+                                            <img src="assets/images/avatar/download.png" alt="" *ngIf="!user.avatar"/>
+                                             
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="profile-head">
+                                            <h3>
+                                                <strong> 
+                                               {{profile.fullname}}
+                                               </strong>
+                                            </h3>
+                                            <h4 style="color: blue;">
+                                                {{profile.poste}}
+                                            </h4>
+                                                   
+                                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">A propos</a>
+                                                </li>
+                                               <!---- <li class="nav-item">
+                                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a> 
+                                                </li>-->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2" *ngIf="id == user.id">
+                                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Editer le Profile" (click)="editerProfile()"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                         <div class="profile-work" *ngIf="user.role =='F'">
+                                           
+                                            <p>Compétences</p>
+                                            <div *ngFor="let comp of profile.competences"> 
+                                            <a href="">{{comp.titre}}</a><br/>
+                                            
+                                            </div>
+                                        </div> 
+                                    </div> 
+                                    <div class="col-md-8">
+                                        <div class="tab-content profile-tab" id="myTabContent">
+                                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>Nom d'utilisateur</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p>{{user.username}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>Nom</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p>{{profile.fullname}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>Adreese email</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p>{{user.email}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>Role</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p *ngIf="user.role == 'R'">Responsable de Formation</p>
+                                                                <p *ngIf="user.role == 'F'">Formateur</p>
+                                                                <p *ngIf="user.role == 'P'">Participant</p>
+
+                                                            </div>
+                                                        </div>
+
+                                                        
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>Profession</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p>{{profile.poste}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row" *ngIf="user.role !='R'">
+                                                            <div class="col-md-6">
+                                                                <label>Spécialité</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p>{{profile.specialite}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>Entreprise</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p>{{profile.entreprise}}</p>
+                                                            </div>
+                                                        </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>Experience</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p>Expert</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>Hourly Rate</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p>10$/hr</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>Total Projects</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p>230</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>English Level</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p>Expert</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>Availability</label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <p>6 months</p>
+                                                            </div>
+                                                        </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <label>Your Bio</label><br/>
+                                                        <p>Your detail description</p>
+                                                    </div>
+                                                </div>
+                                             
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>           
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

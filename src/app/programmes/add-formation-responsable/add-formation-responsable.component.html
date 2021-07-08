@@ -1,10 +1,13 @@
+<div id="right-panel" >
+  <app-navbar></app-navbar> 
+
 <div class="content">
     <div class="animated fadeIn">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Programme Hancho</strong>
+                      <strong class="card-title">                        <a routerLink=".."><i class="fa fa-arrow-left" style="color: black;"></i> </a>  &nbsp;&nbsp;<strong class="card-title">Nouveau Programme</strong></strong>
                     </div>
                     <div class="card-body">
                         <div class="col-sm-12">
@@ -41,12 +44,12 @@
                                         id="cmpv-tab" data-toggle="tab" href="#cmpv" role="tab" aria-controls="cmpv"
                                         aria-selected="true" (click)="cmpv()">CMPV</a>
                                 </li>
-                                <li class="nav-item mx-lg-4">
+                                <!--<li class="nav-item mx-lg-4">
                                     <a class="filter-btn nav-link btn-outline-primary shadow rounded-pill text-dark px-4 light-300"
                                         id="evaluation-tab" data-toggle="tab" href="#evaluation" role="tab"
                                         aria-controls="evaluation" aria-selected="true"
                                         (click)="evaluation()">Evaluation</a>
-                                </li>
+                                </li>-->
                             </ul>
 
 
@@ -54,6 +57,14 @@
                             <div class="tab-content" id="nav-tabContent">
                                 <form class="form-horizontal tab-content" id="nav-tabContent"
                                     (ngSubmit)="valider_formation(form)" novalidate>
+                                    <br>
+
+                                  <div class="alert alert-warning" *ngIf='!addSuccess && submitted && errorMessage.titre'>{{errorMessage.titre}}</div>
+                                  <div class="alert alert-warning" *ngIf='!addSuccess && submitted && errorMessage.description'>{{errorMessage.description}}</div>
+                                  <div class="alert alert-warning" *ngIf='!addSuccess && submitted && errorMessage.duration'>{{errorMessage.duration}}</div>
+
+                                    <div class="alert alert-success" *ngIf='addSuccess && submitted'>{{successMessage}}</div> 
+                                  
                                     <div class="tab-pane fade show active" id="presentation" role="tabpanel"
                                         aria-labelledby="presentation-tab">
 
@@ -70,9 +81,9 @@
                                                             placeholder="Titre de Programme" [(ngModel)]="programmeModel.titre"
                                                             #titreControl="ngModel" required>
                                                         </div>
-                                                        <span class="help-block" *ngIf="titreControl.invalid   && submitted">
+                                                        <!--<span class="help-block" *ngIf="titreControl.invalid   && submitted">
                                                           Veuillez entrer un titre de Programme
-                                                        </span>
+                                                        </span>-->
                                                       </div>
                           
                           
@@ -99,9 +110,9 @@
                                                           #durationControl="ngModel" required placeholder="Durée">
 
                                                     </div>
-                                                    <span class="help-block" *ngIf="durationControl.invalid   && submitted">
+                                                    <!--<span class="help-block" *ngIf="durationControl.invalid   && submitted">
                                                       Veuillez entrer une Durée de Programme
-                                                    </span>
+                                                    </span>-->
                                                     </div>
                                                     <div class="row form-group" [class.has-error]="minControl.invalid">
                                                       <div class="col col-md-3"><label for="textarea-input"
@@ -149,7 +160,7 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th>Competence</th>
-                                                                    <th>Niveau</th>
+                                                                  
                                                                     <th>Action</th>
 
                                                                 </tr>
@@ -169,21 +180,20 @@
                                                                             name='competence{{i}}'></ngx-select>
                                                                         <!--<input [(ngModel)]="dynamicArray[i].competence" class="form-control" type="text" name="competence" id="competence"/>  -->
                                                                     </td>
-                                                                    <td>
-                                                                        <!--<ngx-select [items]="niveaux" [(ngModel)]="dynamicArray[i].niveau" id="niveau" name="niveau" ></ngx-select>-->
-                                                                        <ngx-select [items]="niveaux"
+                                                                    <!--<td>
+                                                                         <ngx-select [items]="niveaux"
                                                                             optionTextField="titre"
                                                                             [(ngModel)]="dynamicArray[i].niveau"
                                                                             contenteditable="true" name='niveau{{i}}'>
                                                                         </ngx-select>
-                                                                    </td>
+                                                                    </td>-->
                                                                     <td (click)="deleteRow(i)">
                                                                         <i class="fa fa-trash fa-2x"></i>
                                                                     </td>
                                                                 </tr>
 
                                                                 <tr>
-                                                                    <td></td>
+                                                                    
                                                                     <td></td>
                                                                     <td (click)="addRow()">
                                                                         <i class="fa fa-plus fa-2x"></i>
@@ -225,84 +235,83 @@
                                                             <div class="tab-pane fade show active" id="travaux"
                                                                 role="tabpanel" aria-labelledby="travaux-tab">
 
+                                                                <br><br>
+
+
+
+                                                                <button class="btn btn-outline-primary rounded-pill shadow" type="button" (click)="addTravail()">Ajouter Travail</button>
+                                                              
+                                                                 <br><br>
+           
                                                                 <h2>Liste des travaux</h2>
                                                                 <div class="row form-group">
 
 
 
 
-                                                                    <table class="table">
-                                                                        <thead>
-                                                                          <tr>
-                                    
-                                                                            <th>Titre</th>
-                                                                            <th>Date début</th>
-                                    
-                                                                            <th>Date Limite</th>
-                                                                            <th>Test</th>
-                                                                            <th>Pondération</th>
-                                                                            <!--<th>Résultat</th>-->
-                                                                            <th>Action</th>
-                                                                          </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                    
-                                    
-                                    
-                                                                          <tr *ngFor="let travail of traveaux; index as i; trackBy: customTrackBy">
-                                    
-                                                                            <td>
-                                                                              <input [(ngModel)]="traveaux[i].titre" class="form-control" type="text"
-                                                                                name="titre{{i}}" />
-                                                                            </td>
-                                                                            <td>
-                                                                           
-                                                                              <input type="date" class="form-control" name="date_debut{{i}}"
-                                                                                [(ngModel)]="traveaux[i].date_debut">
-                                    
-                                    
-                                    
-                                                                            </td>
-                                                                            <td>
-                                                                              <input type="date" class="form-control" name="date_limite{{i}}"
-                                                                                [(ngModel)]="traveaux[i].date_limite">
-                                    
-                                                                            </td>
-                                    
-                                                                            <td>
-                                                                              <button type="button" data-toggle="modal"   data-id="{{i}}"  data-target="#testModal" (click)="showModal(i,travail)"> <i
-                                                                                  class="fas fa-external-link-alt"></i></button>
-                                    
-                                                                            
-                                                                            {{travail.titre}}
-                                                                            {{modal.index}}
-                                                                            
-                                                                          </td>
-                                    
-                                    
-                                    
-                                                                            <td>
-                                                                              <input type="text" name="ponderation{{i}}"
-                                                                                [(ngModel)]="traveaux[i].ponderation" class="form-control">
-                                                                            </td>
-                                                                            <td (click)="deleteTravail(i)">
-                                                                              <i class="fa fa-trash fa-2x"></i>
-                                    
-                                                                            </td>
-                                                                          </tr>
-                                    
-                                                                          <tr>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td (click)="addTravail()">
-                                                                              <i class="fa fa-plus fa-2x"></i>
-                                                                            </td>
-                                                                          </tr>
-                                                                        </tbody>
-                                                                      </table>
+                                                                  <table class="table">
+                                                                    <thead>
+                                                                      <tr>
+                                
+                                                                        <th>Titre</th>
+                                                                        <th>Date début</th>
+                                
+                                                                        <th>Date Limite</th>
+                                                                     
+                                                                        <th>Pondération</th>
+                                                                        <!--<th>Résultat</th>-->
+                                                                        <th>Action</th>
+                                                                      </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                
+                                
+                                
+                                                                      <tr *ngFor="let travail of traveaux; index as i; trackBy: customTrackBy">
+                                
+                                                                        <td>
+                                                                          <input [(ngModel)]="traveaux[i].titre" class="form-control" type="text"
+                                                                            name="titre{{i}}" />
+                                                                        </td>
+                                                                        <td>
+                                                                       
+                                                                          <input type="date" class="form-control" name="date_debut{{i}}"
+                                                                            [(ngModel)]="traveaux[i].date_debut">
+                                
+                                
+                                
+                                                                        </td>
+                                                                        <td>
+                                                                          <input type="date" class="form-control" name="date_limite{{i}}"
+                                                                            [(ngModel)]="traveaux[i].date_limite">
+                                
+                                                                        </td>
+                                
+                                                                       
+                                
+                                
+                                                                        <td>
+                                                                          <input type="text" name="ponderation{{i}}"
+                                                                            [(ngModel)]="traveaux[i].ponderation" class="form-control">
+                                                                        </td>
+                                                                        <td width="200px"><a class="btn" (click)="deleteTravail(i)" style="background-color: white;">
+                                                                          <i class="fa fa-trash fa-2x"></i></a>&nbsp;
+                                                                          <a class="btn" data-toggle="modal"   data-id="{{i}}" style="background-color: white;width: 10px; " data-target="#testModal" (click)="showModal(i,travail)"> <i
+                                                                            class="fas fa-external-link-alt"></i>Test</a>
+                              
+                                                                        </td>
+                                                                      </tr>
+                                
+                                                                      <tr>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                       
+                                                                      </tr>
+                                                                    </tbody>
+                                                                  </table>
                                                                           
                                                                 </div>
 
@@ -343,7 +352,7 @@
                                                                                     <h5 *ngIf="current >0" > Question {{current}}</h5>
                                                                                     <h5 *ngIf="current === 0" style="margin-left: 50px;"> Question {{ current }}</h5>
 
-                                                                                    <a 
+                                                                                    <a  *ngIf="current < questions.length-1"
                                                                                     (click)="onNext()"
                                                                                     class="button disabled"
                                                                                     style="width: 20px;height: 20px;margin-left: 50px;"><i
@@ -447,109 +456,161 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!--<div class="modal fade" id="testModal" tabindex="-1" role="dialog" name="testModal"
-                    aria-labelledby="largeModalLabel" aria-hidden="true"> 
-                    <div class="modal-dialog modal-lg" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header" style="height: 60px;">
-                          <h2 class="modal-title" id="largeModalLabel"></h2>
-                          <button type="button" class="close" data-dismiss="modal"
-                            aria-label="Close" #closebtn>
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body" id="consignes">
-                          <mat-tab-group>
-                            <mat-tab label="Consigne" style="color: black;">
-                                <form #consigneForm="ngForm"> 
-                             
-                              <table class="table table-striped table-bordered">
-                                <thead>
-                                  <tr>
-                                    <th>Consigne  </th>
-                                     <th>Action</th>
-
-                                  </tr>
-                                </thead>
-                                <tbody>
-                              
-                               {{modal.index}}
-
-                                  <tr *ngFor="let consigne of  traveaux[modal.index].consignes  index as j; trackBy: customTrackBy">
-                                     <td>
-                                      <input type="file" class="form-control-file" (change)="onChange($event)"
-                                    [(ngModel)]="traveaux[modal.index].consignes[j].piece_jointe" value="traveaux[modal.index].consignes[j].piece_jointe" name='piece_jointe{{modal.index}}{{j}}' id='piece_jointe{{modal.index}}{{j}}'>
-                                    
-                                        </td>
-                                    
-                                    <td (click)="deleteConsigne(i)">
-                                      <i class="fa fa-trash fa-2x"></i>
-                                    </td>
-                                  </tr>
-
-                                  <tr>
-                                    
-                                    <td></td>
-                                    <td (click)="addConsigne()">
-                                      <i class="fa fa-plus fa-2x"></i>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                              </form>
-
-
-
-                            </mat-tab>
-                            <mat-tab label="Remise">
-
-                              <table id="example" class="table table-striped" style="width:100%">
-                                <thead>
-                                  <tr>
-                                    <th>Actions</th>
-                                    <th>Titre</th>
-                                    <th>Piece Jointe</th>
-
-
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr *ngFor="let remise of remises; let i = index;">
-                                    <td (click)="deleteRemise(i)">
-                                      <i class="fa fa-trash fa-2x"></i>
-                                    </td>
-                                    <td>
-                                      <input type="text" id="titre" [(ngModel)]="remises[i].titre"
-                                        class="form-control">
-                                    </td>
-                                    <td>
-                                      <input type="file" class="form-control-file"
-                                        id="piece_jointe" [(ngModel)]="remises[i].piece_jointe">
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td (click)="addRemise()">
-                                      <i class="fa fa-plus"></i>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-
-                            </mat-tab>
-                          </mat-tab-group>
-
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary"
-                            data-dismiss="modal">Annuler</button>
-                          <button type="button" class="btn btn-primary"
-                            (click)="valider()">Valider</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>-->
-                                    <button class="btn btn-primary btn-flat m-b-30 m-t-30" style="margin-left: 450px;">Valider</button>
-                                    <button type="button" class="btn btn-danger" style="margin-left: 50px;">Annuler</button>
+                                    <div class="modal fade" id="testModal" tabindex="-1" role="dialog" name="testModal"
+                                    aria-labelledby="largeModalLabel" aria-hidden="true"> 
+                                    <div class="modal-dialog modal-lg" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header" style="height: 60px;">
+                                          <h2 class="modal-title" id="largeModalLabel"></h2>
+                                          <button type="button" class="close" data-dismiss="modal"
+                                            aria-label="Close" #closebtn>
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body" id="consignes">
+                                          <mat-tab-group>
+                                            <mat-tab label="Consigne" style="color: black;" active>
+                                                  <!--<div class="jumbotron" style="background-color: white;">-->
+                                                    <br><br>
+                                                  <div class="row">
+                                                    <div class="col-8">
+              
+                                                      <label class="btn btn-default p-0">
+                                                        <input #myInput type="file" multiple (change)="selectFiles($event)"  />
+                                                      </label>
+                                                    </div>
+                                                  
+                                                    <div class="col-4">
+                                                      <button
+                                                      type="button"
+                                                        class="btn btn-primary btn-sm"
+                                                        id="Upload"
+                                                        [disabled]="!selectedFiles"
+                                                        (click)="uploadFiles()"
+                                                      >
+                                                        Upload
+                                                      </button>
+                                                    </div>
+                                                  </div>
+                                                   <br>
+                                                  
+                                                  <div *ngIf="message.length" class="alert alert-secondary my-3" role="alert">
+                                                    <ul *ngFor="let msg of message; let i = index">
+                                                      <li>{{ msg }}</li>
+                                                    </ul>
+                                                  </div>
+                                                  <br>
+              
+              
+              
+                                                   <table *ngIf="currentTravail"> 
+                                                  
+                                                     <tr 
+                                                      
+                                                      *ngFor="let file of currentTravail.consignes;let i=index "
+                                                    >
+                                                      <!--<li class="list-group-item">-->
+                                                        <!--<a href="{{ file.piece_jointe }}">{{ {{ files[i].name}}  }}</a> --><!--<button class="button" (click)="downloadFile(file)" >download</button>-->
+                                                      <td>  <a *ngIf="file.id" href="{{file.piece_jointe}}">  {{ file.file_name}}  </a> 
+                                                       {{file.name}}</td>
+                                                      <td> <button class="btn" style="color: black;" (click)="supprimer_file(i)"  ><i class="fa fa-times"></i> </button></td>
+                                                       <td> <button *ngIf="file.id"    class="btn"  (click)="downloadFile(file)"><i class="fa fa-download"></i></button></td>
+                                                      
+                                                    <!----  </li>-->
+                                                      </tr>
+                                                   </table>
+                                                  
+                                                 
+                                                <!--<form #consigneForm="ngForm"> 
+                                             
+                                              <table class="table table-striped table-bordered">
+                                                <thead>
+                                                  <tr>
+                                                    <th>Consigne  </th>
+                                                     <th>Action</th>
+                
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                              
+                                               {{modal.index}}
+                
+                                                  <tr *ngFor="let consigne of  traveaux[modal.index].consignes  index as j; trackBy: customTrackBy">
+                                                     <td>
+                                                      <input type="file" class="form-control-file" (change)="onChange($event)"
+                                                    [(ngModel)]="traveaux[modal.index].consignes[j].piece_jointe" value="traveaux[modal.index].consignes[j].piece_jointe" name='piece_jointe{{modal.index}}{{j}}' id='piece_jointe{{modal.index}}{{j}}'>
+                                                    
+                                                        </td>
+                                                    
+                                                    <td (click)="deleteConsigne(i)">
+                                                      <i class="fa fa-trash fa-2x"></i>
+                                                    </td>
+                                                  </tr>
+                
+                                                  <tr>
+                                                    
+                                                    <td></td>
+                                                    <td (click)="addConsigne()">
+                                                      <i class="fa fa-plus fa-2x"></i>
+                                                    </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>-
+                                              </form>-->
+                
+                
+                
+                                            </mat-tab>
+                                            <mat-tab label="Remise"></mat-tab>
+                                            <!--<mat-tab label="Remise">
+                
+                                              <table id="example" class="table table-striped" style="width:100%">
+                                                <thead>
+                                                  <tr>
+                                                    <th>Actions</th>
+                                                    <th>Titre</th>
+                                                    <th>Piece Jointe</th>
+                
+                
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  <tr *ngFor="let remise of remises; let i = index;">
+                                                    <td (click)="deleteRemise(i)">
+                                                      <i class="fa fa-trash fa-2x"></i>
+                                                    </td>
+                                                    <td>
+                                                      <input type="text" id="titre" [(ngModel)]="remises[i].titre"
+                                                        class="form-control">
+                                                    </td>
+                                                    <td>
+                                                      <input type="file" class="form-control-file"
+                                                        id="piece_jointe" [(ngModel)]="remises[i].piece_jointe">
+                                                    </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td (click)="addRemise()">
+                                                      <i class="fa fa-plus"></i>
+                                                    </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                
+                                            </mat-tab>-->
+                                          </mat-tab-group>
+                
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Annuler</button>
+                                          <button type="button" class="btn btn-primary"
+                                            (click)="valider()">Valider</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                    <button class="btn btn-primary btn-flat m-b-30 m-t-30" style="margin-left: 550px;">Valider</button>
+                                    <button type="button" class="btn btn-danger" style="margin-left: 50px;" (click)="Annuler()">Annuler</button>
 
                                 </form>
 
@@ -564,4 +625,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>

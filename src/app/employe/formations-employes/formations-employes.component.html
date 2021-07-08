@@ -1,17 +1,21 @@
 
  
+ <app-sidebar-employe></app-sidebar-employe>
+ <div id="right-panel" class="right-panel">
  
+ 
+ <app-navbar></app-navbar> 
  <div class="content">
 
     <div class="animated fadeIn">
         <div class="row">
 
-            <div class="col-md-12">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
                         <strong class="card-title">Programmes</strong>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
                        
-                               <ul class="nav nav-tabs card-header-tabs pull-right"  id="myTab" role="tablist">
+                               <!--<ul class="nav nav-tabs card-header-tabs pull-right"  id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active btn-light" id="list-tab" data-toggle="tab" href="#list" role="tab" aria-controls="list" aria-selected="true">Liste</a>
                                 </li>
@@ -19,7 +23,7 @@
                                     <a class="nav-link btn-light" id="agenda-tab" data-toggle="tab" href="#agenda" role="tab" aria-controls="agenda" aria-selected="false">Agenda</a>
                                 </li>
                                 
-                            </ul>
+                            </ul>-->
                        
                       </div>
                      
@@ -32,31 +36,88 @@
                                 <tr style="border-radius: 0ch;">
                                      <th scope="col">Titre</th>
                                      <th scope="col">Formateur</th>
-                                    <th scope="col">Date Limite</th>
-                                     <th scope="col">Statut</th>
+                                    <th scope="col">Date Début</th>
+                                    <th scope="col">Date fin</th>
+                                    <th scope="col">Statut</th>
+                                     <!--<th scope="col">Statut</th>-->
                                     <th scope="col">Actions</th>
 
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let programme of programmes">
-                                     <td>   <a    [routerLink]="['/employé/programmes', programme.id ]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><b>  {{programme.titre }} </b></a></td>
-                                     <td>Formateur 1</td>
+                                <tr *ngFor="let demande  of demandes   ;let i=index ">
+                                     <td>   <a    [routerLink]="['/employé/programmes', demande.programme,'view' ]"    routerLinkActive="active" [queryParams]= "{demande : demande.id}" [routerLinkActiveOptions]="{exact: true}"><b>  {{ demande.programme_name }} </b></a></td>
+                                     <td>{{demande.formateur_name}}</td>
 
-                                    <td>06/03/2021</td>
-                                    <td ><strong *ngIf="programme.id === 1"> Non inscrit</strong> 
+                                    <td>{{demande.date_debut}}</td>
+                                    <td>{{demande.date_fin}}</td>
+                                     <td  >
+                                        <b *ngIf="demande.statut_participant == 'EA'">En Attente</b>
+                                        <b *ngIf="demande.statut_participant == 'A'">Accepté</b>
+                                        <b *ngIf="demande.statut_participant == 'R'">Réfusé</b>
+                                        <b *ngIf="demande.statut_participant == 'Non Inscrit'">Non Inscrit</b>
+                                    </td>
+                                    <td> <a class="btn btn-outline-primary rounded-pill shadow"  *ngIf="demande.statut_participant == 'Non Inscrit'" data-toggle="modal" data-target="#inscrireModal"  (click)="showModalInscrire(demande)"   >S'inscrire </a> 
+                                        <a class="btn btn-outline-primary rounded-pill shadow" *ngIf="demande.statut_participant == 'EA'" data-toggle="modal" data-target="#acceptModal" (click)="showModal(demande.dp_id,demande)" >Désinscrire </a> 
+                                    
+                                    
+                                    </td>
+                                    <div class="modal fade" id="acceptModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-sm" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="staticModalLabel">Confirmer</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closebutton>
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>
+                                                     Etes Vous sur de désinscrire de ce programme
+                                                   </p>
+                                               </div>
+                                               <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal"  >Annuler</button>
+                                                <button type="button" class="btn btn-success" (click)="desinscrire(demande,dp_id)" >Confirmer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal fade" id="inscrireModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-sm" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="staticModalLabel">Confirmer</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closebtn>
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>
+                                                 Voulez vous participer a cette formation
+                                               </p>
+                                           </div>
+                                           <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"  >Annuler</button>
+                                            <button type="button" class="btn btn-success" (click)="inscrire(demande1)" >Confirmer</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                    
+                                     <!--<td ><strong *ngIf="programme.id === 1"> Non inscrit</strong> 
                                          <strong *ngIf="programme.id === 2">A payé </strong>
                                          <strong *ngIf="programme.id === 3">En Attente </strong>
                                          <strong *ngIf="programme.id === 4">Réfusé </strong>
 
-                                    </td>
+                                    </td>-->
 
-                                    <td>
-                                        <a  *ngIf="programme.id === 1 " [routerLink]="['/employé/programmes', programme.id,'inscriptions']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-pencil-square-o"></i> S'inscrire</a>
+                                    
+                                       <!---- <a  *ngIf="programme.id === 1 " [routerLink]="['/employé/programmes', programme.id,'inscriptions']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-pencil-square-o"></i> S'inscrire</a>
                                         <a *ngIf="programme.id!==1 && programme.id === 2" [routerLink]="['/employé/programmes', programme.id,'inscriptions']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-pencil-square-o"></i> Payer</a>
                                         <a  *ngIf="programme.id === 3 " [routerLink]="['/employé/programmes', programme.id,'inscriptions']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-pencil-square-o"></i>Désinscrire</a>
-                                        <a  *ngIf="programme.id === 4 " [routerLink]="['/employé/programmes', programme.id,'inscriptions']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> </a>
-                                    </td>
+                                        <a  *ngIf="programme.id === 4 " [routerLink]="['/employé/programmes', programme.id,'inscriptions']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> </a>-->
+                                    
                                  </tr>
                                  
                             </tbody>
@@ -68,6 +129,85 @@
 
 
         </div>
+        <!--<div class="col-lg-4">
+            <h4 class="card-title box-title"><b> Récommendés pour vous </b></h4>
+            <div class="col-lg-10"   >
+                <div class="card">
+                  <div class="card-body">
+                 
+                         <div  >
+                            <div class="  dib flat-color-2">
+                                <i  ></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="text-left dib">
+                                    <div  > <h3>  Intélligence émotionnelle </h3></div>
+                                    <div> <b> Fatma BN</b></div>
+                                    <i style="color: blue;"> De 2021/07/07 à 2021/08/11</i>
+                                </div>
+                            </div>
+                       
+                </div>
+                <div  >
+                  
+                  
+             
+        </div>
+        </div>
+        </div>
+        </div>
+        <div class="col-lg-10"   >
+          <div class="card">
+            <div class="card-body">
+           
+                   <div  >
+                      <div class="  dib flat-color-2">
+                          <i  ></i>
+                      </div>
+                      <div class="stat-content">
+                          <div class="text-left dib">
+                              <div  > <h3> Gestion d'équipe </h3></div>
+                              <div> <b> Mohamed Zarraa</b></div>
+                              <i style="color: blue;"> De 2021/07/05 à 2021/07/30</i>
+                          </div>
+                      </div>
+                 
+          </div>
+          <div  >
+            
+            
+        
+        </div>
+        </div>
+        </div>
+        </div>
+        <div class="col-lg-10"   >
+          <div class="card">
+            <div class="card-body">
+           
+                   <div  >
+                      <div class="  dib flat-color-2">
+                          <i  ></i>
+                      </div>
+                      <div class="stat-content">
+                          <div class="text-left dib">
+                              <div  > Gestion de la relation Client</div>
+                               <div> <b> Sirine Zarraa</b></div>
+                               <i style="color: blue;"> De 2021/07/11 à 2021/08/11</i>
+                          </div>
+                      </div>
+                 
+          </div>
+          <div  >
+            
+            
+        
+        </div>
+        </div>
+        </div>
+        </div>
+              
+          </div>-->
     </div>
 </div>
-  
+  </div>

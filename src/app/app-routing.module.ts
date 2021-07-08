@@ -32,11 +32,23 @@ import { AuthorizationGuard } from './authorization.guard';
 import { AccessDeniedComponent } from './auth/access-denied/access-denied.component';
 import { LogoutComponent } from './auth/logout/logout.component';
 import { AddFormationResponsableComponent } from './programmes/add-formation-responsable/add-formation-responsable.component';
+import { ConsulterFormationResponsableComponent } from './programmes/consulter-formation-responsable/consulter-formation-responsable.component';
+import { CourseService } from './services/course.service';
+import { MesProgrammesFormateurComponent } from './formateur/mes-programmes-formateur/mes-programmes-formateur.component';
+import { MyprogComponent } from './formateur/myprog/myprog.component';
+import { ViewFormationFormateurComponent } from './formateur/view-formation-formateur/view-formation-formateur.component';
+import { MesprogParticipantComponent } from './employe/mesprog-participant/mesprog-participant.component';
+import { ViewFormationEmployeComponent } from './employe/view-formation-employe/view-formation-employe.component';
+import { ProfileComponent } from './auth/profile/profile.component';
+import { ProfileEditComponent } from './auth/profile-edit/profile-edit.component';
+
 const routes: Routes = [
   
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterComponent},
   {path:'access-denied',component:AccessDeniedComponent},
+  {path:'profile/:id',component:ProfileComponent},
+  {path:'profile/:id/edit',component:ProfileEditComponent},
   {path:'logout',component:LogoutComponent},
   {path:'responsable',component:ProgrammeComponent, data: {
     allowedRoles: ['R']
@@ -47,7 +59,7 @@ const routes: Routes = [
     children:[
       {path :'programmes' , component:FormationsComponent},
       {path:'programmes/add',component:AddFormationResponsableComponent},
-      {path:'programmes/:programmeID',component:ConsulterFormationComponent},
+      {path:'programmes/:programmeID',component:ConsulterFormationResponsableComponent},
        {path:'programmes/:programmeID/inscriptions',component:InscriptionsComponent},
        {path:'programmes/:programmeID/inscriptions/:inscriptionID',component:InscriptionsEmployesComponent},
        {path:'programmes/:programmeID/cours/ajouter',component:CreerCoursResponsableComponent},
@@ -55,36 +67,45 @@ const routes: Routes = [
 
       ]
  },
-  {path:'formateur/programmes',component:ProgrammeFormateurComponent, data: {
+  {path:'formateur',component:ProgrammeFormateurComponent, data: {
     allowedRoles: ['F']
 
   },
   canActivate: [AuthorizationGuard],
    children:[
-     {path:'',component:FormationFormateurComponent},
-     {path:':programmeID',component:ConsulterFormationFormateurComponent},
-     {path:':programmeID/demande_inscription',component:PlanifierProgramFormateurComponent},
-     {path:':programmeID/inscriptions',component:InscriptionsFormateurComponent},
-     {path:':programmeID/cours',component:CoursesFormateurComponent},
-     {path:':programmeID/cours/ajouter',component:CreerCoursFormateurComponent},
+     {path:'programmes',component:FormationFormateurComponent},
+     {path:'mesprogrammes',component:MyprogComponent},
 
-     {path:':programmeID/cours/horaire',component:HoraireCoursesComponent},
-     {path:':programmeID/cours/:coursID',component:ConsulterCoursFormateurComponent},
+     {path:'mesprogrammes/:programmeID',component:ConsulterFormationFormateurComponent},
+     {path:'programmes/:programmeID/view',component:ViewFormationFormateurComponent},
+     {path:'programmes/:programmeID/demande_inscription',component:PlanifierProgramFormateurComponent},
+     {path:'programmes/:programmeID/inscriptions',component:InscriptionsFormateurComponent},
+     {path:'mesprogrammes/:programmeID/inscriptions',component:InscriptionsFormateurComponent},
 
-     {path:':programmeID/cours/:coursID/planifier',component:PlanifierCourseFormateurComponent},
-     {path:':programmeID/cours/:coursID/planifier_hebdo',component:PlanifierCourseHebdomodaireComponent}
+     {path:'programmes/:programmeID/cours',component:CoursesFormateurComponent},
+     {path:'mesprogrammes/:programmeID/cours/ajouter',component:CreerCoursFormateurComponent},
+
+     {path:'mesprogrammes/:programmeID/cours/horaire',component:HoraireCoursesComponent},
+     {path:'mesprogrammes/:programmeID/cours/:coursID',component:ConsulterCoursFormateurComponent, resolve: { coursModel: CourseService}},
+
+     {path:'programmes/:programmeID/cours/:coursID/planifier',component:PlanifierCourseFormateurComponent},
+     {path:'programmes/:programmeID/cours/:coursID/planifier_hebdo',component:PlanifierCourseHebdomodaireComponent}
 
 
    ]
 
  },
- {path:'employé/programmes',component:ProgrammeEmployesComponent,
+ {path:'employé',component:ProgrammeEmployesComponent,
    children:[
-     {path:'',component:FormationsEmployesComponent},
-     {path:':programmeID',component:ConsulterFormationEmployeComponent},
-     {path:':programmeID/cours/:coursID',component:ConsulterCoursEmployeComponent},
+     {path:'mesprogrammes',component:MesprogParticipantComponent},
+     {path:'programmes',component:FormationsEmployesComponent},
+     {path:'mesprogrammes/:programmeID',component:ConsulterFormationEmployeComponent},
+     {path:'programmes/:programmeID/view',component:ViewFormationEmployeComponent},
+     {path:'mesprogrammes/:programmeID/cours/:coursID',component:ConsulterCoursEmployeComponent},
 
-     {path:':programmeID/inscriptions',component:InscrireEmployesComponent}
+     {path:'mesprogrammes/:programmeID/inscriptions',component:InscrireEmployesComponent},
+     {path:'programmes/:programmeID/inscriptions',component:InscrireEmployesComponent}
+
    ]   
 }
 ];

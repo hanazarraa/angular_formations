@@ -1,3 +1,5 @@
+import { Competence } from "./competence";
+
 export class Formateur {
     constructor(){}
     id?:string;
@@ -5,4 +7,6 @@ export class Formateur {
     specialite?:string;
     entreprise?:string;
     user?:string;
+    competences?:Competence[];
+    cv?:File;
 }

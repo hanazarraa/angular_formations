@@ -1,0 +1,70 @@
+
+ 
+ <app-sidebar-employe></app-sidebar-employe>
+ <div id="right-panel" class="right-panel">
+ 
+ 
+ <app-navbar></app-navbar> 
+ <div class="content">
+
+    <div class="animated fadeIn">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Mes Programmes</strong>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
+                       
+                               <ul class="nav nav-tabs card-header-tabs pull-right"  id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active btn-light" id="list-tab" data-toggle="tab" href="#list" role="tab" aria-controls="list" aria-selected="true">Liste</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link btn-light" id="agenda-tab" data-toggle="tab" href="#agenda" role="tab" aria-controls="agenda" aria-selected="false">Agenda</a>
+                                </li>
+                                
+                            </ul>
+                       
+                      </div>
+                     
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                
+                     <div class="card-body"> 
+                        <table class="table" style="border-radius: 0ch;">
+                            <thead>
+                                <tr style="border-radius: 0ch;">
+                                     <th scope="col">Titre</th>
+                                     <th scope="col">Formateur</th>
+                                     <th scope="col">Date début</th>
+                                     <th scope="col">Date Fin</th>
+                                    <!--<th scope="col">Date Limite</th>-->
+                                     <!--<th scope="col">Statut</th>-->
+                                    <th scope="col">Actions</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let demande of demandes$|async">
+                                     <td>   <a    [routerLink]="['/employé/mesprogrammes', demande.programme ]"  [queryParams]= "{demande : demande.id}"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><b>  {{demande.programme_name }} </b></a></td>
+                                     <td>{{demande.formateur_name}}</td>
+                                     <td>{{demande.date_debut}}</td>
+                                     <td>{{demande.date_fin}}</td>
+
+                                    <!--<td>06/03/2021</td>-->
+                                    
+                                    <td> <a class="btn btn-outline-primary rounded-pill shadow" type="button" [routerLink]="[demande.programme]"   [queryParams]= "{demande : demande.id}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Consulter Programme</a>    </td>
+                                 </tr>
+                                 
+                            </tbody>
+                        </table>
+                         
+                               
+                 </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+  </div>

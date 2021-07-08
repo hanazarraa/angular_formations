@@ -1,0 +1,107 @@
+<app-sidebar-employe></app-sidebar-employe>
+<div id="right-panel" class="right-panel">
+    <app-navbar></app-navbar> 
+ 
+<div class="content">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Programme {{demande.programme_name}}</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-sm-12">
+                            <!-- Nav tabs -->
+                             
+                            <!--<ul class="nav nav-pills ">
+                             
+                              <li>
+                                <a class="active" id="presentation-tab" data-toggle="tab" href="#presentation" >Présentation</a>
+                              </li>
+                              <li>
+                                <a  id="cmpv-tab" data-toggle="tab" href="#cmpv" >CMPV</a>
+                              </li>
+                              <li >
+                                <a  id="evaluation-tab" data-toggle="tab" href="#evaluation">Evaluation</a>
+                              </li>
+                              <li >
+                                <a  id="materiel-tab" data-toggle="tab" href="#materiel">Matériel Pédagogique</a>
+                              </li>
+                              <li >
+                                <a  id="reunion-tab" data-toggle="tab" href="#reunions">Reunions</a>
+                              </li>
+                             
+                              </ul>-->
+                                
+                              
+                              <!-- Tab panes -->
+                              <div class="tab-content"  >
+
+                                <div class="tab-pane fade show active" id="presentation" role="tabpanel" aria-labelledby="presentation-tab">
+
+                                 <div class="row">
+                                  <div class="col-sm-12">
+                                    <br><br><br>
+                                    <div class="jumbotron" style="background-color: white;">
+                                       <form   class="form-horizontal">
+                                        <div class="row form-group">
+                                          <div class="col col-md-2">
+                                              <label   class=" form-control-label"> <strong>  Titre  </strong> </label></div>
+                                              <div class="input-group col col-md-2">
+                                                 {{demande.programme_name}}
+                                              </div>
+                                              <div class="col col-md-2"  >
+                                                <label   class=" form-control-label"  > <strong>  Formateur </strong></label>
+                                            </div>
+                                            <div class="input-group col col-md-3">
+                                             
+                                              <label   class=" form-control-label"  >{{demande.formateur_name}}</label>
+
+                                            </div>
+                                          </div>
+                                          <br>
+                                            <div class="row form-group">
+                                                <div class="col col-md-2">
+                                                    <label   class=" form-control-label"  > <strong>  Date début  </strong> </label>
+                                                </div>
+                                               
+                                                <label   class=" form-control-label"  >{{demande.date_debut}}</label>
+                                                
+                                              <div class="col col-md-2" style="margin-left: 100px;">
+                                                <label   class=" form-control-label"  > <strong>   Date Fin </strong></label>
+                                            </div>
+                                            <div class="input-group col col-md-3">
+                                             
+                                              <label   class=" form-control-label"  >{{demande.date_fin}}</label>
+
+                                            </div>
+                                            </div>
+                                            
+                                       <br>
+                                            <div class="row form-group">
+                                              <div class="col col-md-2"><label for="textarea-input" class=" form-control-label"><strong>  Description </strong></label></div>
+                                              <div class="col-12 col-md-4"> {{demande.programme_desc}}</div>
+                                          </div>
+                                          <div class="row form-group">
+                                            <div class="col col-md-4"><label for="textarea-input" class=" form-control-label"><strong>  Compétences a développer </strong></label></div>
+                                            <div *ngFor="let competence of competences"> 
+                                            <!--<div  class="col-12 col-md-8">--> <!--<tag-input [ngModel]="tags"   [editable]="false" [removable]="false" [displayBy]="'name'"></tag-input>-->
+                                                {{competence.competence_name}} 
+                                                 <!--</div>-->
+                                            </div>
+                                        </div>
+                                          </form>
+                                        
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

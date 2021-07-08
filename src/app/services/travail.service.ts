@@ -39,7 +39,7 @@ export class TravailService {
     return this.httpclient.post('http://localhost:8000/api/travaux/',travail,options);
   
   }
-  getTravailByProgrammeID(id:any):Observable<any>{
+  getTravailByProgrammeIDProprietaire(id:any,partage_par:any):Observable<any>{
     //console.log(this.userService.token)
 
     const headers = new HttpHeaders({
@@ -50,7 +50,7 @@ export class TravailService {
         const options = {
       headers
     };
-    return this.httpclient.get(`${this.travauxUrl}?programme=${id}`,options );
+    return this.httpclient.get(`${this.travauxUrl}?programme=${id}&partage_par=${partage_par}`,options );
   
   }
   updateTravail(id:any,travail:any):Observable<any>{
