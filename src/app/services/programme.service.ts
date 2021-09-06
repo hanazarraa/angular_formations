@@ -82,8 +82,8 @@ export class ProgrammeService {
     return this.httpclient.put(`${this.programmesUrl}${id}/`,programme,options );
   
   }
-  getlist(formateur:any,date:any):Observable<any>{
-    console.log(date);
+  getlist(formateur:any ):Observable<any>{
+    //console.log(date);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
        });
@@ -92,7 +92,7 @@ export class ProgrammeService {
         const options = {
       headers
     };
-    return this.httpclient.get(`${this.programmesUrl}getprogs/?date_fin__lte=${date}`,options );
+    return this.httpclient.get(`http://localhost:8000/api/programmes/getprogs/?formateur=${formateur}`,options );
   
   }
   getrecommenderList(formateur:any):Observable<any>{

@@ -39,6 +39,18 @@ export class DemandeParticipantService {
    return this.httpclient.post('http://localhost:8000/api/demandes_participant/',demande,options);
  
  }
+ getDemandesByStatut(statut:any){
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+     });
+     console.log(localStorage);
+      this.headers.append('Authorization', 'Bearer ' + localStorage.getItem('auth-token'));
+      const options = {
+    headers
+  };
+  return this.httpclient.get(`${this.demandesUrl}?statut=${statut}`,options );
+
+ }
  getDemandesByDemandeFormateurIDStatut(id:any,statut:any):Observable<any>{
    //console.log(this.userService.token)
 

@@ -1,4 +1,5 @@
-<div>
+<app-sidebar></app-sidebar>
+<div class="right-panel" id="right-panel">
     <app-navbar></app-navbar> 
 <div class="content">
     <div class="animated fadeIn">
@@ -45,7 +46,7 @@
                                 <div class="tab-content" id="nav-tabContent">
                                 <div class="tab-pane fade show active" id="acceptes" role="tabpanel" aria-labelledby="acceptes-tab">
                                     <br><br><br>
-                                    <div *ngIf="(demandesA$ | async)?.length == 0" style="margin-left: 500px;margin-top: 100px;"><h3> <b> Aucune demande Acceptée est trouvée</b></h3></div>
+                                    <div *ngIf="(demandesA$ | async)?.length == 0" style="margin-left: 300px;margin-top: 100px;"><h3> <b> Aucune demande Acceptée est trouvée</b></h3></div>
                                 
                                   
                                     <div class="table-stats order-table ov-h" style="float: left;">
@@ -90,7 +91,7 @@
                             </div>
                             <div class="tab-pane fade " id="enattente" role="tabpanel" aria-labelledby="enattente-tab">
                                 <br><br><br>
-                                <div *ngIf="(demandesEA$ | async)?.length == 0" style="margin-left: 500px;margin-top: 100px;"><h3> <b> Aucune demande En Attente est trouvée</b></h3></div>
+                                <div *ngIf="(demandesEA$ | async)?.length == 0" style="margin-left: 300px;margin-top: 100px;"><h3> <b> Aucune demande En Attente est trouvée</b></h3></div>
                                 
                                   
                                 <div class="table-stats order-table ov-h" style="float: left;">
@@ -143,8 +144,7 @@
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         <div class="col col-md-8">
-                                                            <h3> Formateur :   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    </h3>
-                                                        </div>
+                                                         </div>
                                                     </div>
 
                                                     <p>
@@ -207,7 +207,7 @@
                                 </div>
                                 <div class="tab-pane fade show" id="refuses" role="tabpanel" aria-labelledby="refuses-tab">
                                     <br><br><br>
-                                    <div *ngIf="(demandesR$ | async)?.length == 0" style="margin-left: 500px;margin-top: 100px;"><h3> <b> Aucune demande Réfusée est trouvée</b></h3></div>
+                                    <div *ngIf="(demandesR$ | async)?.length == 0" style="margin-left: 300px;margin-top: 100px;"><h3> <b> Aucune demande Réfusée est trouvée</b></h3></div>
                                 
                                   
                                     <div class="table-stats order-table ov-h" style="float: left;">

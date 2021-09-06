@@ -373,10 +373,10 @@
                                               <br>
                                               <br><app-sider *ngIf="current == 0 && scoresquizz.length == 0">
                                                 <!--<div class="border" style="height: 300px;">-->
-                                                <button (click)="onNext()" class="btn btn-outline-danger" style="margin-top: 120px;margin-left: 350px;">Commencer le quiz</button>
+                                                <button (click)="onNext()" *ngIf="questions.length > 0" class="btn btn-outline-primary" style="margin-top: 120px;margin-left: 350px;">Commencer le quiz</button>
                                                 <!--</div>-->
 
- 
+                                                 <h3 *ngIf="questions.length == 0"><b style="margin-left: 300px;margin-top: 200px;"> Aucun Quizz au nniveau de ce programme</b> </h3>
                                               </app-sider>
                                               <app-slider *ngIf="current >0 && questions.length >= current"> 
                                               <div class="border">

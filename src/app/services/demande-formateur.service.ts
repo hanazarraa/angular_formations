@@ -178,6 +178,30 @@ getDemandesById(id:any){
   return this.httpclient.get(`${this.demandesUrl}${id}/`,options );
 
 }
+getRecommenderSession(participant:any):Observable<any>{
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+     });
+     console.log(localStorage);
+      this.headers.append('Authorization', 'Bearer ' + localStorage.getItem('auth-token'));
+      const options = {
+    headers
+  };
+  return this.httpclient.get('http://localhost:8000/api1/Recommend_session/?participant='+participant,options );
+
+}
+getDemandesByStatut(statut:any):Observable<any>{
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+     });
+     console.log(localStorage);
+      this.headers.append('Authorization', 'Bearer ' + localStorage.getItem('auth-token'));
+      const options = {
+    headers
+  };
+  return this.httpclient.get('http://localhost:8000/api/demandes_formateur/?statut='+statut,options );
+
+}
 getMesDemandesParticipant(date:any,participant:any):Observable<any>{
   console.log(date);
   const headers = new HttpHeaders({

@@ -41,6 +41,8 @@ import { MesprogParticipantComponent } from './employe/mesprog-participant/mespr
 import { ViewFormationEmployeComponent } from './employe/view-formation-employe/view-formation-employe.component';
 import { ProfileComponent } from './auth/profile/profile.component';
 import { ProfileEditComponent } from './auth/profile-edit/profile-edit.component';
+import { DemandesFormateurComponent } from './programmes/demandes-formateur/demandes-formateur.component';
+import { DemandesParticipantsComponent } from './programmes/demandes-participants/demandes-participants.component';
 
 const routes: Routes = [
   
@@ -63,7 +65,9 @@ const routes: Routes = [
        {path:'programmes/:programmeID/inscriptions',component:InscriptionsComponent},
        {path:'programmes/:programmeID/inscriptions/:inscriptionID',component:InscriptionsEmployesComponent},
        {path:'programmes/:programmeID/cours/ajouter',component:CreerCoursResponsableComponent},
-       {path:'programmes/:programmeID/cours/:coursID',component:ConsulterCoursResponsableComponent}
+       {path:'programmes/:programmeID/cours/:coursID',component:ConsulterCoursResponsableComponent},
+       {path:'demandes_formateurs',component:DemandesFormateurComponent},
+       {path:'demandes_participants',component:DemandesParticipantsComponent}
 
       ]
  },

@@ -83,11 +83,11 @@ inscrit(demande,programme){
         }) 
    );
    console.log(this.combined$);*/
-   this.programmes$=this.programmeService.getlist(this.id,this.myDate);
-  /* this.programmeService.getrecommenderList(this.id).subscribe(data=>{
+   this.programmes$=this.programmeService.getlist(this.id );
+   this.programmeService.getrecommenderList(this.id).subscribe(data=>{
      console.log(data);
      this.recommprogs=data;
-   });*/
+   });
      /* const concat = (...arrays) => [].concat(...arrays.filter(Array.isArray));
          console.log(concat(this.demandesA$,this.demandesEA$));*/
       /*Observable.combineLatest(this.demandesA$, this.demandesEA$).subscribe(

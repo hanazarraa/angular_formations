@@ -1,0 +1,156 @@
+
+ <app-sidebar ></app-sidebar>
+ 
+ <div id="right-panel" class="right-panel">
+     <app-navbar></app-navbar> 
+<div class="content">
+
+    <div class="animated fadeIn">
+        <div class="row">
+      
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Demandes des formateurs a valider</strong>&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
+                       
+                              <!---- <ul class="nav nav-tabs card-header-tabs pull-right"  id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active btn-light" id="list-tab" data-toggle="tab" href="#list" role="tab" aria-controls="list" aria-selected="true">Liste</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link btn-light" id="agenda-tab" data-toggle="tab" href="#agenda" role="tab" aria-controls="agenda" aria-selected="false">Agenda</a>
+                                </li>
+                                
+                            </ul>-->
+
+                       
+                      </div>
+                     
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                
+                     <div class="card-body"> 
+
+             
+                      
+
+                         
+                          
+                                 
+                         <div class="card-body"> 
+                          <form>
+                            <div class="form-group">
+                              <div class="input-group">
+                                <div class="input-group-addon">
+                                  <i class="fa fa-search"></i>
+                                </div>
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  name="query"
+                                  placeholder="Taper pour rechercher..."
+                                  [(ngModel)]="query"
+                                />
+                              </div>
+                            </div>
+                          </form>
+                          <table class="table" style="border-radius: 0ch;">
+                              <thead>
+                                  <tr style="border-radius: 0ch;">
+                                      <th scope="col">ID</th>
+                                      <th scope="col">Programme</th>
+                                      <th scope="col">Formateur</th>
+                                      <!--<th scope="col">Min</th>
+                                      <th scope="col">Max</th>-->
+                                      <th scope="col">Date Début</th>
+                                      <th scope="col">Date Fin</th>
+                                      <th scope="col">Actions</th>
+  
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                   <tr *ngFor="let df of demandesF">
+                                      <td scope="row" *ngIf="df.date_debut >= myDate">{{df.id}}</td>
+                                      <td><a  [routerLink]="[df.programme]" *ngIf="df.date_debut >= myDate" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> <b> {{df.programme_name}}</b></a></td>
+                                      <td *ngIf="df.date_debut >= myDate">{{df.formateur_name}}</td>
+                                    
+                                      <td *ngIf="df.date_debut >= myDate">{{df.date_debut}} </td>
+                                      <td *ngIf="df.date_debut >= myDate">{{df.date_fin}}</td>
+                                      <td *ngIf="df.date_debut >= myDate"> 
+                                        <button type="button" class="btn btn-success btn-sm"  data-toggle="modal" data-target="#acceptModal" (click)="showAcceptModel(i,df)">Accepter</button>
+                                        <br><br> <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#declineModal" (click)="showAcceptModel(i,df)">Réfuser</button>
+
+     
+                                            <!--<a class="btn  btn-outline-primary shadow rounded-pill" [routerLink]="[programme.id,'inscriptions']"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Gestion des Inscriptions</a>
+                                            <br><br>
+                                             <a class="btn  btn-outline-primary shadow rounded-pill" [routerLink]="[programme.id]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"> Gestion Programme</a>-->
+
+
+                                              
+                                         
+                                      </td>
+                                   </tr> 
+                                   
+                              </tbody>
+                          </table>
+
+                   </div>  
+                   <div class="modal fade" id="acceptModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticModalLabel">Confirmer</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closebutton>
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col col-md-8">
+                                     </div>
+                                </div>
+
+                                <p>
+                                 Etes Vous sur d'accepter cette Demande 
+                               </p>
+                           </div>
+                           <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"  >Annuler</button>
+                            <button type="button" class="btn btn-success" (click)="Accepter(demande)" >Confirmer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="declineModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticModalLabel">Confirmer</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closebtn>
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                             Etes Vous sur de Refuser cette Demande 
+                           </p>
+                       </div>
+                       <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"  >Annuler</button>
+                        <button type="button" class="btn btn-danger" (click)="Refuser(demande)" >Confirmer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+ 
+                                  
+                     </div>
+                               
+                 </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+</div>
+ 

@@ -78,6 +78,8 @@ import { ViewFormationEmployeComponent } from './employe/view-formation-employe/
 import { TagInputModule } from 'ngx-chips';
 import { ProfileComponent } from './auth/profile/profile.component';
 import { ProfileEditComponent } from './auth/profile-edit/profile-edit.component';
+import { DemandesFormateurComponent } from './programmes/demandes-formateur/demandes-formateur.component';
+import { DemandesParticipantsComponent } from './programmes/demandes-participants/demandes-participants.component';
 
   @NgModule({
   declarations: [
@@ -129,6 +131,8 @@ import { ProfileEditComponent } from './auth/profile-edit/profile-edit.component
    ViewFormationEmployeComponent,
    ProfileComponent,
    ProfileEditComponent,
+   DemandesFormateurComponent,
+   DemandesParticipantsComponent,
  
     //AccordionModule
   ],

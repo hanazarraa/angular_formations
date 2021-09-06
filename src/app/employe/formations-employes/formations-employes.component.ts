@@ -32,6 +32,7 @@ export class FormationsEmployesComponent implements OnInit {
   date=new Date();
   myDate:any;
   token:any;
+  demandesRecomm:any;
   id:any;
   constructor(private demande_participantService:DemandeParticipantService, private datePipe:DatePipe,private userService:UserService,private demande_formateurService:DemandeFormateurService, private router:Router,private programmeService:ProgrammeService,private route: ActivatedRoute) {
     //this.formationId= this.route.snapshot.paramMap.get('programmeID');
@@ -48,6 +49,10 @@ export class FormationsEmployesComponent implements OnInit {
   ngOnInit(): void {
     this.demandes$=this.demande_formateurService.getDemandesParticipants(this.myDate,this.id);
     this.getDemandes();
+    this.demande_formateurService.getRecommenderSession(this.id).subscribe(data=>{
+      console.log(data);
+      this.demandesRecomm=data;
+    });
     
   /* this.demandes$.pipe(
     map((res) => {res.statut ,console.log(res)}), // extract data attribut

@@ -245,7 +245,7 @@
                                       
                                                                               <th>Date Limite</th>
                                                                            
-                                                                              <!--<th>Pondération</th>-->
+                                                                               <th>Pondération</th> 
                                                                               <!--<th>Résultat</th>-->
                                                                               <th>Action</th>
                                                                             </tr>
@@ -304,7 +304,20 @@
                                                                               </td>
                                       
                                                                              
+                                                                              <td>
+                                                                                <div class="form-group" [class.has-error]="ponderation_Control.invalid">
+                                                                             
+                                                                             
+                                                                                <input type="text" class="form-control" name="ponderation{i}}" #ponderation_Control="ngModel" id="ponderation{{i}}"
+                                                                                  [(ngModel)]="traveaux[i].ponderation" required>
+                                                                                  {{form.get('ponderation').errors}}
                                       
+                                      
+                                                                                  <span class="help-block" *ngIf=" date_debut_Control.invalid   && submitted " >
+                                                                                   Veuillez saisir la ponderation
+                                                                                  </span>
+                                                                                  </div>
+                                                                              </td>
                                       
                                                                               <!--<td>
                                                                                 <input type="text" name="ponderation{{i}}"
@@ -429,7 +442,7 @@
                                                                     
                                                                     
                                                                     <div *ngIf="currentConsigne.remises.length == 0" style="margin-top: 50px;">
-                                                                      <b style="margin-left: 500px;">  Aucune Remise trouvée</b>
+                                                                      <b style="margin-left: 300px;">  Aucune Remise trouvée</b>
                                                                      </div>
                                                                     <table class="table" id="table" *ngIf="currentConsigne.remises.length > 0">
                                                                       <thead>
@@ -470,8 +483,8 @@
                                                                     <!--<div class="border" style="height: 300px;">-->
                                                                       <div class="border" style="height: 300px;">
                                               
-                                                                    <button (click)="onNext()" *ngIf="questions1.length === 0" class="btn btn-outline-danger" style="margin-top: 120px;margin-left: 450px;">Créer Quizz</button>
-                                                                    <button (click)="onNext()" *ngIf="questions1.length > 0" class="btn btn-outline-danger" style="margin-top: 120px;margin-left: 450px;">Voir Quizz</button>
+                                                                    <button (click)="onNext()" *ngIf="questions1.length === 0" class="btn btn-outline-primary" style="margin-top: 120px;margin-left: 350px;">Créer Quizz</button>
+                                                                    <button (click)="onNext()" *ngIf="questions1.length > 0" class="btn btn-outline-primary" style="margin-top: 120px;margin-left: 350px;">Voir Quizz</button>
    
                                                                   </div>
                                                                      </app-sider>
@@ -629,7 +642,7 @@
                                                                             <div class="border">
                                                                               
                                                                               <div *ngIf="scoresquizz.length == 0" style="margin-top: 50px;">
-                                                                                <b style="margin-left: 500px;">  Aucun Participant a passé le quizz encore</b>
+                                                                                <b style="margin-left: 300px;">  Aucun Participant a passé le quizz encore</b>
                                                                                </div>
                                                                                <br><br><br>
                                                                               <div class="question bg-white p-3 border-bottom" *ngIf="scoresquizz.length > 0">
@@ -642,7 +655,7 @@
                                                                                   <tbody>
                                                                                     <tr *ngFor="let scoreq of scoresquizz">
                                                                                       <td>{{scoreq.participant_name}}</td>
-                                                                                      <td>{{scoreq.score}}/{{questions.length}}</td>
+                                                                                      <td>{{scoreq.score}}/{{questions1.length}}</td>
                                                                                     </tr>
                                                                                   </tbody>
                                                                                 </table>
@@ -857,7 +870,7 @@
                         </div>
                       </div>
                     </div> 
-                                      <button class="btn btn-success btn-flat m-b-30 m-t-30" style="margin-left: 450px;" id="valider" type="submit">Valider</button>
+                                      <button class="btn btn-success btn-flat m-b-30 m-t-30" style="margin-left: 350px;" id="valider" type="submit">Valider</button>
                                       <button type="button" class="btn btn-danger" style="margin-left: 50px;" >Annuler</button>
   
                                   </form>

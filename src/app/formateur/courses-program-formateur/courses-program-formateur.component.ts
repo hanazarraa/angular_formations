@@ -77,4 +77,12 @@ export class CoursesProgramFormateurComponent implements OnInit {
      this.router.navigate(["formateur/mesprogrammes/"+this.programmeID+"/cours/ajouter" ], { queryParams: { demande: this.demandeID} });
  
    }
+   supprimer(cours){
+     this.courseService.deleteCours(cours.id).subscribe(data=>{
+      this.courseService.getCoursByProgrammeIDFormateur(this.programmeID,this.id).subscribe(data=>{
+        console.log(data);
+        this.courses=data;
+      });
+     });
+   }
  }

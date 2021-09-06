@@ -1139,7 +1139,7 @@ console.log(this.programmeModel);
          for(var consigne of row){
            console.log(consigne,"valider_formation");
            if(consigne.id===undefined){
-           this.consigneService.upload(consigne,result.id,this.id).subscribe((result)=>{
+           this.consigneService.upload(consigne,travail.id,this.id).subscribe((result)=>{
              console.log(result);
            });
           }

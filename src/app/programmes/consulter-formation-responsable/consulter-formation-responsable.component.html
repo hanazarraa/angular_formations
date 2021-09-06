@@ -1,4 +1,5 @@
-<div id="right-panel"  >
+<app-sidebar></app-sidebar>
+<div id="right-panel" class="right-panel" >
   <app-navbar></app-navbar> 
 
 <div class="content">
@@ -423,7 +424,7 @@
                                                                   <!--<div class="border" style="height: 300px;">-->
                                                                     <div class="border" style="height: 300px;">
                                             
-                                                                  <button (click)="onNext()" class="btn btn-outline-danger" style="margin-top: 120px;margin-left: 600px;">Voir Quizz</button>
+                                                                  <button (click)="onNext()" class="btn btn-outline-primary" style="margin-top: 120px;margin-left: 350px;">Voir Quizz</button>
                                                                    </div>
                                                                   <!--</div>-->
                   
@@ -445,7 +446,7 @@
                                                     </div>
                                                   
                                                     <div class="ans ml-2" *ngFor="let reponse of questions[current-1].reponses;let i=index;trackBy: customTrackBy">
-                                                      <input type="checkbox" id="isvalid{{i}}" name="isvalid{{i}}" id="isvalid{{i}}" [(ngModel)]="reponse.isvalid" disabled="disabled"> <span>&nbsp;&nbsp;<input type="text" name="option{{i}}" id="option{{i}}" [(ngModel)]="reponse.option"></span>  
+                                                      <input type="checkbox" id="isvalid{{i}}" name="isvalid{{i}}" id="isvalid{{i}}" [(ngModel)]="reponse.isvalid" disabled="disabled">  &nbsp;&nbsp;<input type="text" name="option{{i}}" id="option{{i}}" [(ngModel)]="reponse.option" style="width: 750px;"> 
                                                      
                                                     </div>
                                                  
@@ -465,7 +466,7 @@
                                               <br><br>
                                               <div class="border" style="height: 300px;">
                                                 <div *ngIf="scoresquizz.length == 0" style="margin-top: 100px;">
-                                                  <b style="margin-left: 500px;">  Aucun Participant a passé le quizz encore</b>
+                                                  <b style="margin-left: 300px;">  Aucun Participant a passé le quizz encore</b>
                                                  </div>
                                                 <div class="question bg-white p-3 border-bottom" *ngIf="scoresquizz.length > 0">
                                                   <table id="table" class="table">
@@ -768,7 +769,7 @@
                                         </div>
                                       </div>
                                     </div>
-                                  </div> <button class="btn btn-success btn-flat m-b-30 m-t-30" style="margin-left: 550px;" id="valider" type="submit">Valider</button>
+                                  </div> <button class="btn btn-success btn-flat m-b-30 m-t-30" style="margin-left: 330px;" id="valider" type="submit">Valider</button>
                                   <button type="button" class="btn btn-danger btn-flat m-b-30 m-t-30" style="margin-left: 50px;"data-toggle="modal" data-target="#deleteModal"  >Supprimer</button>
 
 
